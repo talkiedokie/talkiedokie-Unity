@@ -1,0 +1,199 @@
+# MTL Exporter v1.0 by Seungwoo Oh at CLO - Virtual Fashion Inc.
+newmtl Material93853
+Ka 0.803875 0.803875 0.787266
+Kd 0.867143 0.867143 0.849227
+Ks 0.000000 0.000000 0.000000
+Ns 5.000000
+illum 2
+d 1.000000
+newmtl Material93856
+Ka 0.421869 0.016609 0.076401
+Kd 0.455071 0.017916 0.082414
+Ks 0.000000 0.000000 0.000000
+Ns 5.000000
+illum 2
+d 1.000000
+newmtl Material93848
+Ka 0.847059 0.847059 0.847059
+Kd 0.913725 0.913725 0.913725
+Ks 0.000000 0.000000 0.000000
+Ns 5.000000
+illum 2
+d 1.000000
+map_Ka B-3.jpg
+map_Kd B-3.jpg
+newmtl lambert9
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ns 5.000000
+illum 2
+d 1.000000
+map_Kd C:/Program Files/Marvelous Designer 3 Enterprise/Model/Avatar/Accessory/Shoes/Woman_shoes/platform_shoes/platform01.png
+map_Ka platform01.png
+newmtl phongE4
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.870970 0.870970 0.870970
+Ns 20.000000
+illum 2
+d 1.000000
+newmtl lambert1
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ns 5.000000
+illum 2
+d 1.000000
+map_Kd C:/Program Files/Marvelous Designer 3 Enterprise/Model/Avatar/Accessory/Shoes/Woman_shoes/platform_shoes/transparency.png
+map_d C:/Program Files/Marvelous Designer 3 Enterprise/Model/Avatar/Accessory/Shoes/Woman_shoes/platform_shoes/transparency.png
+map_Ka transparency.png
+newmtl phongE4
+Ka 0.000000 0.000000 0.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.870970 0.870970 0.870970
+Ns 20.000000
+illum 2
+d 1.000000
+newmtl middiecut_hair2
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.122000 0.122000 0.122000
+Ns 20.000000
+illum 2
+d 1.000000
+map_Kd C:/Program Files/Marvelous Designer 3 Enterprise/Model/Avatar/Accessory/Hair/Woman_hair/woman_east_bobbed_hair/StrandBrown_1.png
+map_d C:/Program Files/Marvelous Designer 3 Enterprise/Model/Avatar/Accessory/Hair/Woman_hair/woman_east_bobbed_hair/StrandBrown_1.png
+map_Ka StrandBrown_1.png
+newmtl lambert9
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ns 5.000000
+illum 2
+d 1.000000
+map_Kd C:/Program Files/Marvelous Designer 3 Enterprise/Model/Avatar/Accessory/Shoes/Woman_shoes/platform_shoes/platform01.png
+map_Ka platform01.png
+newmtl middiecut_hair4
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.122000 0.122000 0.122000
+Ns 20.000000
+illum 2
+d 1.000000
+map_Kd C:/Program Files/Marvelous Designer 3 Enterprise/Model/Avatar/Accessory/Hair/Woman_hair/woman_east_bobbed_hair/BaseBrown_1.png
+map_d C:/Program Files/Marvelous Designer 3 Enterprise/Model/Avatar/Accessory/Hair/Woman_hair/woman_east_bobbed_hair/BaseBrown_1.png
+map_Ka BaseBrown_1.png
+newmtl phongE3
+Ka 0.000000 0.000000 0.000000
+Kd 0.176675 0.153823 0.108131
+Ks 1.000000 1.000000 1.000000
+Ns 20.000000
+illum 2
+d 1.000000
+newmtl middiecut_hair1
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.122000 0.122000 0.122000
+Ns 20.000000
+illum 2
+d 1.000000
+map_Kd C:/Program Files/Marvelous Designer 3 Enterprise/Model/Avatar/Accessory/Hair/Woman_hair/woman_east_bobbed_hair/Mapgrid5_1.png
+map_d C:/Program Files/Marvelous Designer 3 Enterprise/Model/Avatar/Accessory/Hair/Woman_hair/woman_east_bobbed_hair/Mapgrid5_1.png
+map_Ka Mapgrid5_1.png
+newmtl phongE3
+Ka 0.000000 0.000000 0.000000
+Kd 0.176675 0.153823 0.108131
+Ks 1.000000 1.000000 1.000000
+Ns 20.000000
+illum 2
+d 1.000000
+newmtl lambert1
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ns 5.000000
+illum 2
+d 1.000000
+map_Kd C:/Program Files/Marvelous Designer 3 Enterprise/Model/Avatar/Accessory/Shoes/Woman_shoes/platform_shoes/transparency.png
+map_d C:/Program Files/Marvelous Designer 3 Enterprise/Model/Avatar/Accessory/Shoes/Woman_shoes/platform_shoes/transparency.png
+map_Ka transparency.png
+newmtl middiecut_hair3
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.122000 0.122000 0.122000
+Ns 20.000000
+illum 2
+d 1.000000
+map_Kd C:/Program Files/Marvelous Designer 3 Enterprise/Model/Avatar/Accessory/Hair/Woman_hair/woman_east_bobbed_hair/Mapgrid5_1.png
+map_d C:/Program Files/Marvelous Designer 3 Enterprise/Model/Avatar/Accessory/Hair/Woman_hair/woman_east_bobbed_hair/Mapgrid5_1.png
+map_Ka Mapgrid5_1.png
+newmtl W_eye_specular_Light
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ns 2.000000
+illum 2
+d 1.000000
+map_Kd C:/Users/user/AppData/Local/Temp/clo3d/7468/eye_light.png
+map_d C:/Users/user/AppData/Local/Temp/clo3d/7468/eye_light.png
+map_Ka eye_light.png
+newmtl W_eye
+Ka 0.231000 0.231000 0.231000
+Kd 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ns 100.000000
+illum 2
+d 1.000000
+map_Kd C:/Users/user/AppData/Local/Temp/clo3d/7468/eye_1.jpg
+map_Ka eye_1.jpg
+newmtl W_eyelashes
+Ka 0.000000 0.000000 0.000000
+Kd 0.025600 0.000000 0.000000
+Ks 0.000000 0.000000 0.000000
+Ns 5.000000
+illum 2
+d 1.000000
+newmtl W_body
+Ka 0.500000 0.451000 0.425000
+Kd 1.000000 1.000000 1.000000
+Ks 0.120000 0.120000 0.120000
+Ns 7.000000
+illum 2
+d 1.000000
+map_Kd C:/Users/user/AppData/Local/Temp/clo3d/7468/W_body_lingerie.jpg
+map_Ka W_body_lingerie.jpg
+newmtl W_face
+Ka 0.500000 0.451250 0.425000
+Kd 1.000000 1.000000 1.000000
+Ks 0.120000 0.120000 0.120000
+Ns 7.000000
+illum 2
+d 1.000000
+map_Kd C:/Users/user/AppData/Local/Temp/clo3d/7468/W_face.jpg
+map_Ka W_face.jpg
+newmtl W_hand_leg
+Ka 0.500000 0.451250 0.425000
+Kd 1.000000 1.000000 1.000000
+Ks 0.120000 0.120000 0.120000
+Ns 7.000000
+illum 2
+d 1.000000
+map_Kd C:/Users/user/AppData/Local/Temp/clo3d/7468/W_leg_hand.jpg
+map_Ka W_leg_hand.jpg
+newmtl Material93864
+Ka 0.803875 0.803875 0.787266
+Kd 0.867143 0.867143 0.849227
+Ks 0.000000 0.000000 0.000000
+Ns 5.000000
+illum 2
+d 1.000000
+newmtl Material93859
+Ka 0.847059 0.847059 0.847059
+Kd 0.913725 0.913725 0.913725
+Ks 0.000000 0.000000 0.000000
+Ns 5.000000
+illum 2
+d 1.000000
+map_Ka N-5.jpg
+map_Kd N-5.jpg

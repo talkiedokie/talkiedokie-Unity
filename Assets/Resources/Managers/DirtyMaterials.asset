@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a65cef27e837dd41892903370990d09, type: 3}
+  m_Name: DirtyMaterials
+  m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: d18ae4cc3a7416842a98b783e2a42393, type: 2}
+  - {fileID: 2100000, guid: 02b17148551479642bc4426d1b9c9cc3, type: 2}
+  - {fileID: 2100000, guid: b3d1c640c647ddb4d807e840d7808c39, type: 2}
+  - {fileID: 2100000, guid: 899aee2671201a641858f9b8579a1611, type: 2}
+  - {fileID: 2100000, guid: 0ee65ac6c50406d46bb8fa63e1596ccb, type: 2}
+  - {fileID: 2100000, guid: 4eb6be0dc498b4e40961b9b49c293948, type: 2}
