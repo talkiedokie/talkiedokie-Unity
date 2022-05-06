@@ -25,3 +25,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ed7bb3a921179094895fdf8a9ae0b9d0, type: 3}
   - {fileID: 8300000, guid: 6cea6f72a6f51d440b92f27d1bc2d418, type: 3}
   - {fileID: 8300000, guid: 6e551f9b73b235141adef3265b100a8f, type: 3}
+  - {fileID: 8300000, guid: 5941b3ecf286d704d8a6151d09318d18, type: 3}
+  - {fileID: 8300000, guid: 0addc86a64b38be43ad4659d00fa443a, type: 3}
+  - {fileID: 8300000, guid: ed462a31314fcd24886a001a2b4706e5, type: 3}
+  groups:
+  - name: Gameplay/Wiping
+    clips:
+    - {fileID: 8300000, guid: 25ea4b8d3b221314bb66b83af2e54911, type: 3}
+    - {fileID: 8300000, guid: 05725db7c2819fc428073d67eac9ccd8, type: 3}
+    - {fileID: 8300000, guid: 47a88e7aaf2625244862144142ebb442, type: 3}
+  - name: Gameplay/Bubbles
+    clips:
+    - {fileID: 8300000, guid: 07416ad6122b90f4bb9009e36edb45e0, type: 3}
+    - {fileID: 8300000, guid: 889f0c40800c87d42b5c7a3e5d75db74, type: 3}
+    - {fileID: 8300000, guid: 5d6253373b79ddb41a162970ad2ce473, type: 3}
+    - {fileID: 8300000, guid: d52c1e2e4189e2d4b9b3d9bf256f644e, type: 3}
+    - {fileID: 8300000, guid: 96f2122d612cd08438f20e0fb0a8a6c0, type: 3}

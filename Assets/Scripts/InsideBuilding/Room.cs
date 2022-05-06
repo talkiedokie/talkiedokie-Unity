@@ -6,6 +6,7 @@ public class Room : MonoBehaviour
 	[SerializeField] AudioClip roomNameFairyVoiceClip;
 	[SerializeField] Transform charPoint;
 	[SerializeField] CinemachineVirtualCamera camPoint;
+	[SerializeField] Animator camAnimator;
 	
 	[Space()] public Task[] tasks;
 	
@@ -46,5 +47,9 @@ public class Room : MonoBehaviour
 	public void Start(){
 		foreach(var task in tasks)
 			task.gameObject.SetActive(false);
+	}
+	
+	public void OnEnter(){
+		camAnimator.SetTrigger("enter");
 	}
 }

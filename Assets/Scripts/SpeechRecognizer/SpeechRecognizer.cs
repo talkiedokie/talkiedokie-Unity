@@ -5,71 +5,118 @@ using System.Collections;
 
 public class SpeechRecognizer : SceneObjectSingleton<SpeechRecognizer>
 {
-	[SerializeField] float onCompletionExitDuration = 1f;
-	[SerializeField] string word;
-	[SerializeField] float listenDuration = 5f;
+	#region Inspector
+		
+		[SerializeField, LabelOverride("Word/Phrase")] string word;
+		
+		[SerializeField] float
+			onCompletionExitDuration = 1f,
+			listenDuration = 5f;
+		
+		[SerializeField] SpeechRecognizerUI ui;
+		[Space(), SerializeField, TextArea()] string hypothesis;
+		
+		[Space()]
+		[SerializeField] AudioClip[] tryAgainClips;
+		
+	#endregion
 	
-	[SerializeField] SpeechRecognizerUI ui;
-	[Space(), SerializeField, TextArea()] string hypothesis;
+	#region Variables/Properties
+		
+		public string result{ get; private set; }
+		public bool listenAgainOnWrong{ private get; set; } = true;
+		
+		public SpeechSystemStatus status;
+		public Action onHypothesis, onResult;
+		
+		ConfidenceLevel confidence;
+		bool isSkipped;
+		
+		DictationRecognizer dr;
+		Action onFinish;
+		
+		Fairy fairy;
+		
+	#endregion
 	
-	public SpeechSystemStatus status;
+	#region Unity Methods
+		
+		void Awake(){
+			dr = new DictationRecognizer();
+			{
+				dr.DictationResult += Result;
+				dr.DictationHypothesis += Hypothesis;
+				dr.DictationComplete += Complete;
+				dr.DictationError += Error;
+				
+				dr.InitialSilenceTimeoutSeconds = listenDuration;
+			}
+			
+			if(tryAgainClips.Length > 0)
+				fairy = Fairy.Instance;
+		}
+		
+		void Update(){
+			status = dr.Status;
+			
+			if(Input.GetKeyDown("p"))
+				Skip();
+		}
+		
+		void OnDestroy(){ Stop(); }
+		
+	#endregion
 	
-	string result;
-	ConfidenceLevel confidence;
-	
-	DictationRecognizer dr;
-	Action onFinish;
-	
-	[Space()]
-	[SerializeField] AudioClip[] tryAgainClips;
-	
-	Fairy fairy => Fairy.Instance;
-	
-	void Awake(){
-		dr = new DictationRecognizer();
-		{
-			dr.DictationResult += Result;
-			dr.DictationHypothesis += Hypothesis;
-			dr.DictationComplete += Complete;
-			dr.DictationError += Error;
+	#region Calls
+		
+		public void Listen(string word, Action onFinish){
+			this.word = word;
+			this.onFinish = onFinish;
+			
+			Listen();
+		}
+		
+		[ContextMenu("Listen")]
+		public void Listen(){
+			if(!Application.isPlaying) return;
+			
+			enabled = true;
+			isSkipped = false;
 			
 			dr.InitialSilenceTimeoutSeconds = listenDuration;
-		}
-	}
-	
-	void Update(){
-		status = dr.Status;
-	}
-	
-	public void Listen(string word, Action onFinish){
-		this.word = word.ToLower();
-		this.onFinish = onFinish;
-		
-		Listen();
-	}
-	
-	[ContextMenu("Listen")]
-	public void Listen(){
-		dr.InitialSilenceTimeoutSeconds = listenDuration;
-		
-		StartSpeechDictation();
-		ui.OnListen();
-	}
-	
-	void StartSpeechDictation(){
-		bool isDictatorRunning = false;
-		int iteration = 0;
-		
-		while(!isDictatorRunning && iteration < 100){
-			dr.Start();
 			
-			isDictatorRunning = dr.Status != SpeechSystemStatus.Running;
-			iteration ++;
+			StartSpeechDictation();
+			ui.OnListen(listenDuration);
+			
+			Debug.Log("SpeechRecognizer is now listening to the word/phrase: " + word);
 		}
 		
-		if(iteration > 1)
-			Debug.LogWarning("On Completion Looped " + iteration + " times");
-	}
+		[ContextMenu("Skip")]
+		public void Skip(){
+			if(!Application.isPlaying) return;
+			
+			if(dr.Status != SpeechSystemStatus.Running){
+				Debug.LogWarning("SpeechRecognizer is not running but is currently '" + dr.Status.ToString() + "'");
+				return;
+			}
+			
+			isSkipped = true;
+			dr.Stop();
+			
+			ui.OnSkip();
+			Debug.LogWarning("Speech recognizer skipped the word/phrase: " + word);
+		}
+		
+		[ContextMenu("Stop")]
+		public void Stop(){
+			dr.Stop();
+			dr.Dispose();
+			
+			ui.gameObject.SetActive(false);
+			enabled = false;
+		}
+		
+	#endregion
 	
 	#region Events
 		
@@ -79,18 +126,27 @@ public class SpeechRecognizer : SceneObjectSingleton<SpeechRecognizer>
 			
 			Complete(DictationCompletionCause.Complete);
 			dr.Stop();
+			
+			onResult?.Invoke();
 		}
 		
 		void Hypothesis(string text){
 			hypothesis = text;
+			
 			ui.OnHypothesis();
+			onHypothesis?.Invoke();
 		}
 		
 		void Complete(DictationCompletionCause cause){
-			bool isCorrect = cause == DictationCompletionCause.Complete && result == word;
-			float grade = CalculateGrade();
+			if(!Application.isPlaying) return;
+			bool isCorrect = false;
 			
-			ui.OnCompletion(cause, result, isCorrect, grade);
+			if(!isSkipped){
+				isCorrect = cause == DictationCompletionCause.Complete && result == word.ToLower();
+				float grade = CalculateGrade();
+				
+				ui.OnCompletion(cause, result, isCorrect, grade);
+			}
 			OnCompletion(isCorrect);
 		}
 		
@@ -113,23 +169,56 @@ public class SpeechRecognizer : SceneObjectSingleton<SpeechRecognizer>
 		}
 		
 		IEnumerator OnCompletion_Routine(bool isCorrect){
-			if(isCorrect){
-				yield return new WaitForSeconds(onCompletionExitDuration);
+			var exitDelay = new WaitForSeconds(onCompletionExitDuration);
+			
+			if(isCorrect || isSkipped){
+				yield return exitDelay;
 				
 				ui.gameObject.SetActive(false);
+				enabled = false;
+				
 				onFinish?.Invoke();
 			}
 			else{
-				fairy.Speak(Tools.Random(tryAgainClips), 0.15f);
-				while(fairy.isSpeaking) yield return null;
+				if(listenAgainOnWrong){
+					bool fairyCanSpeak = fairy && tryAgainClips.Length > 0;
+					
+					if(fairyCanSpeak){
+						fairy.Speak(Tools.Random(tryAgainClips), 0.15f);
+						while(fairy.isSpeaking) yield return null;
+					}
+					
+					enabled = false;
+					Listen();
+				}
 				
-				Listen();
+				else{
+					yield return exitDelay;
+					
+					enabled = false;
+					onFinish?.Invoke();
+				}
 			}
 		}
 		
 	#endregion
 	
 	#region MSC
+	
+		void StartSpeechDictation(){
+			bool isDictatorRunning = false;
+			int iteration = 0;
+			
+			while(!isDictatorRunning && iteration < 50){
+				dr.Start(); // this
+				
+				isDictatorRunning = dr.Status != SpeechSystemStatus.Running;
+				iteration ++;
+			}
+			
+			if(iteration > 1)
+				Debug.LogWarning("On Completion Looped " + iteration + " times");
+		}
 		
 		const float diffBetweenConfidenceLevel = 0.25f;
 		

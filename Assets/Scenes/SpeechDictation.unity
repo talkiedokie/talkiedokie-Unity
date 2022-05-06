@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d55a1d126d6cc4f9dfa751b7d4552c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onCompletionExitDuration: 2
   word: apple
+  onCompletionExitDuration: 2
   listenDuration: 8
   ui: {fileID: 319985198}
   hypothesis: 
@@ -565,7 +565,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Text
 --- !u!222 &2021775252

@@ -1,57 +1,77 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using AccountsManagement;
 
 public enum Gender{ Male, Female }
 
 public class GameManager : SceneObjectSingleton<GameManager>
 {
 	#region Inspector
-	
-		public Level level;
 		
-		[SerializeField] Gender playerGender;
-		[SerializeField] GameObject[] characterPrefabs;
+		[Foldout("Level")]
 		
-		[Space()]
-		[SerializeField] GameObject roomSelector;
-		[SerializeField] RoomButton roomButtonTemplate;
+			public UserSelector user;
+			
+			[LabelOverride("Prefab")]
+			public Level level;
+			
+			[SerializeField] GameObject[] characterPrefabs;
 		
-		[Space()]
-		[SerializeField] GameObject wordPopup;
-		[SerializeField] Text wordPopupTxt;
-		[SerializeField] Image wordPopupIcon;
+		[Foldout("UI")]
 		
-		[Space()]
-		[SerializeField] RoomTasksUI roomTasksUITemplate;
-		RoomTasksUI[] roomTasksUI;
+			[SerializeField] GameObject roomSelector;
+			[SerializeField] RoomButton roomButtonTemplate;
+			
+			[Space()]
+			[SerializeField] GameObject wordPopup;
+			[SerializeField] Text wordPopupTxt;
+			[SerializeField] Image wordPopupIcon;
 		
-		[Space()]
-		[SerializeField] WordOfTheDay[] wordOfTheDays;
-		[SerializeField] float wotd_ClipDelay = 0.45f;
+		[Foldout("Tasks")]
 		
-		WordOfTheDay wordOfTheDay;
+			[SerializeField, LabelOverride("UI Template")] RoomTasksUI roomTasksUITemplate;
+			RoomTasksUI[] roomTasksUI;
+			
+			[SerializeField, LabelOverride("Exit Duration")] float onTaskExitDuration = 2.25f;
+			[SerializeField] GeneralAudioSelector onTaskFinishSound = 4;
+			
+			[Space()]
+			[SerializeField] GameObject[] onTaskFinishParticles;
+			[SerializeField] GameObject coinsParticles;
 		
-		[Space()]
-		[SerializeField] GameObject menu;
-		public GameObject particle;
+		[Foldout("Word of the Day")]
+			
+			[SerializeField] WordOfTheDay[] wordOfTheDays;
+			[SerializeField, LabelOverride("Clip Delay")] float wotd_ClipDelay = 0.45f;
+			
+			[Space()]
+			[SerializeField, LabelOverride("The word of the day is...")] AudioClip wotd_Clip1;
+			[SerializeField, LabelOverride("I want you to say the word...")] AudioClip wotd_Clip2;
+			
+			WordOfTheDay wordOfTheDay;
 		
-		[HideInInspector] public AudioClip
-			wdywtg_Clip,
-			wgj_Clip,
-			lptw_Clip,
-			ycneyft_Clip,
-			wotd_Clip1,
-			wotd_Clip2;
+		[Foldout("Audio Clips")]
+			
+			[SerializeField] AudioClip[] wowClips;
+			[SerializeField, LabelOverride("Clip Delay")] float wowClipsDelay = 1f;
+			
+			[Space()]
+			[SerializeField, LabelOverride("Where do you want to go?")] AudioClip wdywtg_Clip;
+			[SerializeField, LabelOverride("Clip Delay")] float wdywtg_ClipDelay = 1f;
+			
+			[Space()]
+			[SerializeField, LabelOverride("Let's play the word")] AudioClip lptw_Clip;
+			[SerializeField, LabelOverride("Clip Delay")] float awsm_ClipDelay = 1f;
+			
+			[Space()]
+			[SerializeField, LabelOverride("You can now enjoy your free time!")] AudioClip ycneyft_Clip;
+			[SerializeField, LabelOverride("Clip Delay")] float ycneyft_ClipDelay = 1f;
 		
-		[HideInInspector] public float
-			wdywtg_ClipDelay = 1f,
-			awsm_ClipDelay = 1f,
-			ycneyft_ClipDelay = 1f;
+		[Foldout("Other")]
 		
-		[Space()]
-		[SerializeField] AudioClip[] wowClips;
-		[SerializeField] float wowClipsDelay = 1f;
+			[SerializeField] GameObject menu;
+			[SerializeField] GeneralAudioSelector transitionSound = 9;
 		
 	#endregion
 	
@@ -67,14 +87,15 @@ public class GameManager : SceneObjectSingleton<GameManager>
 		
 		UIManager uiMgr;
 		SpeechRecognizer speechRecognizer;
-		
 		CameraManager camMgr;
 		
 	#endregion
 	
 	#region Properties
 		
-		public Gender PlayerGender => playerGender;
+		public User UserData{ get; private set; }
+		public Gender PlayerGender => UserData.gender;
+		
 		public GameObject player{ get; private set; }
 		
 		public Room SelectedRoom{
@@ -93,28 +114,31 @@ public class GameManager : SceneObjectSingleton<GameManager>
 			set{ level.selectedRoomIndex = value; }
 		}
 		
+		GameObject onTaskFinishParticle => Tools.Random(onTaskFinishParticles);
+		
 	#endregion
 	
 	#region Unity Methods
 		
 		void Awake(){
-			uiMgr = UIManager.Instance;
-			speechRecognizer = SpeechRecognizer.Instance;
-			
-			fairy = Fairy.Instance;
-			
-			playerGender = (Gender) Random.Range(0,2); // temporary
+			AccountManager.Instance.currentUser = user;
+			UserData = user.Reference;
 			
 			var playerPlaceHolder = GameObject.FindWithTag("Player").transform;
 			
 			player = Instantiate(
-				characterPrefabs[(int) playerGender],
+				characterPrefabs[(int) PlayerGender],
 				playerPlaceHolder.position,
 				playerPlaceHolder.rotation,
 				playerPlaceHolder.parent
 			);
 			
 			Destroy(playerPlaceHolder.gameObject);
+			
+			uiMgr = UIManager.Instance;
+			speechRecognizer = SpeechRecognizer.Instance;
+			
+			fairy = Fairy.Instance;
 			
 			cam = Camera.main;
 			camMgr = CameraManager.Instance;
@@ -177,9 +201,7 @@ public class GameManager : SceneObjectSingleton<GameManager>
 			}
 			
 			var uiPopup = roomTasksUI[selectedRoom_Index].gameObject;
-				uiMgr.Show(uiPopup, single);
-			
-			particle.SetActive(false);
+				uiMgr.Show(uiPopup, single);			
 		}
 		
 		[ContextMenu("Word of the Day")]
@@ -192,11 +214,16 @@ public class GameManager : SceneObjectSingleton<GameManager>
 				
 				wordPopupIcon.gameObject.SetActive(sprite);
 				wordPopupIcon.sprite = sprite;
-				
 				wordPopup.SetActive(true);
 			
 			var fairyVoiceClip = wordOfTheDay.fairyVoiceClip;
-			var clips = new AudioClip[]{ wotd_Clip1, fairyVoiceClip, wotd_Clip2, fairyVoiceClip };
+			
+			var clips = new AudioClip[]{
+				wotd_Clip1,
+				fairyVoiceClip,
+				wotd_Clip2,
+				fairyVoiceClip
+			};
 			
 				fairy.Speak(clips, wotd_ClipDelay, SpeechListen);
 			
@@ -225,6 +252,11 @@ public class GameManager : SceneObjectSingleton<GameManager>
 		#region UI Input
 		
 			public void SelectRoom(int index){
+				if(selectedRoom && index == selectedRoom_Index){
+					Debug.LogWarning("You're in the " + selectedRoom.name + " already!", selectedRoom);
+					return;
+				}
+				
 				SelectedRoom = level.rooms[index];
 				selectedRoom_Index = index;
 				
@@ -249,7 +281,8 @@ public class GameManager : SceneObjectSingleton<GameManager>
 						camMgr.SetPriority(selectedRoom.CameraPoint);
 						
 						uiMgr.Transition();
-						GeneralAudio.Instance.Play("splashIntro");
+						transitionSound.Play();
+						SelectedRoom.OnEnter(); // play cam animation (ease-in)
 						
 						var wowClip = Tools.Random(wowClips);
 						fairy.Speak(wowClip, wowClipsDelay, OnRoomEntered);
@@ -268,7 +301,7 @@ public class GameManager : SceneObjectSingleton<GameManager>
 					currentTask.gameObject.SetActive(true);
 					currentTask.Play(true);
 					
-					uiMgr.Transition();
+					// uiMgr.Transition();
 					uiMgr.Hide(roomTasksUI[selectedRoom_Index].gameObject);
 					
 					fairy.gameObject.SetActive(false);
@@ -282,14 +315,25 @@ public class GameManager : SceneObjectSingleton<GameManager>
 				StartCoroutine(routine());
 				
 				IEnumerator routine(){
-					particle.SetActive(true);
+					onTaskFinishParticle.SetActive(true);
+					onTaskFinishSound.Play();
 					
-					yield return new WaitForSeconds(1.5f);
+					yield return new WaitForSeconds(1f);
+					
+						var coinHUD = CoinHUD.Instance;
+						{
+							coinHUD.AddCoin(currentTask.rewards);
+							while(coinHUD.isUpdatingAmount) yield return null;
+						}
+						
+						coinsParticles.SetActive(true);
+					
+					yield return new WaitForSeconds(onTaskExitDuration);
 					
 					uiMgr.Transition();
 					
 					camMgr.SetPriority(selectedRoom.CameraPoint);
-					GeneralAudio.Instance.Play("splashIntro");
+					transitionSound.Play();
 					
 					player.SetActive(true);
 					fairy.gameObject.SetActive(true);
@@ -305,6 +349,13 @@ public class GameManager : SceneObjectSingleton<GameManager>
 						currentTask.isFinished = true;
 						Destroy(currentTask.gameObject);
 					}
+					
+					yield return new WaitForSeconds(1);
+					
+					foreach(var particle in onTaskFinishParticles)
+						particle.SetActive(false);
+					
+					coinsParticles.SetActive(false);
 				}
 				
 				uiMgr.SetExclamationPoint(Vector3.zero, false);
@@ -332,6 +383,11 @@ public class GameManager : SceneObjectSingleton<GameManager>
 		
 		public void ExitGame(){
 			Application.Quit();
+		}
+		
+		[ContextMenu("Test Error")]
+		public void Test(){
+			Debug.LogError("test error");
 		}
 		
 	#endregion

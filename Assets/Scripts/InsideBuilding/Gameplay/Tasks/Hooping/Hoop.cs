@@ -30,6 +30,8 @@ namespace Gameplay
 		}
 		
 		public void Interact(GameObject obj){
+			Debug.Log(obj.name, obj);
+			
 			if(objects.Contains(obj)) return;
 			objects.Add(obj);
 			

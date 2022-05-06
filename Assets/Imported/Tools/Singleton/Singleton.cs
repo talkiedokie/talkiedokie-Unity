@@ -12,10 +12,10 @@ public class Singleton<T> : ScriptableObject where T : Singleton<T>
 				int count = assets.Length;
 				
 				if(assets == null || count < 1)
-					throw new System.Exception("Could not find T instance in the resources");
+					throw new System.Exception("Could not find T instance in Resources/" + directory);
 				
 				else if(count > 1)
-					throw new System.Exception("Multiple instances of T are found in the resources");
+					throw new System.Exception("Multiple instances of T are found in Resources/" + directory);
 				
 				instance = assets[0];
 			}

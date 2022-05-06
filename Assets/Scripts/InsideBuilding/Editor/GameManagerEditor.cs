@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace Gameplay
 {
-	[CustomEditor(typeof(GameManager))]
+	/* [CustomEditor(typeof(GameManager))]
 	public class GameManagerEditor : Editor
 	{
 		GameManager script;
@@ -50,5 +50,5 @@ namespace Gameplay
 				(T) EditorGUILayout.ObjectField(reference, typeof(T), true):
 				(T) EditorGUILayout.ObjectField(label, reference, typeof(T), true);
 		}
-	}
+	} */
 }

@@ -35,6 +35,7 @@ public class FpCtrl : MonoBehaviour
 		// Smoothing
 			Vector2 moveSmoothVel, viewSmoothVel;
 		
+		GameObject ui;
 		Rigidbody rb;
 		
 		CinemachineVirtualCamera camView, currentCamCache;
@@ -56,6 +57,14 @@ public class FpCtrl : MonoBehaviour
 		void OnEnable(){
 			currentCamCache = camMgr.Current;
 			camMgr.SetPriority(camView);
+			
+			CustomCursor.Instance.Hide();
+			
+			// fpUI
+			if(!ui) ui = GameObject.Find("/Canvas/Overlays/FirstPerson");
+			if(ui) ui.SetActive(true);
+			
+			rb.isKinematic = false;
 		}
 		
 		void Update(){
@@ -63,13 +72,8 @@ public class FpCtrl : MonoBehaviour
 			HandleJumping();
 			HandleViewRotation();
 			
-			if(Input.GetMouseButtonDown(0)){
-				var ray = new Ray(cam.position, cam.forward);
-				
-				if(Physics.Raycast(ray, out var hit, interactionDistance, clickables))
-					if(hit.collider.TryGetComponent<Clickable>(out var clickable))
-						clickable.Interact();
-			}
+			if(Input.GetMouseButtonDown(0))
+				HandleInteraction();
 		}
 		
 		void FixedUpdate(){
@@ -86,6 +90,9 @@ public class FpCtrl : MonoBehaviour
 		
 		void OnDisable(){
 			camMgr.SetPriority(currentCamCache);
+			if(ui) ui.SetActive(false);
+			
+			rb.isKinematic = true;
 		}
 		
 	#endregion
@@ -113,8 +120,7 @@ public class FpCtrl : MonoBehaviour
 			if(Input.GetButtonDown("Jump"))
 				rb.AddForce(Vector3.up * jumpForce, jumpForceMode);
 		}
-		
-		void HandleViewRotation(){
+		void HandleViewRotation(){			
 			// Input
 				viewInput.x += Input.GetAxis("Mouse Y");
 				viewInput.y = Input.GetAxis("Mouse X");
@@ -136,8 +142,16 @@ public class FpCtrl : MonoBehaviour
 				);
 			
 			// Apply
-				cam.localEulerAngles = Vector3.left * viewRotation.x;
+				cam.localEulerAngles = Vector3.left	* viewRotation.x;
 				transform.Rotate(Vector3.up * viewRotation.y);
+		}
+		
+		void HandleInteraction(){
+			var ray = new Ray(cam.position, cam.forward);
+				
+			if(Physics.Raycast(ray, out var hit, interactionDistance, clickables))
+				if(hit.collider.TryGetComponent<Clickable>(out var clickable))
+					clickable.Interact();
 		}
 		
 	#endregion

@@ -6,13 +6,12 @@ public static class Tools
 {
 	public static string Clamp(string str, int length){
 		string output = "";
-		char[] chars = str.ToCharArray();
 		
 		for(int i = 0; i < length; i++)
-			if(i < chars.Length)
-				output += chars[i];
+			if(i < str.Length)
+				output += str[i];
 		
-		if(chars.Length > length)
+		if(str.Length > length)
 			output += "...";
 		
 		return output;
@@ -38,28 +37,73 @@ public static class Tools
 	
 	#region Random
 		
-		public static T Random<T>(T[] array){
-			return array[UnityEngine.Random.Range(0, array.Length)];
-		}
-		
-		public static T Random<T>(List<T> list){
-			return list[UnityEngine.Random.Range(0, list.Count)];
-		}
-		
-		public static bool RandomCondition(){
-			return UnityEngine.Random.value < 0.5f;
-		}
-		
-		public static bool RandomCondition(float probability){
-			return UnityEngine.Random.value < Mathf.Clamp01(probability);
-		}
-		
-		public static bool RandomCondition(float probability, out float probableValue){
-			probableValue = UnityEngine.Random.value;
-			probability = Mathf.Clamp01(probability);
+		#region Array/List
 			
-			return probableValue < probability;
-		}
+			public static T Random<T>(T[] array){
+				return array[UnityEngine.Random.Range(0, array.Length)];
+			}
+			
+			public static T Random<T>(List<T> list){
+				return list[UnityEngine.Random.Range(0, list.Count)];
+			}
+			
+			public static T Random<T>(T[] array, out int index){
+				index = UnityEngine.Random.Range(0, array.Length);
+				return array[index];
+			}
+			
+			public static T Random<T>(List<T> list, out int index){
+				index = UnityEngine.Random.Range(0, list.Count);
+				return list[index];
+			}
+			
+		#endregion
+		
+		#region Condition
+			
+			public static bool RandomCondition(){
+				return UnityEngine.Random.value < 0.5f;
+			}
+			
+			public static bool RandomCondition(float probability){
+				return UnityEngine.Random.value < Mathf.Clamp01(probability);
+			}
+			
+			public static bool RandomCondition(
+				float probability,
+				out float probableValue
+			){
+				probableValue = UnityEngine.Random.value;
+				probability = Mathf.Clamp01(probability);
+				
+				return probableValue < probability;
+			}
+			
+		#endregion
 		
 	#endregion
+	
+	public static T LerpOn<T>(T[] array, float t){
+		int length = array.Length;
+		
+		if(length == 0) return default(T);
+		if(length == 1) return array[0];
+		
+		t = Mathf.Clamp01(t);
+		int index = Mathf.RoundToInt(Mathf.Lerp(0, length - 1, t));
+		
+		return array[index];
+	}
+	
+	public static T LerpOn<T>(List<T> list, float t){
+		int count = list.Count;
+		
+		if(count == 0) return default(T);
+		if(count == 1) return list[0];
+		
+		t = Mathf.Clamp01(t);
+		int index = Mathf.RoundToInt(Mathf.Lerp(0, count - 1, t));
+		
+		return list[index];
+	}
 }

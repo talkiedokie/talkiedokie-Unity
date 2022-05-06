@@ -2,9 +2,10 @@ using UnityEngine;
 
 namespace DataManagement
 {
-	[CreateAssetMenu(menuName = "Managers/Player Progress")]
-	public class PlayerProgress : Singleton<PlayerProgress>
+	[CreateAssetMenu(menuName = "Player Progress")]
+	public class PlayerProgress : ScriptableObject
 	{
 		public LevelData[] levels;
+		public LevelDataSelector currentLevel;
 	}
 }

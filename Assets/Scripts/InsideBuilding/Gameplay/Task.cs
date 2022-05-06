@@ -6,8 +6,16 @@ public class Task : MonoBehaviour
 {
 	[TextArea()] public string description;
 	
+	[Foldout("General")]
+	public int rewards = 10;
+	
 	public AudioClip fairyVoiceClip;
-	public CinemachineVirtualCamera camView;
+	[SerializeField] CinemachineVirtualCamera camView;
+	
+	[Foldout("Recap")]
+	[SerializeField] CinemachineVirtualCamera recapCam;
+	[SerializeField] Animator recapAnim;
+	[SerializeField] string recapAnimParam = "recap";
 	
 	[HideInInspector]
 	public bool isFinished;
@@ -32,6 +40,13 @@ public class Task : MonoBehaviour
 	protected virtual void Start(){
 		if(!fairy) fairy = Fairy.Instance.gameObject;
 		if(!player) player = gameMgr.player;
+		
+		if(!recapCam){
+			var child = transform.Find("CM taskRecap");
+			
+			if(child)
+				recapCam = child.GetComponent<CinemachineVirtualCamera>();
+		}
 	}
 	
 	public virtual void Play(bool b){
@@ -49,6 +64,11 @@ public class Task : MonoBehaviour
 	
 	protected void CompleteTask(){
 		gameMgr.FinishTask();
+		
+		if(recapAnim)
+			recapAnim?.SetTrigger(recapAnimParam);
+		
+		camMgr.SetPriority(recapCam);
 		Play(false);
 	}
 	

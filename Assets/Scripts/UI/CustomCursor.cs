@@ -18,6 +18,9 @@ public class CustomCursor : SceneObjectSingleton<CustomCursor>
 		Lock(b);
 	}
 	
+	public void Show(){ Show(true); }
+	public void Hide(){ Hide(true); }
+	
 	void Lock(bool b){
 		if(b) Cursor.lockState = CursorLockMode.Locked;
 		else Cursor.lockState = CursorLockMode.None;

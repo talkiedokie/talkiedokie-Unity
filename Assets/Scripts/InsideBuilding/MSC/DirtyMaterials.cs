@@ -1,15 +1,11 @@
 using UnityEngine;
 
-[CreateAssetMenu()]
+[CreateAssetMenu(menuName = "MSC/Dirty Materials")]
 public class DirtyMaterials : Singleton<DirtyMaterials>
 {
 	[SerializeField] Material[] materials;
 	
 	public Material GetRandom(){
 		return Tools.Random(materials);
-	}
-	
-	public void Test(){
-		Debug.Log("test");
 	}
 }

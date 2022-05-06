@@ -32,10 +32,13 @@ public class NPC : MonoBehaviour
 		var floor = floors[Random.Range(0, floors.Length)];
 		var bounds = floor.bounds;
 		
+		var min = bounds.min;
+		var max = bounds.max;
+		
 		targetPosition = new Vector3(
-			Random.Range(bounds.min.x, bounds.max.x),
-			Random.Range(bounds.min.y, bounds.max.y),
-			Random.Range(bounds.min.z, bounds.max.z)
+			Random.Range(min.x, max.x),
+			Random.Range(min.y, max.y),
+			Random.Range(min.z, max.z)
 		);
 		
 		agent.SetDestination(targetPosition);

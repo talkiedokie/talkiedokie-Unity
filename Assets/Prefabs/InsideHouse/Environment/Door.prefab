@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5268281344082762849}
   - component: {fileID: 5945073171513659447}
   m_Layer: 0
-  m_Name: Quad (1)
+  m_Name: clickable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 8793331756982508612}
   - component: {fileID: 1701693065468202276}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: clickable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -578,7 +578,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openDuration: 0.65
-  closeDuration: 1.5
   curve:
     serializedVersion: 2
     m_Curve:
