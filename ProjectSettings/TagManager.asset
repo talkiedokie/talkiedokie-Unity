@@ -3,12 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Interaction Prompt
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - FirstPerson
+  - Characters/FirstPerson
   - Water
   - UI
   - Gameplay/Interactable
@@ -16,7 +17,7 @@ TagManager:
   - Gameplay/Overlay
   - Gameplay/Hoop
   - Gameplay/Tool
-  - 
+  - Characters/Character
   - 
   - 
   - 

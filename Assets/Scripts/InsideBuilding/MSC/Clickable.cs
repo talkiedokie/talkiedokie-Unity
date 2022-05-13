@@ -7,6 +7,7 @@ public class Clickable : MonoBehaviour
 	[SerializeField] string _param = "clicked";
 	int param;
 	
+	[SerializeField] GameObject[] highlights;
 	[SerializeField] UnityEvent<bool> onClick;
 	
 	public bool clicked{ get; private set; }
@@ -17,6 +18,11 @@ public class Clickable : MonoBehaviour
 	
 	void OnMouseDown(){
 		Interact();
+	}
+	
+	public void ShowHighlight(bool b){
+		foreach(var highlight in highlights)
+			highlight.SetActive(b);
 	}
 	
 	public void Interact(){

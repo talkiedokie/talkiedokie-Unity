@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 using System.Collections;
 using AccountsManagement;
 
@@ -17,11 +16,10 @@ namespace Minigame
 			
 			[Foldout("Timer")]
 				[LabelOverride("Amount")] public float _timer = 10f;
-				[LabelOverride("Correct Answer Reward")] public float timeRecovery = 1.25f;
+				[LabelOverride("Correct Answer Recovery")] public float timeRecovery = 1.25f;
 				[LabelOverride("Text UI")] public Text timerTxt;
 					
 					float timer;
-					bool isHypothizing;
 				
 				public GeneralAudioSelector timesUpSound = 13;
 				
@@ -34,6 +32,7 @@ namespace Minigame
 				[LabelOverride("Max Amount")] public int maxScore = 10;
 				
 				[LabelOverride("Text UI")] public Text scoreTxt;
+				public SpeechRecognizerUI speechRecognizerUI;
 				
 				public GeneralAudioSelector
 					correctSound = 6,
@@ -71,9 +70,7 @@ namespace Minigame
 			UIManager uiMgr;
 			
 			void Awake(){
-				speechRecognizer = SpeechRecognizer.Instance;
-				speechRecognizer.onHypothesis = onHypothesis;
-				
+				speechRecognizer = SpeechRecognizer.Instance;				
 				uiMgr = UIManager.Instance;
 				
 				headerAnim = scoreTxt.GetComponentInParent<Animator>();
@@ -81,8 +78,6 @@ namespace Minigame
 				foreach(var character in characters)
 					character.OnAwake();
 			}
-			
-			void onHypothesis(){ isHypothizing = true; }
 			
 			IEnumerator Start(){
 				yield return null; // late start
@@ -113,19 +108,17 @@ namespace Minigame
 				bool isWin = false;
 				
 				while(timer > 0f){
-					if(!isHypothizing){
-						float lerp = timer / _timer;
-						var color = timerGradient.Evaluate(lerp);
-						{
-							timerImg.fillAmount = lerp;
-							timerImg.color = color;
-							
-							timerTxt.text = (Mathf.Round(timer * 10) / 10).ToString();
-							timerTxt.color = color;
-						}
+					float lerp = timer / _timer;
+					var color = timerGradient.Evaluate(lerp);
+					{
+						timerImg.fillAmount = lerp;
+						timerImg.color = color;
 						
-						timer -= Time.deltaTime;
+						timerTxt.text = (Mathf.Round(timer * 10) / 10).ToString();
+						timerTxt.color = color;
 					}
+					
+					timer -= Time.deltaTime;
 					
 					yield return null;
 					
@@ -153,7 +146,9 @@ namespace Minigame
 							
 							var coinHUD = CoinHUD.Instance;
 							{
-								coinHUD.AddCoin(coinRewards);
+								int amount = Mathf.RoundToInt(Mathf.Lerp(0, coinRewards, timer / _timer));
+								coinHUD.AddCoin(amount);
+								
 								while(coinHUD.isUpdatingAmount) yield return null;
 							}
 					}
@@ -180,31 +175,67 @@ namespace Minigame
 					var food = character.InstantiateFood();
 				
 				speechRecognizer.Listen(character.name, onListen);
-				speechRecognizer.listenAgainOnWrong = false;
-				
-				// speechRecognizer.onResult = onListen;
+				// speechRecognizer.listenAgainOnWrong = false;
 				
 				void onListen(){
 					if(timer <= 0f) return;
 					
 					string result = speechRecognizer.result;
-					var destChar = Array.Find(characters, character => character.name.ToLower() == result);
+					var destChar = FindCharacterWithSpeech(result);
 					
 					if(destChar != null){
 						var routine = MoveTheFood(food.transform, destChar, character);
 							StartCoroutine(routine);
-					}else{
+					}
+					else{
 						speechRecognizer.Listen(character.name, onListen);
-						speechRecognizer.listenAgainOnWrong = false;
+						// speechRecognizer.listenAgainOnWrong = false;
 					}
 				}
+			}
+			
+			Character FindCharacterWithSpeech(string speech){
+				Character output = null;
+				
+				foreach(var character in characters){
+					if(character.name.ToLower() == speech){
+						output = character;
+						break;
+					}
+					
+					else{
+						foreach(var sl in character.soundsLike)
+							if(sl.ToLower() == speech){
+								output = character;
+								break;
+							}
+					}
+				}
+				
+				return output;
+				// Array.Find(characters, character => character.name.ToLower() == result);
 			}
 			
 			IEnumerator MoveTheFood(
 				Transform food,
 				Character destination,
 				Character correct
-			){			
+			){
+				yield return null;
+				bool isCorrect = destination == correct;
+					
+					speechRecognizerUI.OnResult(
+						destination.name,
+						speechRecognizer.resultType
+					);
+					
+					/* speechRecognizerUI.OnCompletion(
+						speechRecognizer.completionCause,
+						destination.name,
+						isCorrect,
+						speechRecognizer.grade
+					); */
+				
 				float timer = 0f;
 				float duration = 0.35f;
 				
@@ -215,15 +246,17 @@ namespace Minigame
 				
 				while(timer < duration){
 					float lerp = timer / duration;
-					food.position = Vector3.Lerp(start, dest, lerp);
+					
+					if(food)
+						food.position = Vector3.Lerp(start, dest, lerp);
 					
 					timer += Time.deltaTime;
 					yield return null;
 				}
 				
-				bool isCorrect = destination == correct;
-					UpdateScore(destination, isCorrect);
+				UpdateScore(destination, isCorrect);
 				
+				yield return null;
 				Destroy(food.gameObject);
 				NewChallenge();
 			}
@@ -238,22 +271,22 @@ namespace Minigame
 					scoreTxt.text = score.ToString();
 					
 					Pop(headerAnim);
-					
-					var particle = Instantiate(
-						Tools.Random(correctParticles),
-						character.transform.position,
-						Quaternion.identity
-					);
-					
-					Destroy(particle, correctParticlesDespawnTime);
-					
 					timer += timeRecovery;
 				}
 				
 				Pop(character.animator);
-				GeneralAudio.Instance.Play(isCorrect? correctSound: wrongSound);
 				
-				isHypothizing = false;
+				var particlePrefab = Tools.Random(correctParticles);
+				
+				var particle = Instantiate(
+					particlePrefab,
+					character.transform.position,
+					particlePrefab.transform.rotation
+				);
+				
+				Destroy(particle, correctParticlesDespawnTime);
+				
+				GeneralAudio.Instance.Play(isCorrect? correctSound: wrongSound);
 			}
 			
 			void Pop(Animator anim){
@@ -275,6 +308,9 @@ namespace Minigame
 			
 			public GameObject gameObject;
 			public GameObject food;
+			
+			[Space()]
+			public string[] soundsLike;
 			
 			public Transform transform{ get; private set; }
 			public Animator animator{ get; private set; }

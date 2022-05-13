@@ -1,73 +1,58 @@
 using UnityEngine;
-using UnityEngine.Windows.Speech;
+using UnityEngine.Events;
 using System;
 using System.Collections;
 
 public class SpeechRecognizer : SceneObjectSingleton<SpeechRecognizer>
 {
-	#region Inspector
-		
-		[SerializeField, LabelOverride("Word/Phrase")] string word;
-		
-		[SerializeField] float
-			onCompletionExitDuration = 1f,
-			listenDuration = 5f;
-		
-		[SerializeField] SpeechRecognizerUI ui;
-		[Space(), SerializeField, TextArea()] string hypothesis;
-		
-		[Space()]
-		[SerializeField] AudioClip[] tryAgainClips;
-		
-	#endregion
+	[TextArea()] public string word;
 	
-	#region Variables/Properties
-		
-		public string result{ get; private set; }
-		public bool listenAgainOnWrong{ private get; set; } = true;
-		
-		public SpeechSystemStatus status;
-		public Action onHypothesis, onResult;
-		
-		ConfidenceLevel confidence;
-		bool isSkipped;
-		
-		DictationRecognizer dr;
-		Action onFinish;
-		
-		Fairy fairy;
-		
-	#endregion
+	public string result => stt.result;
 	
-	#region Unity Methods
-		
-		void Awake(){
-			dr = new DictationRecognizer();
-			{
-				dr.DictationResult += Result;
-				dr.DictationHypothesis += Hypothesis;
-				dr.DictationComplete += Complete;
-				dr.DictationError += Error;
-				
-				dr.InitialSilenceTimeoutSeconds = listenDuration;
-			}
-			
-			if(tryAgainClips.Length > 0)
-				fairy = Fairy.Instance;
-		}
-		
-		void Update(){
-			status = dr.Status;
-			
-			if(Input.GetKeyDown("p"))
-				Skip();
-		}
-		
-		void OnDestroy(){ Stop(); }
-		
-	#endregion
+	public enum ResultType{ None, Correct, Wrong, TimeOut }
+	public ResultType resultType{ get; private set; } = ResultType.None;
+	
+	public bool isCorrect => resultType == ResultType.Correct;
+	
+	[SerializeField] SpeechRecognizerUI ui;
+	[SerializeField] float onCompletionExitDuration = 1f;
+	
+	[Foldout("Events")]
+	[SerializeField] UnityEvent
+		onListen, onHypothesis,
+		onCorrect, onWrong, onTimeOut;
+	
+	[SerializeField] UnityEvent<ResultType> onResult;
+	
+	Action onFinish;
+	SpeechToText stt; // multi-platform handler
+	
+	void Awake(){
+		stt = SpeechToText.Instance;
+	}
 	
 	#region Calls
+		
+		[ContextMenu("Listen")]
+		public void Listen(){
+			enabled = true;
+			
+			stt.StartListening(
+				OnListenHypothesis, // loading UI
+				OnListenResult
+			);
+			
+			StopListenTimer();
+				listenTimer = ListenTimer();
+				StartCoroutine(listenTimer);
+			
+			resultType = ResultType.None;
+			
+			// Events
+				ui.gameObject.SetActive(true);
+				ui.OnListen();
+				onListen?.Invoke();
+		}
 		
 		public void Listen(string word, Action onFinish){
 			this.word = word;
@@ -76,158 +61,89 @@ public class SpeechRecognizer : SceneObjectSingleton<SpeechRecognizer>
 			Listen();
 		}
 		
-		[ContextMenu("Listen")]
-		public void Listen(){
-			if(!Application.isPlaying) return;
-			
-			enabled = true;
-			isSkipped = false;
-			
-			dr.InitialSilenceTimeoutSeconds = listenDuration;
-			
-			StartSpeechDictation();
-			ui.OnListen(listenDuration);
-			
-			Debug.Log("SpeechRecognizer is now listening to the word/phrase: " + word);
-		}
-		
-		[ContextMenu("Skip")]
-		public void Skip(){
-			if(!Application.isPlaying) return;
-			
-			if(dr.Status != SpeechSystemStatus.Running){
-				Debug.LogWarning("SpeechRecognizer is not running but is currently '" + dr.Status.ToString() + "'");
-				return;
-			}
-			
-			isSkipped = true;
-			dr.Stop();
-			
-			ui.OnSkip();
-			Debug.LogWarning("Speech recognizer skipped the word/phrase: " + word);
-		}
-		
-		[ContextMenu("Stop")]
+		[ContextMenu("Stop Listening")]
 		public void Stop(){
-			dr.Stop();
-			dr.Dispose();
-			
+			stt.StopListening();
 			ui.gameObject.SetActive(false);
-			enabled = false;
 		}
 		
 	#endregion
 	
 	#region Events
 		
-		void Result(string result, ConfidenceLevel confidence){
-			this.result = result;
-			this.confidence = confidence;
+		void OnListenHypothesis(){
+			if(resultType == ResultType.TimeOut)
+				return;
 			
-			Complete(DictationCompletionCause.Complete);
-			dr.Stop();
+			StopListenTimer();
 			
-			onResult?.Invoke();
+			// Events
+				ui.OnHypothesis(stt.hypothesis);
+				onHypothesis?.Invoke();
 		}
 		
-		void Hypothesis(string text){
-			hypothesis = text;
+		void OnListenResult(){
+			if(resultType == ResultType.TimeOut)
+				return;
 			
-			ui.OnHypothesis();
-			onHypothesis?.Invoke();
-		}
-		
-		void Complete(DictationCompletionCause cause){
-			if(!Application.isPlaying) return;
-			bool isCorrect = false;
+			StopListenTimer();
 			
-			if(!isSkipped){
-				isCorrect = cause == DictationCompletionCause.Complete && result == word.ToLower();
-				float grade = CalculateGrade();
-				
-				ui.OnCompletion(cause, result, isCorrect, grade);
-			}
-			OnCompletion(isCorrect);
-		}
-		
-		void Error(string error, int hresult){
-			Debug.LogErrorFormat("Dictation error: {0}; HResult = {1}.", error, hresult);
+			resultType = (result == word.ToLower())?
+				ResultType.Correct:
+				ResultType.Wrong;
+			
+			StartCoroutine(OnListenResult_Routine());
 		}
 		
 	#endregion
 	
 	#region Coroutines
-	
-		IEnumerator onCompletion;
 		
-		void OnCompletion(bool isCorrect){
-			if(onCompletion != null)
-				StopCoroutine(onCompletion);
-			
-			onCompletion = OnCompletion_Routine(isCorrect);
-			StartCoroutine(onCompletion);
+		IEnumerator listenTimer;
+		
+		void StopListenTimer(){
+			if(listenTimer != null)
+				StopCoroutine(listenTimer);
 		}
 		
-		IEnumerator OnCompletion_Routine(bool isCorrect){
-			var exitDelay = new WaitForSeconds(onCompletionExitDuration);
+		IEnumerator ListenTimer(){
+			float duration = stt.listenDuration;
+			float timer = stt.listenDuration;
 			
-			if(isCorrect || isSkipped){
-				yield return exitDelay;
+			while(timer > 0f){
+				ui.OnListenTimer(timer / duration);
 				
-				ui.gameObject.SetActive(false);
-				enabled = false;
-				
-				onFinish?.Invoke();
+				timer -= Time.deltaTime;
+				yield return null;
 			}
-			else{
-				if(listenAgainOnWrong){
-					bool fairyCanSpeak = fairy && tryAgainClips.Length > 0;
-					
-					if(fairyCanSpeak){
-						fairy.Speak(Tools.Random(tryAgainClips), 0.15f);
-						while(fairy.isSpeaking) yield return null;
-					}
-					
-					enabled = false;
-					Listen();
+			
+			onTimeOut?.Invoke(); // Event
+			
+			resultType = ResultType.TimeOut;
+			yield return OnListenResult_Routine();
+		}
+		
+		IEnumerator OnListenResult_Routine(){
+			enabled = false;
+			
+			// Events
+				ui.OnResult(result, resultType);
+				onResult?.Invoke(resultType);
+				
+				switch(resultType){
+					case ResultType.None: 							break;
+					case ResultType.Correct: onCorrect?.Invoke();	break;
+					case ResultType.Wrong:	 onWrong?.Invoke();		break;
+					case ResultType.TimeOut: onTimeOut?.Invoke();	break;
 				}
-				
-				else{
-					yield return exitDelay;
-					
-					enabled = false;
-					onFinish?.Invoke();
-				}
-			}
+			
+			yield return new WaitForSeconds(onCompletionExitDuration);
+			
+			Stop();
+			
+			onFinish?.Invoke();
+			ui.gameObject.SetActive(false);	
 		}
 		
-	#endregion
-	
-	#region MSC
-	
-		void StartSpeechDictation(){
-			bool isDictatorRunning = false;
-			int iteration = 0;
-			
-			while(!isDictatorRunning && iteration < 50){
-				dr.Start(); // this
-				
-				isDictatorRunning = dr.Status != SpeechSystemStatus.Running;
-				iteration ++;
-			}
-			
-			if(iteration > 1)
-				Debug.LogWarning("On Completion Looped " + iteration + " times");
-		}
-		
-		const float diffBetweenConfidenceLevel = 0.25f;
-		
-		float CalculateGrade(){
-			float tolerance = (diffBetweenConfidenceLevel * UnityEngine.Random.value);
-			float level = (float) confidence + tolerance;
-			
-				return Mathf.InverseLerp(3, 0, level);
-		}
-	
 	#endregion
 }

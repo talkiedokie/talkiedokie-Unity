@@ -8,9 +8,18 @@ public class Fairy : SceneObjectSingleton<Fairy>
 	[SerializeField] AudioSource source;
 	[SerializeField] AudioClip noAudioClip;
 	
-	IEnumerator speakRoutine;
+	[Space()]
+	[SerializeField] AudioClip[] wowClips;
+	[SerializeField] AudioClip[] failClips;
 	
+	IEnumerator speakRoutine;
 	public bool isSpeaking{ get; private set; }
+	
+	SpeechRecognizer speechRecognizer;
+	
+	void Awake(){
+		speechRecognizer = SpeechRecognizer.Instance;
+	}
 	
 	#region Calls
 		
@@ -48,10 +57,30 @@ public class Fairy : SceneObjectSingleton<Fairy>
 			Speak(clip, startDelay, null);
 		}
 		
+		public void ListenToSpeech(string speech, Action onFinish){
+			speechRecognizer.Listen(speech, onSpeechResult);
+			
+			void onSpeechResult(){
+				bool isCorrect = speechRecognizer.isCorrect;
+				
+				var audioClip = isCorrect?
+					Tools.Random(wowClips):
+					Tools.Random(failClips);
+				
+				var onSpeakFinish = isCorrect? onFinish: Loop;
+				
+				Speak(audioClip, 0.5f, isCorrect? onFinish: onSpeakFinish);
+				
+				void Loop(){
+					ListenToSpeech(speech, onFinish);
+				}
+			}
+		}
+		
 	#endregion
 	
 	#region Routines
-		
+	
 		IEnumerator SpeakRoutine(
 			AudioClip[] clips,
 			float delay,

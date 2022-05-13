@@ -83,10 +83,9 @@ public class GameManager : SceneObjectSingleton<GameManager>
 		Fairy fairy;
 		Camera cam;
 		
-		const ShowType single = ShowType.Single;
+		const ShowType single = ShowType.Single; // UIManager
 		
 		UIManager uiMgr;
-		SpeechRecognizer speechRecognizer;
 		CameraManager camMgr;
 		
 	#endregion
@@ -136,8 +135,6 @@ public class GameManager : SceneObjectSingleton<GameManager>
 			Destroy(playerPlaceHolder.gameObject);
 			
 			uiMgr = UIManager.Instance;
-			speechRecognizer = SpeechRecognizer.Instance;
-			
 			fairy = Fairy.Instance;
 			
 			cam = Camera.main;
@@ -164,6 +161,7 @@ public class GameManager : SceneObjectSingleton<GameManager>
 			Destroy(roomTasksUITemplate.gameObject);
 			
 			ChangeTheWordOfTheDay();
+			GeneralAudio.Instance.PlayMusic();
 		}
 		
 		void LateUpdate(){
@@ -228,17 +226,16 @@ public class GameManager : SceneObjectSingleton<GameManager>
 				fairy.Speak(clips, wotd_ClipDelay, SpeechListen);
 			
 			void SpeechListen(){
-				speechRecognizer.Listen(word, OnListenFinish);
+				fairy.ListenToSpeech(word, OnListenFinish);
 				
 				void OnListenFinish(){
 					wordPopup.SetActive(false);
 					
-					var clips = new AudioClip[]{
-						Tools.Random(wowClips),
-						ycneyft_Clip
-					};
-					
-					fairy.Speak(clips, ycneyft_ClipDelay, OnLevelFinished);
+					fairy.Speak(
+						ycneyft_Clip,
+						ycneyft_ClipDelay,
+						OnLevelFinished
+					);
 				}
 			}
 		}
@@ -269,7 +266,7 @@ public class GameManager : SceneObjectSingleton<GameManager>
 				uiMgr.Hide(roomSelector);
 				
 				void SpeechListen(){
-					speechRecognizer.Listen(SelectedRoom.name, GoToTheRoom);
+					fairy.ListenToSpeech(SelectedRoom.name, GoToTheRoom);
 					
 					void GoToTheRoom(){
 						wordPopup.SetActive(false);
@@ -383,11 +380,6 @@ public class GameManager : SceneObjectSingleton<GameManager>
 		
 		public void ExitGame(){
 			Application.Quit();
-		}
-		
-		[ContextMenu("Test Error")]
-		public void Test(){
-			Debug.LogError("test error");
 		}
 		
 	#endregion

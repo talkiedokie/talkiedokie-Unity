@@ -5,9 +5,15 @@ using System;
 [CreateAssetMenu(menuName = "MSC/General Audio")]
 public class GeneralAudio : Singleton<GeneralAudio>
 {
+	[SerializeField, LabelOverride("Background Music")] AudioClip bgm;
+	[SerializeField, Range(0,1)] float bgmVolume = 0.1f;
+	
+	[Space()]
 	[SerializeField] AudioClip[] clips;
 	[SerializeField] Group[] groups;
 	
+	
+	AudioSource bgmPlayer;
 	AudioSource[] sources;
 	
 	GameObject _gameObject;
@@ -48,6 +54,17 @@ public class GeneralAudio : Singleton<GeneralAudio>
 	public bool isPlaying => source.isPlaying;
 	
 	#region Play
+		
+		public void PlayMusic(){
+			if(bgmPlayer) return;
+			
+			bgmPlayer = gameObject.AddComponent<AudioSource>();
+				bgmPlayer.clip = bgm;
+				bgmPlayer.volume = bgmVolume;
+				bgmPlayer.loop = true;
+			
+			bgmPlayer.Play();
+		}
 		
 		public void Play(int clipIndex){
 			var clip = clips[clipIndex];

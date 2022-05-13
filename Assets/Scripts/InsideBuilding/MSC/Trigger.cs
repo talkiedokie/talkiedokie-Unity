@@ -53,7 +53,7 @@ public class Trigger : MonoBehaviour
 		
 		else Prototype.City.playerPosition = onRejectionPlayerDest.position;
 		
-		cityScene.Load();
+		cityScene.LoadAsync();
 	}
 	
 	public void OnReject(){

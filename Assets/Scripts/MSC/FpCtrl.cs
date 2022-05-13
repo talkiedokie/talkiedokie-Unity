@@ -21,6 +21,10 @@ public class FpCtrl : MonoBehaviour
 		public float interactionDistance = 3f;
 		public LayerMask clickables;
 		
+		[Space()]
+		public bool enableGpx = true;
+		public GameObject gpx;
+		
 	#endregion
 	
 	#region Variables
@@ -35,11 +39,13 @@ public class FpCtrl : MonoBehaviour
 		// Smoothing
 			Vector2 moveSmoothVel, viewSmoothVel;
 		
-		GameObject ui;
+		GameObject ui, interactionPromptUI;
+		RaycastHit interactionInfo;
+		
 		Rigidbody rb;
 		
 		CinemachineVirtualCamera camView, currentCamCache;
-		Transform cam;
+		Transform camT;
 		CameraManager camMgr;
 		
 	#endregion
@@ -50,21 +56,25 @@ public class FpCtrl : MonoBehaviour
 			rb = GetComponent<Rigidbody>();
 
 			camView = GetComponentInChildren<CinemachineVirtualCamera>();
-			cam = camView.transform;
+			camT = camView.transform;
 			camMgr = CameraManager.Instance;
 		}
 		
 		void OnEnable(){
 			currentCamCache = camMgr.Current;
 			camMgr.SetPriority(camView);
-			
 			CustomCursor.Instance.Hide();
 			
 			// fpUI
 			if(!ui) ui = GameObject.Find("/Canvas/Overlays/FirstPerson");
 			if(ui) ui.SetActive(true);
 			
+			var ipui = GameObject.Find("/Canvas/Overlays/FirstPerson/FPInteractionPrompt");
+			interactionPromptUI = ipui? ipui.gameObject: null;
+			
 			rb.isKinematic = false;
+			
+			if(gpx) gpx?.SetActive(enableGpx);
 		}
 		
 		void Update(){
@@ -73,7 +83,7 @@ public class FpCtrl : MonoBehaviour
 			HandleViewRotation();
 			
 			if(Input.GetMouseButtonDown(0))
-				HandleInteraction();
+				hoveredObject?.Interact();
 		}
 		
 		void FixedUpdate(){
@@ -88,11 +98,16 @@ public class FpCtrl : MonoBehaviour
 				rb.velocity = velocity;
 		}
 		
+		void LateUpdate(){
+			HandleHighlighting();
+		}
+		
 		void OnDisable(){
 			camMgr.SetPriority(currentCamCache);
 			if(ui) ui.SetActive(false);
 			
 			rb.isKinematic = true;
+			if(gpx) gpx?.SetActive(!enableGpx);
 		}
 		
 	#endregion
@@ -120,6 +135,7 @@ public class FpCtrl : MonoBehaviour
 			if(Input.GetButtonDown("Jump"))
 				rb.AddForce(Vector3.up * jumpForce, jumpForceMode);
 		}
+		
 		void HandleViewRotation(){			
 			// Input
 				viewInput.x += Input.GetAxis("Mouse Y");
@@ -142,17 +158,37 @@ public class FpCtrl : MonoBehaviour
 				);
 			
 			// Apply
-				cam.localEulerAngles = Vector3.left	* viewRotation.x;
+				camT.localEulerAngles = Vector3.left	* viewRotation.x;
 				transform.Rotate(Vector3.up * viewRotation.y);
 		}
 		
-		void HandleInteraction(){
-			var ray = new Ray(cam.position, cam.forward);
+		#region HandleHighlighting
+			
+			Clickable hoveredObject;
+			
+			void HandleHighlighting(){
+				var ray = new Ray(camT.position, camT.forward);
+				bool raycast = Physics.Raycast(ray, out interactionInfo, interactionDistance, clickables);
 				
-			if(Physics.Raycast(ray, out var hit, interactionDistance, clickables))
-				if(hit.collider.TryGetComponent<Clickable>(out var clickable))
-					clickable.Interact();
-		}
+				if(raycast){
+					if(interactionInfo.collider.TryGetComponent<Clickable>(out var current)){
+						hoveredObject?.ShowHighlight(false);
+						hoveredObject = current;
+						
+						Highlight(true);
+					}
+					else Highlight(false);
+				} else Highlight(false);
+			}
+			
+			void Highlight(bool b){
+				hoveredObject?.ShowHighlight(b);
+				
+				if(interactionPromptUI)
+					interactionPromptUI.SetActive(b);
+			}
+			
+		#endregion
 		
 	#endregion
 }
