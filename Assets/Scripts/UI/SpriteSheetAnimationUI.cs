@@ -22,7 +22,7 @@ public class SpriteSheetAnimationUI : MonoBehaviour
 			if(!image)
 				image = image = GetComponent<Image>();
 			
-			if(sprites.Length > 0)
+			if(sprites.Length > 1)
 				image.sprite = sprites[0];
 		}
 		

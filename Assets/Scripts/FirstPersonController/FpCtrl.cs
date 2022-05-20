@@ -1,0 +1,249 @@
+using UnityEngine;
+using Cinemachine;
+
+[RequireComponent(typeof(Rigidbody))]
+public class FpCtrl : MonoBehaviour
+{
+	#region Inspector
+		
+		[SerializeField] float
+			speed = 1f,
+			jumpForce = 2f;
+		
+		[Space()]
+		[SerializeField] ForceMode jumpForceMode = ForceMode.Impulse;
+		[SerializeField] LayerMask groundLayers;
+		[SerializeField] float groundCheckRadius = 0.15f;
+		
+		[Space()]
+		[SerializeField] float mouseSensitivity = 1f;
+		[SerializeField] bool invertX, invertY;
+		
+		[Space()]
+		[SerializeField] float moveSmoothTime = 0.12f;
+		[SerializeField] float viewSmoothTime = 0.12f;
+		
+		[Space()]
+		[SerializeField] float interactionDistance = 3f;
+		[SerializeField] LayerMask clickables;
+		
+		[Space()]
+		[SerializeField] bool enableGpx = true;
+		[SerializeField] GameObject gpx;
+		
+	#endregion
+	
+	#region Variables
+		
+		// Input
+			Vector2 moveInput, viewInput;
+			float pitch;
+		
+		// Output
+			Vector2 movement, viewRotation;
+		
+		// Smoothing
+			Vector2 moveSmoothVel, viewSmoothVel;
+		
+		bool isGrounded;
+		
+		Rigidbody rb;
+		
+		FpCtrl_Input input;
+		GameObject interactionPromptUI;
+		Clickable hoveredObject;
+		
+		CinemachineVirtualCamera camView, currentCamCache;
+		Transform camT;
+		Camera cam;
+		CameraManager camMgr;
+		
+	#endregion
+	
+	#region Unity Methods
+		
+		#region Pre
+			
+			void Awake(){
+				input = FpCtrl_Input.Instance;
+				rb = GetComponent<Rigidbody>();
+
+				camView = GetComponentInChildren<CinemachineVirtualCamera>();
+				camT = camView.transform;
+				cam = Camera.main;
+				camMgr = CameraManager.Instance;
+			}
+			
+			void OnEnable(){
+				currentCamCache = camMgr.Current;
+				camMgr.SetPriority(camView);
+				input.gameObject.SetActive(true);
+				
+				// fpUI
+				interactionPromptUI = input.interactionPromptUI;
+				
+				rb.isKinematic = false;
+				
+				if(gpx) gpx?.SetActive(enableGpx);
+			}
+			
+		#endregion
+		
+		#region Mid
+			
+			void Update(){
+				HandleMovement();
+				HandleViewRotation();
+				
+				HandleGroundChecking();
+				
+				if(input.jumpButtonDown)
+					HandleJumping();
+				
+				if(input.click)
+					HandleInteraction();
+			}
+			
+			void FixedUpdate(){
+				// Apply Movement
+					var velocity = new Vector3(
+						movement.x, 0f, movement.y
+					);
+					
+					velocity = transform.TransformDirection(velocity);
+					velocity.y = rb.velocity.y;
+					
+					rb.velocity = velocity;
+			}
+			
+			void LateUpdate(){
+				if(!input.gameObject.activeSelf)
+					input.gameObject.SetActive(true);
+				
+				HandleHighlighting();
+				
+				/* if(input.hold) HandleHighlighting();
+				
+				else if(hoveredObject){
+					Highlight(false);
+					hoveredObject = null;
+				} */
+			}
+			
+			void OnDrawGizmosSelected(){
+				Gizmos.color = Color.green;
+				Gizmos.DrawWireSphere(transform.position, groundCheckRadius);
+			}
+			
+		#endregion
+		
+		#region Post
+			
+			void OnDisable(){
+				if(!Application.isPlaying) return;
+				
+				camMgr.SetPriority(currentCamCache);
+				
+				rb.isKinematic = true;
+				if(gpx) gpx?.SetActive(!enableGpx);
+				
+				input.gameObject.SetActive(false);
+			}
+			
+		#endregion
+		
+	#endregion
+	
+	#region Logic
+		
+		void HandleMovement(){
+			// Input
+				moveInput = Vector2.ClampMagnitude(input.moveAxis, 1f);
+				moveInput *= speed;
+			
+			// Smoothen
+				movement = Vector2.SmoothDamp(
+					movement,
+					moveInput,
+					ref moveSmoothVel,
+					moveSmoothTime
+				);
+		}
+		
+		void HandleViewRotation(){			
+			// Input
+				viewInput.x += invertY? -input.panAxis.y: input.panAxis.y;
+				viewInput.y = invertX? -input.panAxis.x: input.panAxis.x;
+				viewInput *= mouseSensitivity;
+			
+			// Smoothen
+				viewRotation.x = Mathf.SmoothDamp(
+					viewRotation.x,
+					viewInput.x,
+					ref viewSmoothVel.x,
+					viewSmoothTime
+				);
+				
+				viewRotation.y = Mathf.SmoothDamp(
+					viewRotation.y,
+					viewInput.y,
+					ref viewSmoothVel.y,
+					viewSmoothTime
+				);
+			
+			// Apply
+				camT.localEulerAngles = Vector3.left * viewRotation.x;
+				transform.Rotate(Vector3.up * viewRotation.y);
+		}
+		
+		void HandleGroundChecking(){
+			isGrounded = Physics.CheckSphere(
+				transform.position,
+				groundCheckRadius,
+				groundLayers
+			);
+		}
+		
+		void HandleJumping(){
+			if(isGrounded)
+				rb.AddForce(Vector3.up * jumpForce, jumpForceMode);
+		}
+		
+	#endregion
+	
+	#region Interactions
+		
+		void HandleHighlighting(){
+			var ray = new Ray(camT.position, camT.forward);
+			// var ray = cam.ScreenPointToRay(input.clickPosition);
+			bool raycast = Physics.Raycast(ray, out var hit, interactionDistance, clickables);
+			
+			if(raycast){
+				if(hit.collider.TryGetComponent<Clickable>(out var current)){
+					hoveredObject?.ShowHighlight(false);
+					hoveredObject = current;
+					
+					Highlight(true);
+				}
+				else Highlight(false);
+			} else Highlight(false);
+		}
+		
+		void Highlight(bool b){
+			hoveredObject?.ShowHighlight(b);
+			
+			if(interactionPromptUI)
+				interactionPromptUI.SetActive(b);
+		}
+		
+		void HandleInteraction(){
+			var ray = cam.ScreenPointToRay(input.clickPosition);
+			
+			if(Physics.Raycast(ray, out var hit, interactionDistance, clickables)){
+				var interactable = hit.collider.GetComponent<Clickable>();
+					interactable?.Interact();
+			}
+		}
+		
+	#endregion
+}

@@ -64,14 +64,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpForce: 1.5
-  mouseSensitivity: 1
   jumpForceMode: 1
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 4096
+  groundCheckRadius: 0.15
+  mouseSensitivity: 1
+  invertX: 1
+  invertY: 1
   moveSmoothTime: 0.12
   viewSmoothTime: 0.12
   interactionDistance: 5
   clickables:
     serializedVersion: 2
     m_Bits: 705
+  enableGpx: 1
+  gpx: {fileID: 0}
 --- !u!136 &7851308424227046750
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -141,7 +149,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 70
     OrthographicSize: 5
-    NearClipPlane: 0.3
+    NearClipPlane: 0.001
     FarClipPlane: 1000
     Dutch: 0
     LensShift: {x: 0, y: 0}

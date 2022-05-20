@@ -48,7 +48,7 @@ public class UIManager : SceneObjectSingleton<UIManager>
 			}
 		}
 		
-		CustomCursor.Instance.Show(true);
+		// CustomCursor.Instance.Show(true);
 	}
 	
 	public void Show(GameObject obj){

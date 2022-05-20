@@ -29,6 +29,10 @@ public partial struct SceneLoader
 				SceneManager.LoadScene(index, mode);
 			}
 			
+			public void LoadAdditive(){
+				Load(LoadSceneMode.Additive);
+			}
+			
 		#endregion
 		
 	#endregion

@@ -17,6 +17,7 @@ public class CameraManager : SceneObjectSingleton<CameraManager>
 	}
 	
 	public void SetPriority(CinemachineVirtualCamera cam){
+		if(!cam) return;
 		if(priorityCamera) priorityCamera.Priority = nonPriorValue;
 		
 		priorityCamera = cam;

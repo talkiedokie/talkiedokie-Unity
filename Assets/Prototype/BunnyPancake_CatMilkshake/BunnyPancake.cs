@@ -120,6 +120,8 @@ namespace Minigame
 					
 					timer -= Time.deltaTime;
 					
+					if(Input.GetButtonDown("Cancel")) speechRecognizer.Skip();
+					
 					yield return null;
 					
 					isWin = score >= maxScore;
@@ -223,10 +225,11 @@ namespace Minigame
 			){
 				yield return null;
 				bool isCorrect = destination == correct;
-					
+				
 					speechRecognizerUI.OnResult(
 						destination.name,
-						speechRecognizer.resultType
+						speechRecognizer.resultType,
+						this
 					);
 					
 					/* speechRecognizerUI.OnCompletion(

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 namespace Gameplay
 {
@@ -15,7 +16,9 @@ namespace Gameplay
 			gameMgr.onLevelFinished += ExitScene;
 		}
 		
-		void Start(){		
+		IEnumerator Start(){
+			while(!gameMgr.hasStarted) yield return null;
+			
 			player = gameMgr.player.transform;
 			fairy = Fairy.Instance.transform;
 			

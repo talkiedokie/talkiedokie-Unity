@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Level.unity
+    path: Assets/Scenes/InsideBuilding.unity
     guid: 02d5a68fa90bb6f4190526f133aab7eb
   - enabled: 1
     path: Assets/Scenes/City.unity
@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Prototype/BunnyPancake_CatMilkshake/BPCM.unity
     guid: 41c09c314cb6c33488b04010c0ade232
+  - enabled: 1
+    path: Assets/Scenes/Login.unity
+    guid: 64d13d8bae892584bbbf90c504a3bb89
+  - enabled: 1
+    path: Assets/Resources/Levels/HouseLevel.unity
+    guid: 8f11377c7d4aa5943af44d09b5935dac
+  - enabled: 1
+    path: Assets/Resources/Levels/TestLevel.unity
+    guid: 30fb07bfd6288da4a8db4e186f3b7e67
   m_configObjects: {}

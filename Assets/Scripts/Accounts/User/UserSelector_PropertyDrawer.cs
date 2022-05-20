@@ -45,7 +45,7 @@ namespace AccountsManagement
 				
 				void GetNames(){
 					var users = AccountManager.Instance.users;
-					int count = users.Length;
+					int count = users.Count;
 					names = new string[count];
 					
 					for(int i = 0; i < count; i++)

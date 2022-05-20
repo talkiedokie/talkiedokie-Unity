@@ -76,4 +76,10 @@ public class SpeechRecognizerUI : MonoBehaviour
 		txt.fontStyle = BOLD;
 		progressObj.SetActive(false);
 	}
+	
+	// debug
+	public void OnResult(string result, SpeechRecognizer.ResultType type, MonoBehaviour caller){
+		OnResult(result, type);
+		Debug.Log("Called from " + caller.name, caller);
+	}
 }
