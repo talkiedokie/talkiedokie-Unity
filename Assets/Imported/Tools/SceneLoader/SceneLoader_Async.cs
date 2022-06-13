@@ -48,6 +48,10 @@ public partial struct SceneLoader
 			Visualizer.Load(index, mode, onFinish);
 		}
 		
+		public AsyncOperation LoadAsyncOperation(LoadSceneMode mode){
+			return SceneManager.LoadSceneAsync(index, mode);
+		}
+		
 		public void Unload(){
 			Visualizer.Unload(index, UnloadSceneOptions.None);
 		}

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
 
-namespace Gameplay
+namespace InsideBuilding.Gameplay
 {
 	public class Hoop : MonoBehaviour
 	{
@@ -30,7 +30,7 @@ namespace Gameplay
 		}
 		
 		public void Interact(GameObject obj){
-			Debug.Log(obj.name, obj);
+			// Debug.Log(obj.name, obj);
 			
 			if(objects.Contains(obj)) return;
 			objects.Add(obj);

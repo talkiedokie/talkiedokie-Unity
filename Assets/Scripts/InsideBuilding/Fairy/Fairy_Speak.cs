@@ -19,11 +19,11 @@ public partial class Fairy
 		if(clips.Length == 0)
 			clips = new AudioClip[]{ noAudioClip };
 		
-		if(speakRoutine != null)
-			StopCoroutine(speakRoutine);
-		
-		speakRoutine = SpeakRoutine(clips, startDelayForeach, onFinish);
-		StartCoroutine(speakRoutine);
+		Tools.StartCoroutine(
+			ref speakRoutine,
+			SpeakRoutine(clips, startDelayForeach, onFinish),
+			this
+		);
 	}
 	
 	public void Speak(
@@ -42,14 +42,19 @@ public partial class Fairy
 		Speak(clip, startDelay, null);
 	}
 	
+	public void SpeakRandom(AudioClip[] clips, float delay, Action onFinish){
+		var clip = Tools.Random(clips);
+		Speak(clip, delay, onFinish);
+	}
+	
 	#region Encourage
-		
+	
 		public void SayWow(float delay, Action onFinish){
-			Speak(Tools.Random(wowClips), delay, onFinish);
+			SpeakRandom(wowClips, delay, onFinish);
 		}
 		
 		public void SayFail(float delay, Action onFinish){
-			Speak(Tools.Random(failClips), delay, onFinish);
+			SpeakRandom(failClips, delay, onFinish);
 		}
 		
 	#endregion

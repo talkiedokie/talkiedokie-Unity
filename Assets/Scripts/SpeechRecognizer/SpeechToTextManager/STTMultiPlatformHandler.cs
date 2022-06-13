@@ -6,67 +6,61 @@ using System;
 public partial class STTMultiPlatformHandler : SceneObjectSingleton<STTMultiPlatformHandler>
 {
 	public float listenDuration = 5f;
-	[TextArea()] public string hypothesis;
 	
 	Action onHypothesis, onResult;
-	public string result{ get; private set; }
 	
-	#region Setup
-		
-		void Awake(){
-			#if (UNITY_EDITOR || UNITY_WINDOWS)
-				WinScript_OnAwake();
-			
-			#elif (UNITY_ANDROID || UNITY_IOS)
-				MobScript_OnAwake();
-				
-			#endif
-		}
-		
-		void Start(){
-			#if (UNITY_EDITOR || UNITY_WINDOWS)
-			#elif (UNITY_ANDROID || UNITY_IOS)
-				MobScript_OnStart();
-				
-			#endif
-		}
-		
-		void OnDestroy(){
-			#if (UNITY_EDITOR || UNITY_WINDOWS)
-				dr?.Dispose();
-			
-			#elif (UNITY_ANDROID || UNITY_IOS)
-			#endif
-		}
-		
-	#endregion
+	public string hypothesis{ get; private set; } = "";
+	public string result{ get; private set; } = "";
 	
-	#region Main
+	void Start(){
+		#if (UNITY_EDITOR_WIN || UNITY_WINDOWS || UNITY_STANDALONE_WIN)
+			WIN_Start();
+			
+		#elif (UNITY_ANDROID || UNITY_IOS)
+			MOB_Start();
+			
+		#endif
+	}
+	
+	public void StartListening(Action onHypothesis, Action onResult){ // (new) smooth but unstable and may result in lag if the game is running for a long time
+		#if (UNITY_EDITOR_WIN || UNITY_WINDOWS || UNITY_STANDALONE_WIN)
+			WIN_Listen();
+			
+		#elif (UNITY_ANDROID || UNITY_IOS)
+			MOB_Listen();
+			
+		#endif
 		
-		public void StartListening(Action onHypothesis, Action onResult){
-			#if (UNITY_EDITOR || UNITY_WINDOWS)
-				WinScript_Listen();
-				
-			#elif (UNITY_ANDROID || UNITY_IOS)
-				MobScript_Listen();
-			
-			#endif
-			
-			this.onHypothesis = onHypothesis;
-			this.onResult = onResult;
-		}
+		result = "";
+		hypothesis = "";
 		
-		public void StopListening(){
-			#if (UNITY_EDITOR || UNITY_WINDOWS)
-				WinScript_StopListening();
-				
-			#elif (UNITY_ANDROID || UNITY_IOS)
-				MobScript_StopListening();
+		this.onHypothesis = onHypothesis;
+		this.onResult = onResult;
+	}
+	
+	public void StopListening(){
+		#if (UNITY_EDITOR_WIN || UNITY_WINDOWS || UNITY_STANDALONE_WIN)
+			WIN_StopListening();
 			
-			#endif
+		#elif (UNITY_ANDROID || UNITY_IOS)
+			MOB_StopListening();
 			
-			onResult = null;
-		}
+		#endif
 		
-	#endregion
+		onHypothesis = null;
+		onResult = null;
+	}
+	
+	public void ReinitializeListen(Action onHypothesis, Action onResult){ // (old)causes small (one frame) freeze on call but very stable and safe 
+		StopListening();
+		
+		#if (UNITY_EDITOR_WIN || UNITY_WINDOWS || UNITY_STANDALONE_WIN)
+			dr?.Dispose();
+			WIN_Start();
+			
+		#elif (UNITY_ANDROID || UNITY_IOS)
+		#endif
+		
+		StartListening(onHypothesis, onResult);
+	}
 }

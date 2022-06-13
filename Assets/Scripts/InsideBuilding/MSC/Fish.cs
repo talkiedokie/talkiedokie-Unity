@@ -13,11 +13,14 @@ public class Fish : MonoBehaviour
 		targetPosition,
 		rotateSmoothVel;
 	
+	Transform target;
+	
 	Aquarium aquarium;
 	IEnumerator wanderingRoutine;
 	
 	void Awake(){
 		aquarium = GetComponentInParent<Aquarium>();
+		aquarium.AddSwimmers(this);
 	}
 	
 	void OnBecameVisible(){
@@ -37,16 +40,23 @@ public class Fish : MonoBehaviour
 	
 	IEnumerator Wander(){
 		while(true){
-			var min = aquarium.waterBounds.min;
-			var max = aquarium.waterBounds.max;
+			if(target){
+				targetPosition = target.position;
+				yield return null;
+			}
 			
-			targetPosition = new Vector3(
-				Random.Range(min.x, max.x),
-				Random.Range(min.y, max.y),
-				Random.Range(min.z, max.z)
-			);
-			
-			yield return new WaitForSeconds(updateDuration * Random.value);
+			else{
+				var min = aquarium.waterBounds.min;
+				var max = aquarium.waterBounds.max;
+				
+				targetPosition = new Vector3(
+					Random.Range(min.x, max.x),
+					Random.Range(min.y, max.y),
+					Random.Range(min.z, max.z)
+				);
+				
+				yield return new WaitForSeconds(updateDuration * Random.value);
+			}
 		}
 	}
 	
@@ -69,5 +79,9 @@ public class Fish : MonoBehaviour
 	void OnDrawGizmos(){
 		if(Application.isPlaying)
 			Gizmos.DrawSphere(targetPosition, gizmoRadius);
+	}
+	
+	public void SetTargetPosition(Transform target){
+		this.target = target;
 	}
 }

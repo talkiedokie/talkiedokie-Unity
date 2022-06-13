@@ -30,6 +30,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5941b3ecf286d704d8a6151d09318d18, type: 3}
   - {fileID: 8300000, guid: 0addc86a64b38be43ad4659d00fa443a, type: 3}
   - {fileID: 8300000, guid: ed462a31314fcd24886a001a2b4706e5, type: 3}
+  - {fileID: 8300000, guid: 55d07d732399ccb45b3087af241080a0, type: 3}
+  - {fileID: 8300000, guid: 4aca6295cf6acc74fb43f13f2159a881, type: 3}
   groups:
   - name: Gameplay/Wiping
     clips:

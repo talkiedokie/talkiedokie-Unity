@@ -12,8 +12,11 @@ public class CameraManager : SceneObjectSingleton<CameraManager>
 	public CinemachineVirtualCamera defaultCamera{ get; private set; }
 	public CinemachineVirtualCamera Current => priorityCamera;
 	
+	Camera cam;
+	
 	void Awake(){
 		defaultCamera = priorityCamera;
+		cam = Camera.main;
 	}
 	
 	public void SetPriority(CinemachineVirtualCamera cam){
@@ -26,5 +29,13 @@ public class CameraManager : SceneObjectSingleton<CameraManager>
 	
 	public void SetDefaultPriority(){
 		SetPriority(defaultCamera);
+	}
+	
+	public void AddCullingLayer(int layer){
+		cam.cullingMask |= 1 << layer;
+	}
+	
+	public void RemoveCullingLayer(int layer){
+		cam.cullingMask &= ~(1 << layer);
 	}
 }

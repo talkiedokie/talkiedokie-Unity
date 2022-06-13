@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-#if UNITY_EDITOR || UNITY_WINDOWS
+#if UNITY_EDITOR_WIN || UNITY_WINDOWS || UNITY_STANDALONE_WIN
 using UnityEngine.Windows.Speech;
 #endif
 
@@ -15,12 +15,12 @@ public class WindowsSpeechErrorHandler : SceneObjectSingleton<WindowsSpeechError
 	public Text title, message;
 	
 	[Space()]
-	public GameObject errorObj;
-	public Text errorTxt;
-	
-	[Space()]
 	public GameObject defaultPanel;
 	public GameObject notSupportedPanel;
+	
+	[Space()]
+	public Text errorTxt;
+	public Text hresultTxt;
 	
 	[System.Serializable]
 	public struct CompletionCause{
@@ -33,27 +33,18 @@ public class WindowsSpeechErrorHandler : SceneObjectSingleton<WindowsSpeechError
 		public bool ignore;
 	}
 	
-	#if UNITY_EDITOR || UNITY_WINDOWS
-		
-		/* [ContextMenu("Show Random")]
-		public void RandomShow(){
-			int random = Random.Range(0, 7);
-			Show((DictationCompletionCause) random);
-		} */
+	#if UNITY_EDITOR_WIN || UNITY_WINDOWS || UNITY_STANDALONE_WIN
 		
 		public void Show(DictationCompletionCause completionCause){
-			Debug.Log(completionCause.ToString());
-			
 			int index = (int) completionCause;
 			var cause = completionCauses[index];
 			
 			if(cause.ignore) return;
+			Debug.LogWarning(cause.ToString());
 			
 			icon.sprite = cause.icon;
 			title.text = cause.name;
 			message.text = cause.message;
-			
-			errorObj.SetActive(false);
 			
 			defaultPanel.SetActive(true);
 			notSupportedPanel.SetActive(false);
@@ -62,13 +53,17 @@ public class WindowsSpeechErrorHandler : SceneObjectSingleton<WindowsSpeechError
 		}
 		
 		public void OnError(string error, int hresult){
+			gameObject.SetActive(true);
 			StartCoroutine(delay());
 			
 			IEnumerator delay(){
+				defaultPanel.SetActive(false);
+				notSupportedPanel.SetActive(true);
+			
 				yield return null;
 				
-				errorObj.SetActive(true);
-				errorTxt.text = "Dictation error: {0}; HResult = {1}. \n" + error + "\n" + hresult;
+				errorTxt.text = error;
+				hresultTxt.text = hresult.ToString();
 			}
 		}
 		

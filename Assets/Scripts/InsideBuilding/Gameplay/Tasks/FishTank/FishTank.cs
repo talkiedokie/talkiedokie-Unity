@@ -3,7 +3,7 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using System.Collections;
 
-namespace Gameplay
+namespace InsideBuilding.Gameplay
 {
 	public class FishTank : Task
 	{
@@ -31,7 +31,7 @@ namespace Gameplay
 		
 		[Space()]
 		public AudioSource siphonAudio;
-		public GameObject sparkle;
+		public GameObject stinkParticle, sparkle;
 		
 		public GeneralAudioSelector sparkleSound = 7;
 		
@@ -105,6 +105,7 @@ namespace Gameplay
 				yield return null;
 			}
 			
+			stinkParticle.SetActive(false);
 			
 			if(bucketA.TryGetComponent<Animator>(out var anim))
 				anim.SetTrigger("pop");

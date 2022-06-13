@@ -217,13 +217,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2929062424722376832}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.00000035762784}
   m_LocalPosition: {x: -0.19000006, y: 0, z: 3.74}
   m_LocalScale: {x: 4, y: 4, z: 2}
   m_Children: []
   m_Father: {fileID: 9023786726238702313}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!1 &3247764527007171457
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,6 +373,11 @@ MonoBehaviour:
     label: City Scene
     currentSceneName: City
     index: 1
+  updateLevel: 0
+  levelScene:
+    label: 
+    currentSceneName: 
+    index: 0
   ui: {fileID: 8486269926700147688}
   camPoint: {fileID: 8249630834783802097}
   onRejectionPlayerDest: {fileID: 8093723037039184232}

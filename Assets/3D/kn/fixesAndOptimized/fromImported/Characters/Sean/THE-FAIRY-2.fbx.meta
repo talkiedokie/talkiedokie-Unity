@@ -1,0 +1,210 @@
+fileFormatVersion: 2
+guid: f04762e3fa454114f87f4e2d95ae3199
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: 4757252699898002397
+    second: metarig.001|metarig.001|metarig.001|metarig.001Action|metarig.001|metarig.0
+  - first:
+      74: 8329068328964539942
+    second: Armature.004|Armature.004|Armature.004|Armature.004Action|Armature.004|Armat
+  - first:
+      74: -7370477485214172321
+    second: Armature.004|Armature.004|Armature.004|ArmatureAction|Armature.004|ArmatureA
+  - first:
+      74: 858065392027523561
+    second: Armature.004|Armature|Armature|Armature.004Action|Armature|Armature.004Actio
+  - first:
+      74: 8106007123571592763
+    second: Armature.004|Armature|Armature|ArmatureAction|Armature|ArmatureAction
+  - first:
+      74: 621445947295781569
+    second: Armature.003|Armature.001|Armature.001|Armature.001Action|Armature.001|Armat
+  - first:
+      74: -7521070144993191641
+    second: Armature.003|Armature.001|Armature.001|Armature.002Action|Armature.001|Armat
+  - first:
+      74: 5952068126547293148
+    second: Armature.003|Armature.001|Armature.001|Armature.003Action|Armature.001|Armat
+  - first:
+      74: -1748808600046349217
+    second: Armature.003|Armature.002|Armature.002|Armature.001Action|Armature.002|Armat
+  - first:
+      74: 875691217150235475
+    second: Armature.003|Armature.002|Armature.002|Armature.002Action|Armature.002|Armat
+  - first:
+      74: 5567389867944670482
+    second: Armature.003|Armature.002|Armature.002|Armature.003Action|Armature.002|Armat
+  - first:
+      74: -3274386670392584187
+    second: Armature.003|Armature.003|Armature.003|Armature.001Action|Armature.003|Armat
+  - first:
+      74: -5161852870901627180
+    second: Armature.003|Armature.003|Armature.003|Armature.002Action|Armature.003|Armat
+  - first:
+      74: 8479073699894873492
+    second: Armature.003|Armature.003|Armature.003|Armature.003Action|Armature.003|Armat
+  - first:
+      74: 1768697333003589177
+    second: Armature.002|Armature.001|Armature.001|Armature.001Action|Armature.001|Armat
+  - first:
+      74: -858528830825695970
+    second: Armature.002|Armature.001|Armature.001|Armature.002Action|Armature.001|Armat
+  - first:
+      74: -7056733108835234428
+    second: Armature.002|Armature.001|Armature.001|Armature.003Action|Armature.001|Armat
+  - first:
+      74: 9170681837973646830
+    second: Armature.002|Armature.002|Armature.002|Armature.001Action|Armature.002|Armat
+  - first:
+      74: -3048805923333850620
+    second: Armature.002|Armature.002|Armature.002|Armature.002Action|Armature.002|Armat
+  - first:
+      74: 667574790151347154
+    second: Armature.002|Armature.002|Armature.002|Armature.003Action|Armature.002|Armat
+  - first:
+      74: -5136481377203981802
+    second: Armature.002|Armature.003|Armature.003|Armature.001Action|Armature.003|Armat
+  - first:
+      74: -3218514146337018018
+    second: Armature.002|Armature.003|Armature.003|Armature.002Action|Armature.003|Armat
+  - first:
+      74: -951639729003371641
+    second: Armature.002|Armature.003|Armature.003|Armature.003Action|Armature.003|Armat
+  - first:
+      74: 5124303301303506722
+    second: Armature.001|Armature.001|Armature.001|Armature.001Action|Armature.001|Armat
+  - first:
+      74: -4119740701833771022
+    second: Armature.001|Armature.001|Armature.001|Armature.002Action|Armature.001|Armat
+  - first:
+      74: 8445790996245319835
+    second: Armature.001|Armature.001|Armature.001|Armature.003Action|Armature.001|Armat
+  - first:
+      74: -6094566244387854891
+    second: Armature.001|Armature.002|Armature.002|Armature.001Action|Armature.002|Armat
+  - first:
+      74: -1799824366463768115
+    second: Armature.001|Armature.002|Armature.002|Armature.002Action|Armature.002|Armat
+  - first:
+      74: 4086900138392023596
+    second: Armature.001|Armature.002|Armature.002|Armature.003Action|Armature.002|Armat
+  - first:
+      74: 7530830605371597254
+    second: Armature.001|Armature.003|Armature.003|Armature.001Action|Armature.003|Armat
+  - first:
+      74: 9059974823366923566
+    second: Armature.001|Armature.003|Armature.003|Armature.002Action|Armature.003|Armat
+  - first:
+      74: 2603574959643809990
+    second: Armature.001|Armature.003|Armature.003|Armature.003Action|Armature.003|Armat
+  - first:
+      74: -2582893642438438676
+    second: Armature|Armature.004|Armature.004|Armature.004Action|Armature.004|Armat
+  - first:
+      74: 6086447108210809637
+    second: Armature|Armature.004|Armature.004|ArmatureAction|Armature.004|ArmatureA
+  - first:
+      74: -1160987536525118728
+    second: Armature|Armature|Armature|Armature.004Action|Armature|Armature.004Actio
+  - first:
+      74: 8450808836658823645
+    second: Armature|Armature|Armature|ArmatureAction|Armature|ArmatureAction
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

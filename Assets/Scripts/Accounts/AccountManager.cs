@@ -22,14 +22,8 @@ namespace AccountsManagement
 		public User CurrentUser(){ return GetUser(currentUser); }
 		
 		public bool UserExists(string name){
-			bool userExists = false;
-			
-			foreach(var user in users){
-				userExists = user.name == name;
-				if(userExists) break;
-			}
-			
-			return userExists;
+			var user = users.Find(user => user.name == name);
+			return user != null;
 		}
 		
 		public void AddUser(
@@ -38,7 +32,7 @@ namespace AccountsManagement
 			out bool success
 		){
 			index = users.Count;
-			success = users.Count < maxUserCount;
+			success = users.Count <= maxUserCount;
 			
 			if(success) users.Add(user);
 		}

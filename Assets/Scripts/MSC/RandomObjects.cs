@@ -7,7 +7,10 @@ public class RandomObjects : MonoBehaviour
 	
 	void Awake(){
 		foreach(var obj in objects){
-			bool isActive = Tools.RandomCondition(probability, out float probableValue);
+			bool isActive = Tools.RandomCondition(
+				probability,
+				out float probableValue
+			);
 			
 			obj.SetActive(isActive);
 			

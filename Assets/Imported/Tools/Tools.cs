@@ -1,39 +1,44 @@
 using UnityEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 public static class Tools
 {
-	public static string Clamp(string str, int length){
-		string output = "";
+	#region String
 		
-		for(int i = 0; i < length; i++)
-			if(i < str.Length)
-				output += str[i];
-		
-		if(str.Length > length)
-			output += "...";
-		
-		return output;
-	}
-	
-	public static string AddStringSpaces(string str){
-		string output = "";
-		int length = str.Length;
-		
-		for(int i = 0; i < length; i++){
-			output += str[i];
+		public static string Clamp(string str, int length){
+			string output = "";
 			
-			int nextIndex = i + 1;
+			for(int i = 0; i < length; i++)
+				if(i < str.Length)
+					output += str[i];
 			
-			if(nextIndex < length){
-				if(System.Char.IsUpper(str, nextIndex))
-					output += " ";
-			}
+			if(str.Length > length)
+				output += "...";
+			
+			return output;
 		}
 		
-		return output;
-	}
+		public static string AddStringSpaces(string str){
+			string output = "";
+			int length = str.Length;
+			
+			for(int i = 0; i < length; i++){
+				output += str[i];
+				
+				int nextIndex = i + 1;
+				
+				if(nextIndex < length){
+					if(System.Char.IsUpper(str, nextIndex))
+						output += " ";
+				}
+			}
+			
+			return output;
+		}
+		
+	#endregion
 	
 	#region Random
 		
@@ -118,5 +123,21 @@ public static class Tools
 		newArray[newIndex] = newEntry;
 		
 		current = newArray;
+	}
+	
+	public static void StartCoroutine( // This will run a coroutine and making sure that the old routine is already stop (avoiding lags from duplicate routines)
+		ref IEnumerator current,
+		IEnumerator target,
+		MonoBehaviour monoBehaviour
+	){
+		if(current != null)
+			monoBehaviour.StopCoroutine(current);
+		
+		current = target;
+		monoBehaviour.StartCoroutine(current);
+	}
+	
+	public static bool CompareLayer(int layer, LayerMask mask){
+		return ((1 << layer) & mask) != 0;
 	}
 }

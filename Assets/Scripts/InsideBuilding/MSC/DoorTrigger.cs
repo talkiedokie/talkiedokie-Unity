@@ -25,11 +25,7 @@ public class DoorTrigger : MonoBehaviour
 		direction = isOpen? anim.GetFloat(param): dir;
 		isOpen = !isOpen;
 		
-		if(routine != null)
-			StopCoroutine(routine);
-		
-		routine = Routine();
-		StartCoroutine(routine);
+		Tools.StartCoroutine(ref routine, Routine(), this);
 	}
 	
 	IEnumerator Routine(){

@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class Level : SceneObjectSingleton<Level>
+namespace InsideBuilding
 {
-	public Room[] rooms;
-	
-	[HideInInspector]
-	public int selectedRoomIndex;
+	public class Level : SceneObjectSingleton<Level>
+	{
+		public Room[] rooms;
+		
+		[HideInInspector]
+		public int selectedRoomIndex;
+	}
 }

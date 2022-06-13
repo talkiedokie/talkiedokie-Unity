@@ -56,7 +56,7 @@ public class FpCtrl_Input : SceneObjectSingleton<FpCtrl_Input>,
 		public bool hold{ get; private set; }
 		public bool drag{ get; private set; }
 		
-		public Vector2 clickPosition{ get; private set; }
+		public Vector2 clickPosition => Input.mousePosition;
 		public Vector2 panAxis{ get; private set; }
 		
 	#endregion	
@@ -91,7 +91,7 @@ public class FpCtrl_Input : SceneObjectSingleton<FpCtrl_Input>,
 		}
 		
 		void OnEnable(){
-			#if UNITY_WINDOWS
+			#if UNITY_WINDOWS || UNITY_STANDALONE_WIN
 				
 				foreach(var ti in touchInputs)
 					ti.SetActive(false);
@@ -109,8 +109,6 @@ public class FpCtrl_Input : SceneObjectSingleton<FpCtrl_Input>,
 		
 		public void OnDrag(PointerEventData data){
 			panAxis = data.delta * SENSITIVITY * panSpeed;
-			clickPosition = data.position;
-			
 			drag = true;
 		}
 		
@@ -120,8 +118,6 @@ public class FpCtrl_Input : SceneObjectSingleton<FpCtrl_Input>,
 		}
 		
 		public void OnPointerUp(PointerEventData data){
-			clickPosition = data.position;
-			
 			if(!drag){
 				click = true;
 				StartCoroutine(reset());

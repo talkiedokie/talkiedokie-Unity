@@ -1,127 +1,45 @@
 using UnityEngine;
 using System;
-using System.Collections;
 
-public class SpeechRecognizer : SceneObjectSingleton<SpeechRecognizer>
+public partial class SpeechRecognizer : SceneObjectSingleton<SpeechRecognizer>
 {
-	[TextArea()]
-	public string wordPhrase;
-	
+	[SerializeField, LabelOverride("Plugin Manager")] STTMultiPlatformHandler stt;
 	[SerializeField] SpeechRecognizerUI ui;
-	[SerializeField] float onCompletionExitDuration = 1f;
-	[SerializeField] STTMultiPlatformHandler stt; // multi-platform handler
+	[SerializeField] float onFinishExitDelay = 0.65f;
+	[SerializeField] GeneralAudioSelector skipSound;
+	
+	Action<string> onResult;
 	
 	public bool isListening{ get; private set; }
+	public bool isSkipped{ get; private set; }
 	
 	public string result => stt.result;
-	public enum ResultType{ None, Correct, Wrong, TimeOut }
-	public ResultType resultType{ get; private set; } = ResultType.None;
 	
-	public bool isCorrect => resultType == ResultType.Correct;
-	
-	Action onFinish;
-	
-	#region Calls
-	
-		public void SetWordPhrase(string wordPhrase){
-			this.wordPhrase = wordPhrase;
+	#region Commands
+		
+		public void Listen(Action<string> onResult){ // (new) smooth but unstable and may result in lag if the game is running for a long time
+			OnListen(onResult, stt.StartListening);
+			Debug.Log("Speech Recognizer is Listening");
 		}
 		
-		[ContextMenu("Listen")]
-		public void Listen(){
-			enabled = true;
-			
-			stt.StartListening(
-				OnListenHypothesis, // loading UI
-				OnListenResult
-			);
-			
-			ui.gameObject.SetActive(true);
-			ui.OnListen();
-			
-			StopListenTimer();
-				listenTimer = ListenTimer();
-				StartCoroutine(listenTimer);
-			
-			resultType = ResultType.None;
-			isListening = true;
+		public void ReinitializeListen(Action<string> onResult){ // (old) causes small (one frame) freeze on call but very stable and safe
+			OnListen(onResult, stt.ReinitializeListen);
+			Debug.LogWarning("Speech Listen was Reinitialized");
 		}
-		
-		public void Listen(string wordPhrase, Action onFinish){
-			this.wordPhrase = wordPhrase;
-			this.onFinish = onFinish;
-			
-			Listen();
-		}
-		
+	
 		public void Stop(){
-			stt.StopListening();
-			ui.gameObject.SetActive(false);
+			ui.SetActive(false);
+			gameObject.SetActive(false);
 			
 			StopAllCoroutines();
-			
-			enabled = false;
-			isListening = false;
+			GeneralAudio.Instance.SetBGMVolume(1f);
 		}
 		
-		[ContextMenu("Skip")]
 		public void Skip(){
-			Stop();
-			onFinish?.Invoke();
-		}
-		
-	#endregion
-	
-	#region Events
-		
-		void OnListenHypothesis(){
-			StopListenTimer();
-			ui.OnHypothesis(stt.hypothesis);
-		}
-		
-		void OnListenResult(){
-			StopListenTimer();
+			isSkipped = true;
+			OnResult();
 			
-			resultType = (result == wordPhrase.ToLower())?
-				ResultType.Correct:
-				ResultType.Wrong;
-			
-			StartCoroutine(OnListenResult_Routine());
-		}
-		
-	#endregion
-	
-	#region Coroutines
-		
-		IEnumerator listenTimer;
-		
-		void StopListenTimer(){
-			if(listenTimer != null)
-				StopCoroutine(listenTimer);
-		}
-		
-		IEnumerator ListenTimer(){
-			float duration = stt.listenDuration;
-			float timer = stt.listenDuration;
-			
-			while(timer > 0f){
-				ui.OnListenTimer(timer / duration);
-				
-				timer -= Time.deltaTime;
-				yield return null;
-			}
-			
-			resultType = ResultType.TimeOut;
-			yield return OnListenResult_Routine();
-		}
-		
-		IEnumerator OnListenResult_Routine(){
-			ui.OnResult(result, resultType);
-			
-			yield return new WaitForSeconds(onCompletionExitDuration);
-			
-			Stop();
-			onFinish?.Invoke();
+			skipSound.Play();
 		}
 		
 	#endregion

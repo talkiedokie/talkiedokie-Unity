@@ -1,51 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 using AccountsManagement;
 
-public partial class GameManager
+namespace InsideBuilding
 {
-	public bool hasStarted{ get; private set; }
-	
-	IEnumerator Start(){
-		hasStarted = false;
-		Time.timeScale = 0f;
-		
-		var threads = new IEnumerator[]{
-			SetupSingletonReferences(),
-			CheckForSpeechSupport(),
-			LoadLevel(),
-			SetupUsersAccount(),
-			SetupPlayerObject(),
-			SetupRoomUI(),
-			FinalSetup()
-		};
-		
-		int count = threads.Length;
-		float maxIndex = (float) count - 1;
-		
-		startLoadUI.SetActive(true);
-		
-		for(int i = 0; i < count; i++){
-			yield return threads[i];
-			float normalizedValue = (float) i / maxIndex;
-			float percent = Mathf.Round(normalizedValue * 100f);
-			
-			startProgressImg.fillAmount = normalizedValue;
-			startProgressTxt.text = "Loading " + percent + "%";
-		}
-		
-		yield return new WaitForSecondsRealtime(1f);
-			
-			startLoadUI.SetActive(false);
-			uiMgr.Transition();
-		
-		Time.timeScale = 1f;
-		hasStarted = true;
-	}
-	
-	#region Custom Threads
-		
+	public partial class GameManager
+	{
 		IEnumerator SetupSingletonReferences(){
 			uiMgr = UIManager.Instance;
 			fairy = Fairy.Instance;
@@ -57,7 +17,7 @@ public partial class GameManager
 		}
 		
 		IEnumerator CheckForSpeechSupport(){
-			#if UNITY_EDITOR || UNITY_WINDOWS
+			#if UNITY_EDITOR_WIN || UNITY_WINDOWS || UNITY_STANDALONE_WIN
 			
 				bool isSupported = STTMultiPlatformHandler.Instance.IsWindowSpeechSupported;
 				
@@ -70,6 +30,9 @@ public partial class GameManager
 		}
 		
 		IEnumerator LoadLevel(){
+			if(City.isLoaded)
+				levelScene = LevelScene;
+			
 			levelScene.LoadAdditive();
 			
 			int iteration = 0;
@@ -107,6 +70,11 @@ public partial class GameManager
 				playerPlaceHolder.parent
 			);
 			
+			playerDefaultPoint = new GameObject("playerDefaultPoint").transform;
+			playerDefaultPoint.position = playerPlaceHolder.position;
+			playerDefaultPoint.rotation = playerPlaceHolder.rotation;
+			playerDefaultPoint.parent = playerPlaceHolder.parent;
+			
 			Destroy(playerPlaceHolder.gameObject);
 			
 			yield return null;
@@ -116,12 +84,13 @@ public partial class GameManager
 			RoomButton.gameMgr = this;
 			
 			int count = level.rooms.Length;
+			roomButtons = new RoomButton[count];
 			roomTasksUI = new RoomTasksUI[count];
 			
 			for(int i = 0; i < count; i++){
 				var room = level.rooms[i];
 				
-				roomButtonTemplate.CreateInstance(room, i);
+				roomButtons[i] = roomButtonTemplate.CreateInstance(room, i);
 				roomTasksUI[i] = roomTasksUITemplate.CreateInstance(room, i);
 				
 				yield return null;
@@ -139,6 +108,5 @@ public partial class GameManager
 			
 			yield return null;
 		}
-		
-	#endregion
+	}
 }

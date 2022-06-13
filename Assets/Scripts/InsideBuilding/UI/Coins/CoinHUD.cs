@@ -98,6 +98,8 @@ public class CoinHUD : SceneObjectSingleton<CoinHUD>
 					return Random.Range(-coinPopupSpawnOffset, coinPopupSpawnOffset);
 				}
 			}
+			
+			isUpdatingAmount = true;
 			ResetHideTimer();
 		}
 		
@@ -119,8 +121,6 @@ public class CoinHUD : SceneObjectSingleton<CoinHUD>
 	#endregion
 	
 	void UpdateAmount(){
-		isUpdatingAmount = true;
-		
 		amount ++;
 		{
 			amountTxt.text = amount.ToString();
@@ -132,11 +132,7 @@ public class CoinHUD : SceneObjectSingleton<CoinHUD>
 			onValChangeCounter ++;
 			onValChangeTxt.text = "+" + onValChangeCounter;
 			
-			if(onValChangeRoutine != null)
-				StopCoroutine(onValChangeRoutine);
-			
-			onValChangeRoutine = OnValChangeRoutine();
-			StartCoroutine(onValChangeRoutine);
+			Tools.StartCoroutine(ref onValChangeRoutine, OnValChangeRoutine(), this);
 		}
 		
 		genAudio.Play(coinSound);
@@ -152,9 +148,7 @@ public class CoinHUD : SceneObjectSingleton<CoinHUD>
 	}
 	
 	void ResetHideTimer(){
-		if(hideTimerRoutine != null) StopCoroutine(hideTimerRoutine);
-		hideTimerRoutine = HideTimerRoutine();
-		StartCoroutine(hideTimerRoutine);
+		Tools.StartCoroutine(ref hideTimerRoutine, HideTimerRoutine(), this);
 	}
 	
 	IEnumerator HideTimerRoutine(){

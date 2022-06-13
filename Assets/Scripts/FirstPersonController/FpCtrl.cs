@@ -1,5 +1,6 @@
 using UnityEngine;
 using Cinemachine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 public class FpCtrl : MonoBehaviour
@@ -31,6 +32,8 @@ public class FpCtrl : MonoBehaviour
 		[SerializeField] bool enableGpx = true;
 		[SerializeField] GameObject gpx;
 		
+		public bool autoResetTransform = true;
+		
 	#endregion
 	
 	#region Variables
@@ -49,6 +52,9 @@ public class FpCtrl : MonoBehaviour
 		
 		Rigidbody rb;
 		
+		Vector3 lastPosition;
+		Quaternion lastRotation;
+		
 		FpCtrl_Input input;
 		GameObject interactionPromptUI;
 		Clickable hoveredObject;
@@ -58,11 +64,13 @@ public class FpCtrl : MonoBehaviour
 		Camera cam;
 		CameraManager camMgr;
 		
+		bool hasStarted;
+		
 	#endregion
 	
 	#region Unity Methods
 		
-		#region Pre
+		#region Setup and Setdown
 			
 			void Awake(){
 				input = FpCtrl_Input.Instance;
@@ -72,11 +80,15 @@ public class FpCtrl : MonoBehaviour
 				camT = camView.transform;
 				cam = Camera.main;
 				camMgr = CameraManager.Instance;
+				
+				hasStarted = true;
 			}
 			
 			void OnEnable(){
+				if(!hasStarted) return;
+				
 				currentCamCache = camMgr.Current;
-				camMgr.SetPriority(camView);
+				camMgr?.SetPriority(camView);
 				input.gameObject.SetActive(true);
 				
 				// fpUI
@@ -84,12 +96,34 @@ public class FpCtrl : MonoBehaviour
 				
 				rb.isKinematic = false;
 				
-				if(gpx) gpx?.SetActive(enableGpx);
+				if(gpx){
+					gpx.SetActive(enableGpx);
+					RemoveToCamCulling();
+				}
+				
+				if(TryGetComponent<Tweener>(out var tweener))
+					tweener.enabled = false;
+			}
+			
+			void OnDisable(){
+				if(!Application.isPlaying) return;
+				
+				camMgr?.SetPriority(currentCamCache);
+				
+				rb.isKinematic = true;
+				
+				if(gpx){
+					gpx.SetActive(true);
+					camMgr?.AddCullingLayer(gpx.layer);
+				}
+				
+				if(input)
+					input.gameObject.SetActive(false);
 			}
 			
 		#endregion
 		
-		#region Mid
+		#region Update Loops
 			
 			void Update(){
 				HandleMovement();
@@ -121,33 +155,11 @@ public class FpCtrl : MonoBehaviour
 					input.gameObject.SetActive(true);
 				
 				HandleHighlighting();
-				
-				/* if(input.hold) HandleHighlighting();
-				
-				else if(hoveredObject){
-					Highlight(false);
-					hoveredObject = null;
-				} */
 			}
 			
 			void OnDrawGizmosSelected(){
 				Gizmos.color = Color.green;
 				Gizmos.DrawWireSphere(transform.position, groundCheckRadius);
-			}
-			
-		#endregion
-		
-		#region Post
-			
-			void OnDisable(){
-				if(!Application.isPlaying) return;
-				
-				camMgr.SetPriority(currentCamCache);
-				
-				rb.isKinematic = true;
-				if(gpx) gpx?.SetActive(!enableGpx);
-				
-				input.gameObject.SetActive(false);
 			}
 			
 		#endregion
@@ -214,8 +226,8 @@ public class FpCtrl : MonoBehaviour
 	#region Interactions
 		
 		void HandleHighlighting(){
-			var ray = new Ray(camT.position, camT.forward);
-			// var ray = cam.ScreenPointToRay(input.clickPosition);
+			// var ray = new Ray(camT.position, camT.forward);
+			var ray = cam.ScreenPointToRay(input.clickPosition);
 			bool raycast = Physics.Raycast(ray, out var hit, interactionDistance, clickables);
 			
 			if(raycast){
@@ -246,4 +258,15 @@ public class FpCtrl : MonoBehaviour
 		}
 		
 	#endregion
+	
+	IEnumerator removeCullingLayer;
+	
+	void RemoveToCamCulling(){
+		Tools.StartCoroutine(ref removeCullingLayer, routine(), this);
+		
+		IEnumerator routine(){
+			yield return new WaitForSeconds(2f);
+			camMgr?.RemoveCullingLayer(gpx.layer);
+		}
+	}
 }

@@ -1,45 +1,47 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoomTaskButton : CustomButton
+namespace InsideBuilding
 {
-	[SerializeField] Button button;
-	[SerializeField] Text label;
-	[SerializeField] int labelLength = 50;
-	
-	Room room;
-	Task task;
-	int index;
-	
-	// bool isActiveTask => room.ActiveTask == task;
-	public static GameManager gameMgr;
-	
-	// void OnEnable(){
-		// if(task.isFinished) gameObject.SetActive(false);
-	// }
-	
-	public RoomTaskButton CreateInstance(Room room, Task task, int i){
-		var instance = Instantiate(this, transform.parent, false);
-			instance.room = room;
-			instance.task = task;
-			instance.index = i;
+	public class RoomTaskButton : CustomButton
+	{
+		[SerializeField] Button button;
+		[SerializeField] Text label;
+		[SerializeField] int labelLength = 50;
+		[SerializeField] GameObject indicator;
 		
-			string description = task.description;
+		Room room;
+		Task task;
+		int index;
+		
+		public static GameManager gameMgr;
+		
+		public RoomTaskButton CreateInstance(Room room, Task task, int i){
+			var instance = Instantiate(this, transform.parent, false);
+				instance.name = task.name;
+				instance.room = room;
+				instance.task = task;
+				instance.index = i;
 			
-			instance.name = Tools.Clamp(description, 15);
-			instance.label.text = Tools.Clamp(description, labelLength);
+				instance.onClick.AddListener(delegate{ instance.onClickAction(); });
+			
+			return instance;
+		}
 		
-			// instance.gameObject.SetActive(!task.exclude);
-			instance.onClick.AddListener(delegate{ instance.onClickAction(); });
+		void onClickAction(){
+			gameMgr.OnTaskSelected(index);
+		}
 		
-		return instance;
-	}
-	
-	void onClickAction(){
-		// if(isActiveTask) gameMgr.OnTaskSelected(index);
-		// else Debug.LogWarning("Task is not active", this);
+		public void IsSelected(bool isSelected){
+			indicator.SetActive(isSelected);
+		}
 		
-		gameMgr.OnTaskSelected(index);
+		void OnEnable(){
+			// Debug.Log("MUST REPHRASE");
+			task.RephraseDescription();
+			
+			string description = task.description.text;
+			label.text = Tools.Clamp(description, labelLength);
+		}
 	}
 }
-

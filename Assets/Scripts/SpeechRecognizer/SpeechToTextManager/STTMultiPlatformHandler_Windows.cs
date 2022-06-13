@@ -1,23 +1,23 @@
 using UnityEngine;
 
-#if (UNITY_EDITOR || UNITY_WINDOWS)
+#if (UNITY_EDITOR_WIN || UNITY_WINDOWS || UNITY_STANDALONE_WIN)
 using UnityEngine.Windows.Speech;
 #endif
 
 public partial class STTMultiPlatformHandler
 {
-	#if (UNITY_EDITOR || UNITY_WINDOWS)
+	#if (UNITY_EDITOR_WIN || UNITY_WINDOWS || UNITY_STANDALONE_WIN)
 		
 		public bool IsWindowSpeechSupported => PhraseRecognitionSystem.isSupported;
-		
-		DictationRecognizer dr;
 		WindowsSpeechErrorHandler errorUI => WindowsSpeechErrorHandler.Instance;
 		
-		void WinScript_OnAwake(){
+		DictationRecognizer dr;
+		
+		void WIN_Start(){
 			dr = new DictationRecognizer();
 			{
-				dr.DictationResult += Result;
 				dr.DictationHypothesis += Hypothesis;
+				dr.DictationResult += Result;
 				dr.DictationComplete += Complete;
 				dr.DictationError += Error;
 				
@@ -25,33 +25,25 @@ public partial class STTMultiPlatformHandler
 			}
 		}
 		
-		void WinScript_Listen(){
-			dr.InitialSilenceTimeoutSeconds = listenDuration;
-			dr.Start();
-		}
+		void OnDisable(){ dr?.Dispose(); }
 		
-		void WinScript_StopListening(){
-			if(dr.Status != SpeechSystemStatus.Stopped){
-				dr.Stop();
-				dr.Dispose();
-			}
-		}
+		void WIN_Listen(){ dr?.Start(); }
+		void WIN_StopListening(){ dr?.Stop(); }
 		
 		#region Events
+			
+			void Hypothesis(string hypothesis){
+				this.hypothesis = hypothesis;
+				onHypothesis?.Invoke();
+			}
 			
 			void Result(string result, ConfidenceLevel confidence){
 				this.result = result;
 				onResult?.Invoke();
 			}
 			
-			void Hypothesis(string text){
-				hypothesis = text;
-				onHypothesis?.Invoke();
-			}
-			
 			void Complete(DictationCompletionCause cause){
-				if(cause != DictationCompletionCause.Complete)
-					errorUI.Show(cause);
+				errorUI.Show(cause);
 			}
 			
 			void Error(string error, int hresult){

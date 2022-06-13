@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Interaction Prompt
+  - House/Bathroom/Toilet
+  - House/Bathroom/Bathtub
+  - House/Bathroom/Hand Basin
+  - House/Bathroom/Mirror
   layers:
   - Default
   - TransparentFX

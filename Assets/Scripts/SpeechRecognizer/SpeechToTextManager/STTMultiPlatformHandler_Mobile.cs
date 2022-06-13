@@ -13,27 +13,22 @@ public partial class STTMultiPlatformHandler
 		
 		#region Setup
 			
-			void MobScript_OnAwake(){
+			void Awake(){
 				var instance = new GameObject("SpeechToText").AddComponent<SpeechToText>();
 					
 					#if UNITY_ANDROID
-					instance.isShowPopupAndroid = false; // UNITY_ANDROID
+					instance.isShowPopupAndroid = false;
 					#endif
 				
 				plugin = SpeechToText.instance;
 			}
 			
-			void MobScript_OnStart(){
+			void MOB_Start(){
 				plugin.Setting("en-US");
 				plugin.onResultCallback = OnFinalSpeechResult;
 				
 				#if UNITY_ANDROID
-				
-					plugin.onPartialResultsCallback = OnPartialSpeechResult; // UNITY_ANDROID
-					
-					if(!Permission.HasUserAuthorizedPermission(Permission.Microphone)) // UNITY_ANDROID
-						Permission.RequestUserPermission(Permission.Microphone);
-					
+				plugin.onPartialResultsCallback = OnPartialSpeechResult;
 				#endif
 			}
 			
@@ -41,21 +36,26 @@ public partial class STTMultiPlatformHandler
 		
 		#region Events
 			
-			void MobScript_Listen(){
+			void MOB_Listen(){
+				#if UNITY_ANDROID
+					
+					if(!Permission.HasUserAuthorizedPermission(Permission.Microphone))
+						Permission.RequestUserPermission(Permission.Microphone);
+					
+				#endif
+				
 				plugin.StartRecording();
 			}
 			
-			void MobScript_StopListening(){
-				plugin.StopRecording();
-			}
+			void MOB_StopListening(){ plugin.StopRecording(); }
 			
 			void OnFinalSpeechResult(string result){
 				this.result = result;
 				onResult?.Invoke();
 			}
 			
-			void OnPartialSpeechResult(string result){
-				this.result = result;
+			void OnPartialSpeechResult(string hypothesis){
+				this.hypothesis = hypothesis;
 				onHypothesis?.Invoke();
 			}
 			

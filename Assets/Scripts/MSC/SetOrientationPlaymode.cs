@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName ="MSC/Set Orientation Playmode")]
 public class SetOrientationPlaymode : ScriptableObject
 {
 	#if UNITY_EDITOR

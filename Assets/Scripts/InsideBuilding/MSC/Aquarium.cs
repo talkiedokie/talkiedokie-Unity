@@ -1,9 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Renderer))]
 public class Aquarium : MonoBehaviour
 {
 	public Bounds waterBounds{ get; private set; }
+	
 	public Transform waterReference;
 	
 	[Range(0,1)]
@@ -12,6 +14,8 @@ public class Aquarium : MonoBehaviour
 		boundsOffset = 0.85f;
 	
 	Vector3 min, max;
+	
+	List<Fish> swimmers = new List<Fish>();
 	
 	void OnValidate(){
 		if(!Application.isPlaying)
@@ -62,5 +66,15 @@ public class Aquarium : MonoBehaviour
 		
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireCube(center, size * boundsOffset);
+	}
+	
+	public void AddSwimmers(Fish fish){
+		if(!swimmers.Contains(fish))
+			swimmers.Add(fish);
+	}
+	
+	public void SetFishTarget(Transform target){
+		var fish = Tools.Random(swimmers);
+			fish.SetTargetPosition(target);
 	}
 }

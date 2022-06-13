@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44855523ad7f08b4fa41f63ed6376d59, type: 3}
+  m_Name: SOP
+  m_EditorClassIdentifier: 
+  saves:
+  - name: Bedroom
+    position: {x: 2.2399898, y: 2.17, z: -15.649989}
+    rotation: {x: -0.04986708, y: 0.8899183, z: -0.100351244, w: -0.44214058}
+    scale: {x: 1, y: 1, z: 1}
+    target: {fileID: 3491150558223127509, guid: 5d1fa54d8a101454a99bc0329f5ca56b, type: 3}
+  - name: Kitchen
+    position: {x: -10.440011, y: 2.33, z: -15.369997}
+    rotation: {x: -0.000008564442, y: 0.99381196, z: -0.11107589, w: -0.0000004172325}
+    scale: {x: 1, y: 1, z: 1}
+    target: {fileID: 4954197700683458411, guid: c6abd59500e0187499bc2c522a7f87c7, type: 3}
+  - name: Dining
+    position: {x: -6.719989, y: 2.01, z: -13.059986}
+    rotation: {x: 0.058487438, y: -0.41185024, z: 0.026498687, w: 0.90898657}
+    scale: {x: 1, y: 1, z: 1}
+    target: {fileID: 6971402153822799735, guid: 64bcd095aa141074fb48479218f96a5a, type: 3}
+  - name: Living
+    position: {x: -3.0599985, y: 2.45, z: -9.950004}
+    rotation: {x: 0.1253062, y: 0.20674887, z: -0.026709009, w: 0.96996903}
+    scale: {x: 1, y: 1, z: 1}
+    target: {fileID: 4747548441002095596, guid: 740440c679789b94c967d03f8b287247, type: 3}
+  - name: Bathroom
+    position: {x: -7.3399878, y: 2.64, z: -3.2399893}
+    rotation: {x: -0.16828023, y: 0.28873035, z: -0.05162849, w: -0.9410904}
+    scale: {x: 1, y: 1, z: 1}
+    target: {fileID: 3874857438809108817, guid: a61ca3350d3f1b041aaa0545416f4119, type: 3}
+  - name: Entry
+    position: {x: 0.09004341, y: 5.638736, z: -4.520246}
+    rotation: {x: 0.32672572, y: -0.00088683254, z: 0.00013339141, w: 0.9451188}
+    scale: {x: 1, y: 1, z: 1}
+    target: {fileID: 3963181880947797008, guid: e457c6b1ecb07df45bd04c85b9cf0c87, type: 3}

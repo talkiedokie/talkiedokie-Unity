@@ -1,10 +1,9 @@
 using UnityEngine;
 
-namespace Gameplay
+namespace InsideBuilding.Gameplay
 {
 	public class CleanFridge : Swiping
 	{
-		// [SerializeField] Animator anim;
 		[SerializeField] float animDelay = 1.5f;
 		bool play;
 		

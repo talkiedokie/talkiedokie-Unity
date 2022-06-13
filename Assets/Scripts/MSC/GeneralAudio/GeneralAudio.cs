@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using System;
 
-[CreateAssetMenu(menuName = "MSC/General Audio")]
+[CreateAssetMenu(menuName = "Managers/General Audio")]
 public class GeneralAudio : Singleton<GeneralAudio>
 {
 	[SerializeField, LabelOverride("Background Music")] AudioClip bgm;
@@ -12,46 +12,49 @@ public class GeneralAudio : Singleton<GeneralAudio>
 	[SerializeField] AudioClip[] clips;
 	[SerializeField] Group[] groups;
 	
-	
-	AudioSource bgmPlayer;
-	AudioSource[] sources;
-	
-	GameObject _gameObject;
-	GameObject gameObject{
-		get{
-			if(!_gameObject){
-				_gameObject = new GameObject("GeneralAudioPlayer");
-				
-				int count = clips.Length;
-				sources = new AudioSource[count];
-				{
-					for(int i = 0; i < count; i++){
-						sources[i] = _gameObject.AddComponent<AudioSource>();
-						sources[i].clip = clips[i];
-						sources[i].playOnAwake = false;
+	#region Properties
+		
+		AudioSource bgmPlayer;
+		AudioSource[] sources;
+		
+		GameObject _gameObject;
+		GameObject gameObject{
+			get{
+				if(!_gameObject){
+					_gameObject = new GameObject("GeneralAudioPlayer");
+					
+					int count = clips.Length;
+					sources = new AudioSource[count];
+					{
+						for(int i = 0; i < count; i++){
+							sources[i] = _gameObject.AddComponent<AudioSource>();
+							sources[i].clip = clips[i];
+							sources[i].playOnAwake = false;
+						}
 					}
+					
+					DontDestroyOnLoad(_gameObject);
 				}
 				
-				DontDestroyOnLoad(_gameObject);
+				return _gameObject;
 			}
-			
-			return _gameObject;
 		}
-	}
-	
-	AudioSource source;
-	AudioSource Source{
-		get{
-			if(!source)
-				source = gameObject.AddComponent<AudioSource>();
-			
-			return source;
+		
+		AudioSource source;
+		AudioSource Source{
+			get{
+				if(!source)
+					source = gameObject.AddComponent<AudioSource>();
+				
+				return source;
+			}
 		}
-	}
-	
-	public AudioClip[] Clips => clips;
-	public Group[] Groups => groups;
-	public bool isPlaying => source.isPlaying;
+		
+		public AudioClip[] Clips => clips;
+		public Group[] Groups => groups;
+		public bool isPlaying => source.isPlaying;
+		
+	#endregion
 	
 	#region Play
 		
@@ -125,6 +128,11 @@ public class GeneralAudio : Singleton<GeneralAudio>
 	#endregion
 	
 	public void Stop(){ source.Stop(); }
+	
+	public void SetBGMVolume(float percent){
+		if(!bgmPlayer) return;
+		bgmPlayer.volume = bgmVolume * percent;
+	}
 	
 	[System.Serializable]
 	public class Group{

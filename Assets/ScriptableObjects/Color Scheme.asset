@@ -1,0 +1,224 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e710a0f4f8a8f640b96077e973b3e5c, type: 3}
+  m_Name: Color Scheme
+  m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: cabbc17706488aa4088e955df37850e1, type: 2}
+  - {fileID: -5998004595915773402, guid: fb106006abf4cd14b8ed2b3e1618ce7f, type: 3}
+  - {fileID: -541708846208547136, guid: fb106006abf4cd14b8ed2b3e1618ce7f, type: 3}
+  - {fileID: -2876712260838632785, guid: d55fa8f9f1fc7f54b8745736bd924daf, type: 3}
+  - {fileID: -3522955778539423533, guid: d55fa8f9f1fc7f54b8745736bd924daf, type: 3}
+  - {fileID: 3780671244086486322, guid: d55fa8f9f1fc7f54b8745736bd924daf, type: 3}
+  - {fileID: 3002369084692617604, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: -2876712260838632785, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: -3989212943532495531, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: 169997778938151021, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: 2858873978472033646, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: -3522955778539423533, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: 6699446615349125189, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: 3780671244086486322, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: 99656467281103303, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: -5605289326131794027, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: -4246479402191905792, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: -7198559261415225722, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: -8693172909504858975, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: 725804396391725484, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: -2813337366143557646, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: -5998004595915773402, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: -541708846208547136, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: 7993982598810627253, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: 1110233775959259594, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: -6274764796855392505, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: -1787745424648543715, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: -5354028657143720620, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: -2563484936441039104, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - {fileID: 3002369084692617604, guid: 87f22d70453aef54196cc52b9a06fd59, type: 3}
+  - {fileID: 7993982598810627253, guid: 87f22d70453aef54196cc52b9a06fd59, type: 3}
+  - {fileID: 1110233775959259594, guid: 87f22d70453aef54196cc52b9a06fd59, type: 3}
+  - {fileID: -1787745424648543715, guid: 87f22d70453aef54196cc52b9a06fd59, type: 3}
+  - {fileID: -2563484936441039104, guid: 87f22d70453aef54196cc52b9a06fd59, type: 3}
+  - {fileID: 6699446615349125189, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  - {fileID: -5605289326131794027, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  - {fileID: -4246479402191905792, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  - {fileID: -7198559261415225722, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  - {fileID: -8693172909504858975, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  - {fileID: 8377306415582925817, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  - {fileID: -5354028657143720620, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  - {fileID: 335274542614986364, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  - {fileID: 2858873978472033646, guid: be94eb4b95103d34cb4114657688e9cc, type: 3}
+  - {fileID: -6478536213147159724, guid: be94eb4b95103d34cb4114657688e9cc, type: 3}
+  - {fileID: -3989212943532495531, guid: 38227f946c2809e409b286a83b0601b2, type: 3}
+  - {fileID: 169997778938151021, guid: 38227f946c2809e409b286a83b0601b2, type: 3}
+  - {fileID: 99656467281103303, guid: 38227f946c2809e409b286a83b0601b2, type: 3}
+  - {fileID: -6274764796855392505, guid: 38227f946c2809e409b286a83b0601b2, type: 3}
+  - {fileID: 725804396391725484, guid: 3a42e24b09c5980469d8a885e8e9bfc6, type: 3}
+  - {fileID: -2813337366143557646, guid: 3a42e24b09c5980469d8a885e8e9bfc6, type: 3}
+  originalColors:
+  - {r: 0.99607843, g: 0, b: 0.99607843, a: 1}
+  - {r: 0.9058824, g: 0.35686228, b: 0.435294, a: 1}
+  - {r: 1, g: 0.393935, b: 0.48051655, a: 1}
+  - {r: 0.6274504, g: 0.4313718, b: 1, a: 1}
+  - {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
+  - {r: 0.32156652, g: 0.78039193, b: 1, a: 1}
+  - {r: 0.99607843, g: 0.7934426, b: 0.66299164, a: 1}
+  - {r: 0.98039216, g: 0.775315, b: 0.55220026, a: 1}
+  - {r: 0.76470554, g: 0.45097983, b: 1, a: 1}
+  - {r: 0.91999274, g: 0.91999274, b: 0.91999274, a: 1}
+  - {r: 0.48948812, g: 0.5810707, b: 1, a: 1}
+  - {r: 0.97906524, g: 0.5348596, b: 1, a: 1}
+  - {r: 0.349923, g: 0.5875063, b: 0.9063317, a: 1}
+  - {r: 0.03879708, g: 0.6199983, b: 1, a: 1}
+  - {r: 0.27495584, g: 0.6105453, b: 1, a: 1}
+  - {r: 0.3201306, g: 0.7103759, b: 1, a: 1}
+  - {r: 0.36782554, g: 0.7087153, b: 1, a: 1}
+  - {r: 0.47291088, g: 0.5048677, b: 0.92665875, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0.9047764, b: 0.5470588, a: 1}
+  - {r: 1, g: 0.72437143, b: 0.25858983, a: 1}
+  editedColors:
+  - {r: 0.9807161, g: 0, b: 0.99607843, a: 1}
+  - {r: 0.9058824, g: 0.35686228, b: 0.44376215, a: 1}
+  - {r: 1, g: 0.39393497, b: 0.48986402, a: 1}
+  - {r: 0.618682, g: 0.4313718, b: 1, a: 1}
+  - {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
+  - {r: 0.32156652, g: 0.7908572, b: 1, a: 1}
+  - {r: 0.99607843, g: 0.78830755, b: 0.66299164, a: 1}
+  - {r: 0.98039216, g: 0.76871216, b: 0.55220026, a: 1}
+  - {r: 0.75623834, g: 0.45097983, b: 1, a: 1}
+  - {r: 0.91999274, g: 0.91999274, b: 0.91999274, a: 1}
+  - {r: 0.48948812, g: 0.5889447, b: 1, a: 1}
+  - {r: 0.97189176, g: 0.5348596, b: 1, a: 1}
+  - {r: 0.349923, g: 0.5960871, b: 0.9063317, a: 1}
+  - {r: 0.03879708, g: 0.6348182, b: 1, a: 1}
+  - {r: 0.27495587, g: 0.6217281, b: 1, a: 1}
+  - {r: 0.3201306, g: 0.72085893, b: 1, a: 1}
+  - {r: 0.3678255, g: 0.71846086, b: 1, a: 1}
+  - {r: 0.47291088, g: 0.51186365, b: 0.92665875, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0.8977884, b: 0.5470588, a: 1}
+  - {r: 1, g: 0.71293795, b: 0.25858986, a: 1}
+  groups:
+  - name: Material.019
+    color: {r: 0.99607843, g: 0, b: 0.99607843, a: 1}
+    materials:
+    - {fileID: 2100000, guid: cabbc17706488aa4088e955df37850e1, type: 2}
+  - name: Material.024
+    color: {r: 0.9058824, g: 0.35686228, b: 0.435294, a: 1}
+    materials:
+    - {fileID: -5998004595915773402, guid: fb106006abf4cd14b8ed2b3e1618ce7f, type: 3}
+    - {fileID: -5998004595915773402, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - name: Material.025
+    color: {r: 1, g: 0.393935, b: 0.48051655, a: 1}
+    materials:
+    - {fileID: -541708846208547136, guid: fb106006abf4cd14b8ed2b3e1618ce7f, type: 3}
+    - {fileID: -541708846208547136, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - name: A06EFF
+    color: {r: 0.6274504, g: 0.4313718, b: 1, a: 1}
+    materials:
+    - {fileID: -2876712260838632785, guid: d55fa8f9f1fc7f54b8745736bd924daf, type: 3}
+    - {fileID: -3522955778539423533, guid: d55fa8f9f1fc7f54b8745736bd924daf, type: 3}
+    - {fileID: -2876712260838632785, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: -3522955778539423533, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+  - name: Material.014
+    color: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
+    materials:
+    - {fileID: 3780671244086486322, guid: d55fa8f9f1fc7f54b8745736bd924daf, type: 3}
+    - {fileID: 6699446615349125189, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: 3780671244086486322, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: 6699446615349125189, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  - name: 52C7FF
+    color: {r: 0.32156652, g: 0.78039193, b: 1, a: 1}
+    materials:
+    - {fileID: 3002369084692617604, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: -8693172909504858975, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: 3002369084692617604, guid: 87f22d70453aef54196cc52b9a06fd59, type: 3}
+    - {fileID: -8693172909504858975, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  - name: board
+    color: {r: 0.99607843, g: 0.7934426, b: 0.66299164, a: 1}
+    materials:
+    - {fileID: -3989212943532495531, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: -3989212943532495531, guid: 38227f946c2809e409b286a83b0601b2, type: 3}
+  - name: box
+    color: {r: 0.98039216, g: 0.775315, b: 0.55220026, a: 1}
+    materials:
+    - {fileID: 169997778938151021, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: 169997778938151021, guid: 38227f946c2809e409b286a83b0601b2, type: 3}
+  - name: C373FF
+    color: {r: 0.76470554, g: 0.45097983, b: 1, a: 1}
+    materials:
+    - {fileID: 2858873978472033646, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: 2858873978472033646, guid: be94eb4b95103d34cb4114657688e9cc, type: 3}
+  - name: Material.017
+    color: {r: 0.91999274, g: 0.91999274, b: 0.91999274, a: 1}
+    materials:
+    - {fileID: 99656467281103303, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: 99656467281103303, guid: 38227f946c2809e409b286a83b0601b2, type: 3}
+  - name: Material.018
+    color: {r: 0.48948812, g: 0.5810707, b: 1, a: 1}
+    materials:
+    - {fileID: -5605289326131794027, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: -5605289326131794027, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+    - {fileID: -6478536213147159724, guid: be94eb4b95103d34cb4114657688e9cc, type: 3}
+  - name: Material.019
+    color: {r: 0.97906524, g: 0.5348596, b: 1, a: 1}
+    materials:
+    - {fileID: -4246479402191905792, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: -4246479402191905792, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  - name: Material.020
+    color: {r: 0.349923, g: 0.5875063, b: 0.9063317, a: 1}
+    materials:
+    - {fileID: -7198559261415225722, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: -7198559261415225722, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  - name: Material.022
+    color: {r: 0.03879708, g: 0.6199983, b: 1, a: 1}
+    materials:
+    - {fileID: 725804396391725484, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: 725804396391725484, guid: 3a42e24b09c5980469d8a885e8e9bfc6, type: 3}
+  - name: Material.023
+    color: {r: 0.27495584, g: 0.6105453, b: 1, a: 1}
+    materials:
+    - {fileID: -2813337366143557646, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: -2813337366143557646, guid: 3a42e24b09c5980469d8a885e8e9bfc6, type: 3}
+  - name: Material.027
+    color: {r: 0.3201306, g: 0.7103759, b: 1, a: 1}
+    materials:
+    - {fileID: 7993982598810627253, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: 7993982598810627253, guid: 87f22d70453aef54196cc52b9a06fd59, type: 3}
+  - name: Material.028
+    color: {r: 0.36782554, g: 0.7087153, b: 1, a: 1}
+    materials:
+    - {fileID: 1110233775959259594, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: 1110233775959259594, guid: 87f22d70453aef54196cc52b9a06fd59, type: 3}
+  - name: post
+    color: {r: 0.47291088, g: 0.5048677, b: 0.92665875, a: 1}
+    materials:
+    - {fileID: -6274764796855392505, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: -6274764796855392505, guid: 38227f946c2809e409b286a83b0601b2, type: 3}
+  - name: white.001
+    color: {r: 1, g: 1, b: 1, a: 1}
+    materials:
+    - {fileID: -1787745424648543715, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: -1787745424648543715, guid: 87f22d70453aef54196cc52b9a06fd59, type: 3}
+    - {fileID: 8377306415582925817, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  - name: yellow
+    color: {r: 1, g: 0.9047764, b: 0.5470588, a: 1}
+    materials:
+    - {fileID: -5354028657143720620, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: -5354028657143720620, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  - name: yellow.001
+    color: {r: 1, g: 0.72437143, b: 0.25858983, a: 1}
+    materials:
+    - {fileID: -2563484936441039104, guid: 675cdb03140658441891201d75b63ef9, type: 3}
+    - {fileID: -2563484936441039104, guid: 87f22d70453aef54196cc52b9a06fd59, type: 3}
+    - {fileID: 335274542614986364, guid: 3976c246e9f5a6a4298f7da05f584617, type: 3}
+  hue: 0.363

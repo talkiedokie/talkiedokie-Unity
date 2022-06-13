@@ -1,13 +1,13 @@
 using UnityEngine;
 
-namespace Gameplay
+namespace InsideBuilding.Gameplay
 {
 	public class Swerving : Task
 	{
-		[Foldout("Swerving")]
+		// [Foldout("Swerving")]
 		[SerializeField] float sensitivity = 0.25f;
 		
-		[SerializeField] Transform gpx;
+		[SerializeField] protected Transform gpx, targetInteractable;
 		[SerializeField] bool updateGpxOrientation = true;
 		
 		[SerializeField] float gpxMovementSmooth;
@@ -18,8 +18,6 @@ namespace Gameplay
 			interactables,
 			raycastFollow;
 		
-		[SerializeField] Transform targetInteractable;
-		
 		[Space()]
 		public Animator anim;
 		public string param;
@@ -29,7 +27,7 @@ namespace Gameplay
 		Vector2 input;
 		const float SENSITIVITY = 0.01f;
 		
-		bool isGrabbingTool;
+		bool isGrabbingTool, isTaskCompleted;
 		
 		[SerializeField] Transform stinkParticle;
 		bool isStinkParticleRemoved; // single-frame gate
@@ -69,10 +67,16 @@ namespace Gameplay
 					progress += input.magnitude * sensitivity * SENSITIVITY;
 					progress = Mathf.Clamp01(progress);
 					
-					UpdateSound();
+					float triggerValue = Mathf.Pow(toolSoundTrigger, 2);
+					
+					if(input.sqrMagnitude >= triggerValue)
+						OnProgressTrigger();
 				
-					if(progress > 0.5f) RemoveStinkParticle();
-					if(progress >= 1) CompleteTask();
+					if(progress > 0.65f) RemoveStinkParticle();
+					if(progress >= 1f && !isTaskCompleted){
+						CompleteTask();
+						isTaskCompleted = true; // one frame gate
+					}
 				}
 				
 				UpdateGpx(ray, isInteracting, hit);
@@ -136,10 +140,8 @@ namespace Gameplay
 				);
 		}
 		
-		void UpdateSound(){
-			float triggerValue = Mathf.Pow(toolSoundTrigger, 2);
-			
-			if(input.sqrMagnitude >= triggerValue && !genAudio.isPlaying)
+		protected virtual void OnProgressTrigger(){
+			if(!genAudio.isPlaying)
 				genAudio.PlayRandom(audioGroup);
 		}
 		

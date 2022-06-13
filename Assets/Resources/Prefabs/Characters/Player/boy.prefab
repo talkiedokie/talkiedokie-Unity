@@ -32,7 +32,7 @@ PrefabInstance:
       objectReference: {fileID: 6639489671146372718}
     - target: {fileID: 710019295326926112, guid: 4550d9b31cc118f43af838ecbd5353cd, type: 3}
       propertyPath: enableGpx
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1059595457465699503, guid: 4550d9b31cc118f43af838ecbd5353cd, type: 3}
       propertyPath: m_Name

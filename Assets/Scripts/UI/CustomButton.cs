@@ -15,7 +15,7 @@ public class CustomButton : MonoBehaviour
 	}
 	
 	IEnumerator OnClick_Routine(){
-		yield return new WaitForSeconds(onClickDelay);
+		yield return new WaitForSecondsRealtime(onClickDelay);
 		onClick?.Invoke();
 	}
 }

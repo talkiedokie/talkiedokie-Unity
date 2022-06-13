@@ -4,19 +4,28 @@ public class SpawnInsideSphere : MonoBehaviour
 {
 	[SerializeField] float radius = 1f;
 	[SerializeField] Vector3 position;
-	[SerializeField] bool randomRotation = true;
-	[SerializeField] Transform[] transforms;
+	
+	[SerializeField] bool
+		randomRotation = true,
+		randomScale = false;
+	
+	[SerializeField] Vector2 randomScaleMinMax = new Vector2(0.5f, 2f);
 	
 	[ContextMenu("Spawn")]
 	public void Spawn(){
 		var position = transform.TransformPoint(this.position);
 		
-		foreach(var transform in transforms){
+		foreach(Transform child in transform){
 			var randomPosition = Random.insideUnitSphere * radius;
-			transform.position = position + randomPosition;
+			child.position = position + randomPosition;
 			
 			if(randomRotation)
-				transform.rotation = Random.rotation;
+				child.rotation = Random.rotation;
+			
+			if(randomScale){
+				float scaleValue = Random.Range(randomScaleMinMax.x, randomScaleMinMax.y);
+				child.localScale *= scaleValue;
+			}
 		}
 	}
 	

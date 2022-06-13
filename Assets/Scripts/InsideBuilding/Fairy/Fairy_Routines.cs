@@ -12,6 +12,7 @@ public partial class Fairy
 		Action onFinish
 	){
 		isSpeaking = true;
+		anim.SetBool("talk", isSpeaking);
 		
 		var step = new WaitForSeconds(delay);
 		
@@ -30,6 +31,8 @@ public partial class Fairy
 		}
 	
 		isSpeaking = false;
+		anim.SetBool("talk", isSpeaking);
+		
 		onFinish?.Invoke();
 	}
 	

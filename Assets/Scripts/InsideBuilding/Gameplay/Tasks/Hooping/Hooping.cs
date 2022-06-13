@@ -1,33 +1,33 @@
 using UnityEngine;
 using System.Collections;
 
-namespace Gameplay
+namespace InsideBuilding.Gameplay
 {
 	public class Hooping : Task
 	{
-		[Space()]
+		// [Foldout("References")]
 		[SerializeField] protected Hoop hoop;
 		[SerializeField] protected Interactable[] interactableObjects;
+		
+		protected Interactable dragged, hovered, selected;
 		
 		protected int maxScore => interactableObjects.Length;
 		protected int score;
 		
+		// [Foldout("Layer Masking")]
 		[SerializeField] int onDragSetLayerTo;
 		
 		[SerializeField] protected LayerMask
 			interactables,
 			dragFollow,
 			hoopLayer;
-		
-		protected Interactable dragged, hovered, selected;
+			
+		[Space()]
+		[SerializeField] protected HoopUI instructionUI;
+		static HoopUI InstructionUI;
 		
 		public delegate void OnFinish();
 		public OnFinish onFinish;
-		
-		/* protected override void Start(){
-			base.Start();
-			hoop._onTrigger += Score;
-		} */
 		
 		protected override void OnEnable(){
 			base.OnEnable();
@@ -91,7 +91,9 @@ namespace Gameplay
 			void HandleDropping(){
 				if(Input.GetMouseButtonUp(0)){
 					bool raycast3 = Physics.Raycast(ray, out var hit2, 10, hoopLayer);
-					if(raycast3 && dragged) hoop.Interact(dragged.gameObject);
+					
+					if(raycast3 && dragged)
+						OnDrop(hit2);
 					
 					dragged?.Enable(true);
 					dragged?.ResetLayer();
@@ -102,14 +104,23 @@ namespace Gameplay
 			}
 		}
 		
+		protected virtual void OnDrop(RaycastHit rayInfo){
+			hoop.Interact(dragged.gameObject);
+		}
+		
 		public override void Play(bool b){
 			base.Play(b);
-			// hoop.gameObject.SetActive(b);
+			
+			if(b){
+				if(!InstructionUI)
+					InstructionUI = instructionUI.CreateInstance();
+				
+				InstructionUI.Show(0.5f, 3, 1, interactableObjects, hoop.transform);
+			}
 		}
 		
 		public void Score(){
 			selected = null;
-			// StartCoroutine(DisablePhysicsDelay());
 			
 			score ++;
 			if(score >= maxScore) CompleteTask();

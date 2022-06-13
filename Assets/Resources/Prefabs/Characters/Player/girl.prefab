@@ -13,15 +13,11 @@ PrefabInstance:
       objectReference: {fileID: 7040844491077817691}
     - target: {fileID: 710019295326926112, guid: 4550d9b31cc118f43af838ecbd5353cd, type: 3}
       propertyPath: enableGpx
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1059595457465699503, guid: 4550d9b31cc118f43af838ecbd5353cd, type: 3}
       propertyPath: m_Name
       value: girl
-      objectReference: {fileID: 0}
-    - target: {fileID: 1059595457465699503, guid: 4550d9b31cc118f43af838ecbd5353cd, type: 3}
-      propertyPath: m_Layer
-      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1059595457465699503, guid: 4550d9b31cc118f43af838ecbd5353cd, type: 3}
       propertyPath: m_TagString
@@ -82,10 +78,6 @@ PrefabInstance:
     - target: {fileID: 4242679555983536512, guid: 4550d9b31cc118f43af838ecbd5353cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5555310052467912331, guid: 4550d9b31cc118f43af838ecbd5353cd, type: 3}
-      propertyPath: m_Layer
-      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7851308424227046750, guid: 4550d9b31cc118f43af838ecbd5353cd, type: 3}
       propertyPath: m_Height
