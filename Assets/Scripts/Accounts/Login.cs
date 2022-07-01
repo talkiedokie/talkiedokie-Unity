@@ -52,9 +52,8 @@ public class Login : MonoBehaviour
 		void Start(){
 			var options = new List<string>();
 			
-			foreach(var user in rememberedUsers){
+			foreach(var user in rememberedUsers)
 				options.Add(user.name);
-			}
 			
 			rememberUserDropdown.AddOptions(options);
 		}

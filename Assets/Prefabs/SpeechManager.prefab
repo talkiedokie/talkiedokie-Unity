@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3092911659663607591}
-  - component: {fileID: 4272758811137141940}
-  - component: {fileID: 3092911659663607592}
+  - component: {fileID: 4449278417075198775}
   m_Layer: 0
   m_Name: SpeechManager
   m_TagString: Untagged
@@ -32,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4272758811137141940
+--- !u!114 &4449278417075198775
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,24 +40,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3092911659663607590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88d55a1d126d6cc4f9dfa751b7d4552c, type: 3}
+  m_Script: {fileID: 11500000, guid: aefa3362a307e1c4bb97c420c82555f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stt: {fileID: 3092911659663607592}
+  plugin: {fileID: 3067662938177305878, guid: 6a9c51df694871f41aebc0bbfd0efc5f, type: 3}
   ui: {fileID: 0}
-  onFinishExitDelay: 0.65
+  appearSound:
+    value: 5
   skipSound:
     value: 1
---- !u!114 &3092911659663607592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3092911659663607590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87439cf898722c34bbfcbe37f8ee963a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listenDuration: 5
+  hypothesis: 
+  result: 

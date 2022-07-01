@@ -13,12 +13,6 @@ namespace InsideBuilding
 		
 		[Space()] public Task[] tasks;
 		
-		/* [ContextMenu("Yeah")]
-		public void Yeah(){
-			foreach(var task in tasks)
-				task.Yeah();
-		} */
-		
 		#region Properties
 			
 			public AudioClip RoomNameFairyVoiceClip => roomNameFairyVoiceClip;
@@ -58,9 +52,8 @@ namespace InsideBuilding
 				task.gameObject.SetActive(false);
 		}
 		
-		public void OnEnter(){
+		public void OnEnter() =>
 			camAnimator.SetTrigger("enter");
-		}
 		
 		public void ShowCharacters(bool b){
 			fairyPoint.gameObject.SetActive(b);

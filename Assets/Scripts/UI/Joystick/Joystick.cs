@@ -32,11 +32,14 @@ public class Joystick : MonoBehaviour,
 		
 	#endregion
 	
-	#region Setup
+	#region Unity Ticks
 		
 		void OnValidate(){
-			if(!rectTransform) rectTransform = transform as RectTransform;
+			if(!rectTransform)
+				rectTransform = transform as RectTransform;
 		}
+		
+		void OnEnable() => ResetPosition();
 		
 	#endregion
 	

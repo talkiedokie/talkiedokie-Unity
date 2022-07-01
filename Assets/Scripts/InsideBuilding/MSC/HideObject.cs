@@ -7,7 +7,7 @@ public class HideObject : MonoBehaviour
 	void OnEnable(){
 		foreach(var obj in objects) obj.SetActive(false);
 	}
-	
+
 	void OnDisable(){
 		foreach(var obj in objects) obj.SetActive(true);
 	}

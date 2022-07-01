@@ -46,6 +46,10 @@ namespace InsideBuilding.Gameplay
 			
 			layer?.AddObject(book.transform, out isBookAdded);
 			
+			if(book.TryGetComponent<Rigidbody>(out var rb))
+				rb.isKinematic = true;
+			
+			
 			if(isBookAdded){
 				base.OnDrop(rayInfo);
 				dragged = null;

@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!143 &938949153
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6256632020698065126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.3
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &938949159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6256632020698065126}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2b39f7a864a7c448ad79e23400a5ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camView: {fileID: 0}
+  _currentCamCache: {fileID: 0}
+  _fpsInput: {fileID: 0}
+  _isActivated: 0
+  playerObject: {fileID: 3874284183611233785}
+  _jumpForce: 7
+  _movementSpeed: 4
+  _panningSpeed: 2
+  _sprintMultiplier: 2
+  _clickablesLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  _clickableMinimumDistance: 3
+--- !u!1001 &7629111364509903767
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 712475332991626151, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 712475332991626151, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 820076341576695390, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 820076341576695390, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 820076341576695390, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 820076341576695390, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 820076341576695390, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 820076341576695390, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 820076341576695390, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 820076341576695390, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 820076341576695390, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 820076341576695390, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 820076341576695390, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060566037764438782, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554276058123780977, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_Name
+      value: boy Variant With new fps controller
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554276058123780977, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6734300827911015040, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4060566037764438782, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+    - {fileID: 3798140646711580397, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+    - {fileID: 9222734063275147493, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+    - {fileID: 712475332991626151, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+--- !u!1 &6256632020698065126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4554276058123780977, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+  m_PrefabInstance: {fileID: 7629111364509903767}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3874284183611233785 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6639489671146372718, guid: 407d59a5d2628d24aa654ce3022329da, type: 3}
+  m_PrefabInstance: {fileID: 7629111364509903767}
+  m_PrefabAsset: {fileID: 0}

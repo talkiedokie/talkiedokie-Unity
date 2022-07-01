@@ -9,12 +9,23 @@ public class CameraManager : SceneObjectSingleton<CameraManager>
 	
 	[SerializeField] CinemachineVirtualCamera priorityCamera;
 	
+	#if UNITY_EDITOR
+	
+		public CinemachineVirtualCamera setCamDebug;
+		
+		[ContextMenu("Set Camera")]
+		public void SetCamDebug() => SetPriority(setCamDebug);
+		
+	#endif
+	
 	public CinemachineVirtualCamera defaultCamera{ get; private set; }
 	public CinemachineVirtualCamera Current => priorityCamera;
 	
 	Camera cam;
 	
-	void Awake(){
+	protected override void Awake(){
+		base.Awake();
+		
 		defaultCamera = priorityCamera;
 		cam = Camera.main;
 	}
@@ -27,15 +38,15 @@ public class CameraManager : SceneObjectSingleton<CameraManager>
 		priorityCamera.Priority = priorValue;
 	}
 	
-	public void SetDefaultPriority(){
-		SetPriority(defaultCamera);
-	}
+	public void SetDefaultPriority() => SetPriority(defaultCamera);
 	
 	public void AddCullingLayer(int layer){
+		if(!cam) return;
 		cam.cullingMask |= 1 << layer;
 	}
 	
 	public void RemoveCullingLayer(int layer){
+		if(!cam) return;
 		cam.cullingMask &= ~(1 << layer);
 	}
 }

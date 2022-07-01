@@ -37,21 +37,22 @@ public class AudioRecorder : MonoBehaviour, IAudioProvider {
     }
 
     public AudioReadyEvent MicReady = new AudioReadyEvent( );
-
-    private void Awake( ) {
+	
+	private void Awake( ) {
         if ( Application.platform == RuntimePlatform.Android ) {
             if ( !Permission.HasUserAuthorizedPermission( Permission.Microphone ) ) {
                 Permission.RequestUserPermission( Permission.Microphone );
             }
         }
-    }
-
-    private void Update( ) {
-        bool micAutorized = true;
+	}
+		
+     private void Update( ) {
+		bool micAutorized = true;
+		
         if ( Application.platform == RuntimePlatform.Android ) {
             micAutorized = Permission.HasUserAuthorizedPermission( Permission.Microphone );
         }
-        if ( micAutorized ) {
+        if ( micAutorized) {
             if ( _firstLoad ) {
                 _deviceName = Microphone.devices [ MicrophoneIndex ];
                 _audioClip = Microphone.Start( _deviceName, true, LENGTH_SEC, MicrophoneSampleRate );
@@ -60,6 +61,7 @@ public class AudioRecorder : MonoBehaviour, IAudioProvider {
             }
         }
     }
+	
     private void OnDestroy( ) {
         Microphone.End( _deviceName );
         _firstLoad = true;
@@ -69,10 +71,6 @@ public class AudioRecorder : MonoBehaviour, IAudioProvider {
     private AudioClip _audioClip = null;
     private const int LENGTH_SEC = 2;
     private string _deviceName;
-
-    private int _currentPosition = 0;
-
-    private bool _init = false;
 
     private const int FRAME_LENGTH = 512;
 

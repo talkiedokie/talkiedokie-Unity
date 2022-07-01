@@ -12,20 +12,18 @@ using UnityEngine.Android;
 using UnityEngine.Events;
 
 internal class SpeechRecognizer : MonoBehaviour {
-    public string LanguageModelDirPath = "SpeechRecognitionSystem/model/english_small";
-
+    const string LanguageModelDirPath = "SpeechRecognitionSystem/model/english_small";
+	
     public void OnDataProviderReady( IAudioProvider audioProvider ) {
         if ( Application.platform == RuntimePlatform.Android ) {
             if ( !Permission.HasUserAuthorizedPermission( Permission.ExternalStorageWrite ) ) {
                 Permission.RequestUserPermission( Permission.ExternalStorageWrite );
             }
-        }
+        } 
 
         _audioProvider = audioProvider;
-
         _sr.Frequency = _audioProvider.Frequency;
-        onInitResult( Application.streamingAssetsPath + "/" + LanguageModelDirPath );
-
+		
         _running = true;
         Task.Run( processing ).ConfigureAwait( false );
     }
@@ -33,40 +31,37 @@ internal class SpeechRecognizer : MonoBehaviour {
     private readonly ConcurrentQueue<float[ ]> _threadedBufferQueue = new ConcurrentQueue<float[ ]>( );
     private readonly ConcurrentQueue<string> _recognitionPartialResultsQueue = new ConcurrentQueue<string>( );
     private readonly ConcurrentQueue<string> _recognitionFinalResultsQueue = new ConcurrentQueue<string>( );
-
-    [System.Serializable]
-    public class MessageEvent : UnityEvent<string> { }
-
-    public MessageEvent LogMessageReceived = new MessageEvent( );
-    public MessageEvent PartialResultReceived = new MessageEvent( );
-    public MessageEvent ResultReceived = new MessageEvent( );
-
-    private void onInitResult( string modelDirPath ) {
+	
+	public delegate void MessageEvent(string message);
+	
+	public MessageEvent
+		LogMessageReceived,
+		PartialResultReceived,
+		ResultReceived;
+	
+    public static void onInitResult() {
+		string modelDirPath = Application.streamingAssetsPath + "/" + LanguageModelDirPath;
+		
         if ( modelDirPath != string.Empty ) {
             if ( Directory.Exists( modelDirPath ) ) {
+				_sr = new SpeechRecognitionSystem.SpeechRecognizer( );
                 _init = _sr.Init( modelDirPath );
             }
             else {
                 _init = false;
             }
-            if ( _init ) {
-                LogMessageReceived?.Invoke( "Say something..." );
-            }
-            else {
-                LogMessageReceived?.Invoke( "Error on init SRS plugin. Check 'Language model dir path'\n" + modelDirPath );
-            }
+            if ( _init )
+				Debug.Log( "Say something..." );
+			
+            else
+				Debug.LogWarning( "Error on init SRS plugin. Check 'Language model dir path'\n" + modelDirPath );
         }
-        else {
-            LogMessageReceived?.Invoke( "Error on copying streaming assets" );
-        }
+        else
+			Debug.LogWarning( "Error on copying streaming assets" );
     }
 
     private void onReceiveLogMess( string message ) {
         LogMessageReceived?.Invoke( message );
-    }
-
-    private void Awake( ) {
-        _sr = new SpeechRecognitionSystem.SpeechRecognizer( );
     }
 
     private void FixedUpdate( ) {
@@ -86,7 +81,7 @@ internal class SpeechRecognizer : MonoBehaviour {
                     PartialResultReceived?.Invoke( part );
             }
             if ( _recognitionFinalResultsQueue.TryDequeue( out string result ) ) {
-                if ( result != string.Empty )
+                if ( result != string.Empty ) 
                     ResultReceived?.Invoke( result );
             }
         }
@@ -96,6 +91,7 @@ internal class SpeechRecognizer : MonoBehaviour {
         while ( _running ) {
             float[ ] audioData;
             var isOk = _threadedBufferQueue.TryDequeue( out audioData );
+			
             if ( isOk ) {
                 int resultReady = _sr.AppendAudioData( audioData );
                 if ( resultReady == 0 ) {
@@ -110,16 +106,17 @@ internal class SpeechRecognizer : MonoBehaviour {
             }
         }
     }
-
-    private bool _running = false;
-
-    private void OnDestroy( ) {
-        _init = false;
+	
+    private static bool _running = false;
+	
+	public static void Dispose()
+	{
+		_init = false;
         _copyRequested = false;
         _running = false;
         _sr.Dispose( );
         _sr = null;
-    }
+	}
 
     private void copyAssets2ExternalStorage( string modelDirPath ) {
         if ( Application.platform == RuntimePlatform.Android ) {
@@ -136,8 +133,8 @@ internal class SpeechRecognizer : MonoBehaviour {
         }
     }
 
-    private SpeechRecognitionSystem.SpeechRecognizer _sr = null;
+    private static SpeechRecognitionSystem.SpeechRecognizer _sr = null;
     private IAudioProvider _audioProvider = null;
-    private bool _init = false;
-    private bool _copyRequested = false;
+    private static bool _init = false;
+    private static bool _copyRequested = false;
 }

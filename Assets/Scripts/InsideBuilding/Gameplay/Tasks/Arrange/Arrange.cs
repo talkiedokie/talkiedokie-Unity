@@ -1,12 +1,18 @@
 using UnityEngine;
+using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace InsideBuilding.Gameplay
 {
 	public class Arrange : Task
 	{
 		[SerializeField] Bounds[] randomAreas;
+
 		[SerializeField] Transform[] objects;
+		List<Transform> _objects = new List<Transform>();
+		
+		
 		[SerializeField] float objColliderRadius = 0.5f;
 		
 		Transform[] defaultPoints;
@@ -28,11 +34,13 @@ namespace InsideBuilding.Gameplay
 			base.Play(b);
 			
 			if(b){
-				int count = objects.Length;
+				_objects = objects.ToList();
+				
+				int count = _objects.Count;
 				defaultPoints = new Transform[count];
 				
 				for(int i = 0; i < count; i++){
-					var obj = objects[i];
+					var obj = _objects[i];
 					defaultPoints[i] = new GameObject(obj.name).transform;
 					defaultPoints[i].parent = obj.parent;
 					defaultPoints[i].position = obj.position;
@@ -75,7 +83,7 @@ namespace InsideBuilding.Gameplay
 				if(Physics.Raycast(ray, out hit, 100)){
 					Debug.Log(hit.transform.name, hit.transform);
 					
-					var target = System.Array.Find(objects, obj => obj == hit.transform);
+					var target = _objects.Find(obj => obj == hit.transform);
 					
 					if(target){
 						var tweener = target.GetComponent<Tweener>();
@@ -103,6 +111,7 @@ namespace InsideBuilding.Gameplay
 						);
 						
 						Destroy(particle, particleDespawnTime);
+						_objects.Remove(target);
 					}
 				}
 			}
@@ -122,7 +131,7 @@ namespace InsideBuilding.Gameplay
 			if(!handUI)
 				handUI = _handUI.CreateInstance();
 			
-			var startObjects = new Component[]{ Tools.Random(objects) };
+			var startObjects = new Component[]{ Tools.Random(_objects) };
 			handUI.Show(0.5f, 3, 1, startObjects, transform);
 		}
 	}

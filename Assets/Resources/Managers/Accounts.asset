@@ -22,5 +22,5 @@ MonoBehaviour:
     coins: 0
     gender: 1
   currentUser:
-    value: 0
+    value: 1
   maxUserCount: 5

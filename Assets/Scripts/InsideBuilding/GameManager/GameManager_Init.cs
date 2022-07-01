@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using AccountsManagement;
+using Gameplay;
 
 namespace InsideBuilding
 {
@@ -9,24 +10,12 @@ namespace InsideBuilding
 		IEnumerator SetupSingletonReferences(){
 			uiMgr = UIManager.Instance;
 			fairy = Fairy.Instance;
-			
-			cam = Camera.main;
 			camMgr = CameraManager.Instance;
 			
-			yield return null;
-		}
-		
-		IEnumerator CheckForSpeechSupport(){
-			#if UNITY_EDITOR_WIN || UNITY_WINDOWS || UNITY_STANDALONE_WIN
+			speech = Speech.Instance;
+			speech.Initialize();
 			
-				bool isSupported = STTMultiPlatformHandler.Instance.IsWindowSpeechSupported;
-				
-				if(!isSupported) winSpeechError.NotSupported();
-				while(!isSupported) yield return null;
-				
-			#endif
-			
-			yield return null;
+			yield break;
 		}
 		
 		IEnumerator LoadLevel(){
@@ -57,27 +46,26 @@ namespace InsideBuilding
 			
 			usernameTxt.text = UserData.name;
 			
-			yield return null;
+			yield break;
 		}
 		
 		IEnumerator SetupPlayerObject(){
 			var playerPlaceHolder = GameObject.FindWithTag("Player").transform;
 			
-			player = Instantiate(
-				characterPrefabs[(int) PlayerGender],
-				playerPlaceHolder.position,
-				playerPlaceHolder.rotation,
-				playerPlaceHolder.parent
-			);
+			var prefab = characterPrefabs[(int) PlayerGender];
+			var position = playerPlaceHolder.position;
+			var rotation = playerPlaceHolder.rotation;
+			var parent = playerPlaceHolder.parent;
+			
+			player = Instantiate(prefab, position, rotation, parent);
 			
 			playerDefaultPoint = new GameObject("playerDefaultPoint").transform;
-			playerDefaultPoint.position = playerPlaceHolder.position;
-			playerDefaultPoint.rotation = playerPlaceHolder.rotation;
-			playerDefaultPoint.parent = playerPlaceHolder.parent;
+			playerDefaultPoint.SetPositionAndRotation(position, rotation);
+			playerDefaultPoint.parent = parent;
 			
 			Destroy(playerPlaceHolder.gameObject);
 			
-			yield return null;
+			yield break;
 		}
 		
 		IEnumerator SetupRoomUI(){
@@ -99,14 +87,15 @@ namespace InsideBuilding
 			Destroy(roomButtonTemplate.gameObject);
 			Destroy(roomTasksUITemplate.gameObject);
 			
-			yield return null;
+			yield break;
 		}
 		
-		IEnumerator FinalSetup(){
+		IEnumerator FinalizeSetup(){
 			ChangeTheWordOfTheDay();
 			GeneralAudio.Instance.PlayMusic();
 			
 			yield return null;
+			// speech.DisablePlugin();
 		}
 	}
 }

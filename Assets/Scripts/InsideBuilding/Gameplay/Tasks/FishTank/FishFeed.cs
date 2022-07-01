@@ -19,7 +19,7 @@ namespace InsideBuilding.Gameplay
 				rb.drag = waterDrag;
 				rb.velocity = Vector3.zero;
 				
-				aquarium.SetFishTarget(transform);
+				// aquarium.SetFishTarget(transform);
 			}
 		}
 	}

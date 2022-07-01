@@ -59,9 +59,8 @@ namespace InsideBuilding
 			}
 		}
 		
-		public void RephraseDescription(){
+		public void RephraseDescription() =>
 			description = Tools.Random(descriptions);
-		}
 		
 		public void SetRoom(Room room){ this.room = room; }
 		

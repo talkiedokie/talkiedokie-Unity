@@ -10,9 +10,7 @@ namespace InsideBuilding.Gameplay
 		[SerializeField] protected Interactable[] interactableObjects;
 		
 		protected Interactable dragged, hovered, selected;
-		
 		protected int maxScore => interactableObjects.Length;
-		protected int score;
 		
 		// [Foldout("Layer Masking")]
 		[SerializeField] int onDragSetLayerTo;
@@ -34,8 +32,6 @@ namespace InsideBuilding.Gameplay
 			
 			foreach(var i in interactableObjects)
 				i.gameObject.SetActive(true);
-			
-			score = 0;
 		}
 		
 		protected override void Update(){
@@ -45,12 +41,12 @@ namespace InsideBuilding.Gameplay
 			var ray = cam.ScreenPointToRay(Input.mousePosition);
 			bool raycast = Physics.Raycast(ray, out var hit, 100, interactables);
 			
-			HandleHighlighting();
+			// HandleHighlighting();
 			HandleSelecting();
 			HandleDragging();
 			HandleDropping();
 			
-			void HandleHighlighting(){
+			/* void HandleHighlighting(){
 				if(raycast && !dragged){
 					hovered?.Highlight(false);
 					hovered = hit.collider.GetComponent<Interactable>();
@@ -60,20 +56,20 @@ namespace InsideBuilding.Gameplay
 					hovered?.Highlight(false);
 					hovered = null;
 				}
-			}
+			} */
 			
 			void HandleSelecting(){
 				if(Input.GetMouseButtonDown(0)){
 					// Deselect Current
 						selected?.Enable(true);
-						selected?.ResetLayer();
+						// selected?.ResetLayer();
 					
 					// Select New
 						if(raycast){
 							selected = hovered? hovered: hit.collider.GetComponent<Interactable>();
 							
-							selected?.Enable(false);
-							selected?.SetLayerTemporary(onDragSetLayerTo);
+							// selected?.Enable(false);
+							// selected?.SetLayerTemporary(onDragSetLayerTo);
 						}
 						else selected = null;
 				}
@@ -96,7 +92,7 @@ namespace InsideBuilding.Gameplay
 						OnDrop(hit2);
 					
 					dragged?.Enable(true);
-					dragged?.ResetLayer();
+					// dragged?.ResetLayer();
 					
 					dragged?.Highlight(false);
 					dragged = null;
@@ -122,15 +118,15 @@ namespace InsideBuilding.Gameplay
 		public void Score(){
 			selected = null;
 			
-			score ++;
+			int score = hoop.containedObjects.Count;
 			if(score >= maxScore) CompleteTask();
 		}
 		
-		IEnumerator DisablePhysicsDelay(){
+		/* IEnumerator DisablePhysicsDelay(){
 			yield return new WaitForSeconds(1f);
 			
 			selected?.Enable(false);
 			selected = null;
-		}
+		} */
 	}
 }

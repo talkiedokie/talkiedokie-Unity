@@ -6,102 +6,145 @@ namespace InsideBuilding
 {
 	public class EntryPoint : MonoBehaviour
 	{
-		public SceneLoader cityScene;
+		#region Inspector
+			
+			[SerializeField, TextArea()] string description = "";
+			[SerializeField] SceneLoader scene;
+			
+			[Space()]
+			[SerializeField] bool updateLevel;
+			[SerializeField] SceneLoader levelScene;
+			
+			[Space()]
+			[SerializeField] EntryPointUI ui;
+			[SerializeField] CinemachineVirtualCamera camPoint;
+			
+			[Space()]
+			[SerializeField] Transform onRejectionPlayerDest;
+			[SerializeField] Vector3 playerPositionCity = Vector3.zero;
+			
+			[Space()]
+			[SerializeField] GeneralAudioSelector onEnterSound;
+			[SerializeField] GeneralAudioSelector onRejectSound;
+			
+		#endregion		
 		
-		[Space()]
-		public bool updateLevel;
-		public SceneLoader levelScene;
+		#region Variables
 		
-		[Space()]
-		public GameObject ui;
-		public CinemachineVirtualCamera camPoint;
+			FirstPersonController fpCtrl;
+			Transform fpCam;
+			bool fpCtrlAutoResetTransform;
+			
+			UIManager uiMgr;
+			bool hasStarted;
+			
+		#endregion
 		
-		[Space()]
-		public Transform onRejectionPlayerDest;
-		public Vector3 playerPositionCity = Vector3.zero;
-		
-		FpCtrl fpCtrl;
-		Transform fpCam;
-		bool fpCtrlAutoResetTransform;
-		
-		UIManager uiMgr;
-		
-		IEnumerator Start(){
-			uiMgr = UIManager.Instance;
-			{
-				var parent = ui.transform.parent;
+		#region Initializations
+			
+			IEnumerator Start(){
+				SetupUI();
 				
-				if(parent != uiMgr.transform){
-					ui.transform.SetParent(uiMgr.transform);
-					{					
-						ui.transform.localPosition = Vector3.zero;
-						ui.transform.localRotation = Quaternion.identity;
-						ui.transform.localScale = Vector3.one;
-					}
+				yield return WaitForGameManager();
+				
+				GetPlayerDependencies();
+				hasStarted = true;
+			}
+			
+			void SetupUI(){
+				uiMgr = UIManager.Instance;
+				
+				var ui = Instantiate(this.ui, uiMgr.transform, false);
 					
-					Destroy(parent.gameObject);
-				}
+					ui.onAccept = OnAccept;
+					ui.onReject = OnReject;
+					
+					ui.SetDescription(description);
 				
-				ui.SetActive(false);
+				this.ui = ui;
+				this.ui.SetActive(false);
 			}
 			
-			var gameMgr = FindObjectOfType<GameManager>();
-			
-			if(gameMgr){
-				while(!gameMgr.hasStarted) yield return null;
+			IEnumerator WaitForGameManager(){
+				var gameMgr = FindObjectOfType<GameManager>();
+				
+				if(gameMgr)
+					while(!gameMgr.hasStarted) yield return null;
 			}
 			
-			fpCtrl = FindObjectOfType<FpCtrl>(true);
-			fpCam = fpCtrl.GetComponentInChildren<CinemachineVirtualCamera>().transform;
-		}
+			void GetPlayerDependencies(){
+				fpCtrl = FindObjectOfType<FirstPersonController>(true);
+				fpCam = fpCtrl.GetComponentInChildren<CinemachineVirtualCamera>().transform;
+			}
+			
+		#endregion
 		
 		void OnTriggerEnter(Collider col){
+			if(!hasStarted) return;
 			if(!col.CompareTag("Player")) return;
 			
-			uiMgr.Show(ui);
-			fpCtrl.enabled = false;
+			uiMgr.Show(ui.gameObject);
+
+            fpCtrl.enabled = false;
 			
 			CameraManager.Instance.SetPriority(camPoint);
 			{
 				camPoint.transform.position = fpCam.position;
 				camPoint.transform.rotation = fpCam.rotation;
 			}
+			
+			onEnterSound.Play();
 		}
 		
-		public void OnAccept(){
-			if(playerPositionCity != Vector3.zero)
-				City.playerPosition = playerPositionCity;
+		#region UI Button Calls
 			
-			else City.playerPosition = onRejectionPlayerDest.position;
-			
-			City.SetPlayerRotation(onRejectionPlayerDest.rotation);
-			
-			GameManager.LevelScene = levelScene;
-			cityScene.LoadAsync();
-		}
-		
-		public void OnReject(){
-			StopAllCoroutines();
-			StartCoroutine(Reject());
-		}
-		
-		IEnumerator Reject(){
-			uiMgr.Hide(ui);
-			
-			var transform = fpCtrl.transform;
-			var startPos = transform.position;
-			var destPos = onRejectionPlayerDest.position;
-			
-			float timer = 0f;
-			float duration = 0.5f;
-			
-			while(timer < duration){
-				transform.position = Vector3.Lerp(startPos, destPos, timer / duration);
-				timer += Time.deltaTime;
-				yield return null;
+			public void OnAccept(){
+				SetPlayerOrientationInCity();
+				
+				if(updateLevel)
+					GameManager.LevelScene = levelScene;
+
+                scene.LoadAsync();
 			}
 			
-			fpCtrl.enabled = true;
-		}
+			public void OnReject(){
+				StopAllCoroutines();
+				StartCoroutine(Reject());
+				
+				onRejectSound.Play();
+			}
+			
+			void SetPlayerOrientationInCity(){
+				if(playerPositionCity != Vector3.zero)
+					City.playerPosition = playerPositionCity;
+				
+				else City.playerPosition = onRejectionPlayerDest.position;
+				
+				City.SetPlayerRotation(onRejectionPlayerDest.rotation);
+			}
+			
+			IEnumerator Reject(){
+				uiMgr.Hide(ui.gameObject);
+                var transform = fpCtrl.transform;
+				var startPos = transform.position;
+				var destPos = onRejectionPlayerDest.position;
+				
+				float timer = 0f;
+				float duration = 0.5f;
+
+				CameraManager.Instance.SetPriority(fpCtrl.GetComponentInChildren<CinemachineVirtualCamera>());
+
+				while (timer < duration)
+				{
+						transform.position = Vector3.Lerp(startPos, destPos, timer / duration);
+						timer += Time.deltaTime;
+						yield return null;
+				}
+				
+					fpCtrl.enabled = true;
+				
+				}
+			
+		#endregion
 	}
 }

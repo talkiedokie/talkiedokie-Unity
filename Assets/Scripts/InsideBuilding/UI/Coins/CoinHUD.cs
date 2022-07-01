@@ -20,8 +20,8 @@ public class CoinHUD : SceneObjectSingleton<CoinHUD>
 	public GeneralAudioSelector coinSound = 13;
 	
 	int amount{
-		get{ return currentUser.coins; }
-		set{ currentUser.coins = value; }
+		get => currentUser.coins;
+		set => currentUser.coins = value;
 	}
 	
 	public bool isUpdatingAmount{ get; private set; }
@@ -52,7 +52,9 @@ public class CoinHUD : SceneObjectSingleton<CoinHUD>
 		}
 	}
 	
-	void Awake(){
+	protected override void Awake(){
+		base.Awake();
+		
 		var templateParent = coinPopupTemplate.transform.parent;
 		bool instantiateInWorld = true;
 		

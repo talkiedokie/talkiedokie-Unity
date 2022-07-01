@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29707849e5e4984b86610687c8ccacc, type: 3}
+  m_Name: worcestershire
+  m_EditorClassIdentifier: 
+  name: Worcestershire
+  sprites:
+  - {fileID: 21300000, guid: 362a42d890f45384e875a5087e13f736, type: 3}
+  - {fileID: 21300000, guid: 38062b48ac5aacb43a95723a7da41d54, type: 3}
+  fairyVoiceClip: {fileID: 8300000, guid: baa1c3f890bd37a4b831285458608cb7, type: 3}
+  isEnabled: 1

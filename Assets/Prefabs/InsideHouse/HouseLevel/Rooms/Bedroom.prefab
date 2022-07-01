@@ -2591,7 +2591,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   descriptions:
   - text: Pick up toys and put them in the box
-    fairyVoiceClip: {fileID: 8300000, guid: 89808f3fd82b9e848bf5183cda805026, type: 3}
+    fairyVoiceClip: {fileID: 8300000, guid: 25ce0ee4e4dcc3d4a840d59a7dcd0d5a, type: 3}
+  - text: Put the toys in the box
+    fairyVoiceClip: {fileID: 8300000, guid: 6a792fd457a88ed4ca77c637b5b12833, type: 3}
+  - text: Place the toys in the box
+    fairyVoiceClip: {fileID: 8300000, guid: 33311b8815b6af643af2e9ea38ae898e, type: 3}
   rewards: 10
   autoCompleteDebug: 0
   charPoint: {fileID: 0}
@@ -3930,7 +3934,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   descriptions:
   - text: Pick up dirty laundry and put in the hamper
-    fairyVoiceClip: {fileID: 8300000, guid: bd2f7f95c918970418805b7808b6dd49, type: 3}
+    fairyVoiceClip: {fileID: 8300000, guid: 03d80872c097cda41a3a17f1885e513f, type: 3}
+  - text: 'Put dirty clothes in the basket '
+    fairyVoiceClip: {fileID: 8300000, guid: 10b45438ea1f94a4b82455837b807866, type: 3}
+  - text: Put dirty laundry in the hamper
+    fairyVoiceClip: {fileID: 8300000, guid: fc52f8d8cd4dfb84f978a461473cf944, type: 3}
+  - text: Put laundry in the hamper
+    fairyVoiceClip: {fileID: 8300000, guid: e11c771d0aa15a94b86130810fd08ea2, type: 3}
+  - text: Put laundry in the basket
+    fairyVoiceClip: {fileID: 8300000, guid: 30fe5104bc9644e46bb9f2ce150f3517, type: 3}
   rewards: 10
   autoCompleteDebug: 0
   charPoint: {fileID: 0}
@@ -5259,7 +5271,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   descriptions:
   - text: Put garbage in the trash bin
-    fairyVoiceClip: {fileID: 8300000, guid: 23ea87a92727ff546afe603cc7b98134, type: 3}
+    fairyVoiceClip: {fileID: 8300000, guid: 2e1fcf18ec88d3f4ab8388dfb5f01c7a, type: 3}
+  - text: Put trash in the bin
+    fairyVoiceClip: {fileID: 8300000, guid: 1c4962d7e8fccb74fb1d543efd8de656, type: 3}
   rewards: 10
   autoCompleteDebug: 0
   charPoint: {fileID: 0}
@@ -6499,7 +6513,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   descriptions:
   - text: Clean mirror
-    fairyVoiceClip: {fileID: 8300000, guid: 7dd4bda2a4a4e264c9d347012c37a8c5, type: 3}
+    fairyVoiceClip: {fileID: 8300000, guid: 9e906d2dd36cd4b40a222d50a0bec3a2, type: 3}
+  - text: Clean the dirty mirror
+    fairyVoiceClip: {fileID: 8300000, guid: 0b28d375c076d5d478cf69edd8c1322d, type: 3}
+  - text: Wipe the dirty mirror clean
+    fairyVoiceClip: {fileID: 8300000, guid: 081bf379e26248147bfa76740a0b32f4, type: 3}
+  - text: Wipe the mirror clean
+    fairyVoiceClip: {fileID: 8300000, guid: a37374570d802b049af8dc6f48820262, type: 3}
   rewards: 10
   autoCompleteDebug: 0
   charPoint: {fileID: 1871289568820963102}
@@ -6529,26 +6549,27 @@ MonoBehaviour:
   audioGroup:
     value: 1
   _renderer: {fileID: 5012256487139515672}
+  _renderers: []
   progressCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-      weightedMode: 0
+      weightedMode: 3
       inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 218.42166
+      outSlope: 218.42166
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.0034467578
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -7680,6 +7701,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: boy
       objectReference: {fileID: 0}
+    - target: {fileID: 4023305148476501411, guid: b8776f6bebdfe5d4cabadfc5de36a111, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8113238191946337170, guid: b8776f6bebdfe5d4cabadfc5de36a111, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b0b1f9b33b85cb9438ee9cf75a2dd3b2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8776f6bebdfe5d4cabadfc5de36a111, type: 3}
 --- !u!114 &6054297357673031220 stripped
@@ -8629,6 +8658,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: boy (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8113238191946337170, guid: b8776f6bebdfe5d4cabadfc5de36a111, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de3e55e7c60ad6c4da5d281bbf7b8b59, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8776f6bebdfe5d4cabadfc5de36a111, type: 3}
 --- !u!4 &3940513210407887411 stripped
@@ -9004,7 +9037,7 @@ PrefabInstance:
     - target: {fileID: 5559365445516026195, guid: 4ee3bec774981994cacc47ff1fba964f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -2813467912831258332, guid: 671014337a390b048932d43c496dc4aa, type: 3}
+      objectReference: {fileID: 2100000, guid: 8ad2a3684d90961449361ea99164f4dd, type: 2}
     - target: {fileID: 7541953126782427675, guid: 4ee3bec774981994cacc47ff1fba964f, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -9324,6 +9357,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1737459722012008255}
     m_Modifications:
     - target: {fileID: 1559182444870652075, guid: 6a4348600c0e7db47ab220fd7bbee242, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1559182444870652075, guid: 6a4348600c0e7db47ab220fd7bbee242, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -9424,9 +9461,13 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6964656887263749931, guid: 6a4348600c0e7db47ab220fd7bbee242, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8910251989501921022, guid: 6a4348600c0e7db47ab220fd7bbee242, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f7d56c9cd94fb6e49b3e4673a721ff4b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a4348600c0e7db47ab220fd7bbee242, type: 3}
 --- !u!4 &6180117797449164407 stripped
@@ -9774,7 +9815,7 @@ PrefabInstance:
     - target: {fileID: 8113238191946337170, guid: b8776f6bebdfe5d4cabadfc5de36a111, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -8274133419916619345, guid: 671014337a390b048932d43c496dc4aa, type: 3}
+      objectReference: {fileID: 2100000, guid: adf67685fe4d1584790c5711f040f8e9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8776f6bebdfe5d4cabadfc5de36a111, type: 3}
 --- !u!114 &1690374525940066313 stripped
@@ -9806,15 +9847,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 24fa9779bf56d694f93f95061ae87081, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.21525213
+      value: 0.13453263
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 24fa9779bf56d694f93f95061ae87081, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.21525213
+      value: 0.13453263
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 24fa9779bf56d694f93f95061ae87081, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.21525213
+      value: 0.13453263
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 24fa9779bf56d694f93f95061ae87081, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10008,7 +10049,7 @@ PrefabInstance:
     - target: {fileID: 5559365445516026195, guid: 4ee3bec774981994cacc47ff1fba964f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -2813467912831258332, guid: 671014337a390b048932d43c496dc4aa, type: 3}
+      objectReference: {fileID: 2100000, guid: 9bd67af897ad44d47a11d37b2490ae35, type: 2}
     - target: {fileID: 7541953126782427675, guid: 4ee3bec774981994cacc47ff1fba964f, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -10129,7 +10170,7 @@ PrefabInstance:
     - target: {fileID: 8113238191946337170, guid: b8776f6bebdfe5d4cabadfc5de36a111, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -8274133419916619345, guid: 671014337a390b048932d43c496dc4aa, type: 3}
+      objectReference: {fileID: 2100000, guid: 8ad2a3684d90961449361ea99164f4dd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8776f6bebdfe5d4cabadfc5de36a111, type: 3}
 --- !u!114 &854164529045287779 stripped
@@ -10161,15 +10202,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d000d11387e7b204c8446a65820350f7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 21.525213
+      value: 24.818571
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d000d11387e7b204c8446a65820350f7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 21.525213
+      value: 24.818571
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d000d11387e7b204c8446a65820350f7, type: 3}
       propertyPath: m_LocalScale.z
-      value: 21.525213
+      value: 24.818571
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d000d11387e7b204c8446a65820350f7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10252,15 +10293,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5c21eb69bf44fb54e9c2c5e0883ed439, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5c21eb69bf44fb54e9c2c5e0883ed439, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5c21eb69bf44fb54e9c2c5e0883ed439, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5c21eb69bf44fb54e9c2c5e0883ed439, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10576,6 +10617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: boy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8113238191946337170, guid: b8776f6bebdfe5d4cabadfc5de36a111, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 16f1bdc3d7391dd42ac19495624e0419, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8776f6bebdfe5d4cabadfc5de36a111, type: 3}
 --- !u!114 &1038332941267033057 stripped
@@ -10803,6 +10848,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: girl
       objectReference: {fileID: 0}
+    - target: {fileID: 5559365445516026195, guid: 4ee3bec774981994cacc47ff1fba964f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de3e55e7c60ad6c4da5d281bbf7b8b59, type: 2}
     - target: {fileID: 7541953126782427675, guid: 4ee3bec774981994cacc47ff1fba964f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -11299,6 +11348,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5058930008885472979}
     - target: {fileID: 2511807759858183475, guid: 8b54e97f299ed9743a07a0309389fa9d, type: 3}
+      propertyPath: tasks.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2511807759858183475, guid: 8b54e97f299ed9743a07a0309389fa9d, type: 3}
       propertyPath: roomNameFairyVoiceClip
       value: 
       objectReference: {fileID: 8300000, guid: 61dafd110284b754bab4067a79851e05, type: 3}
@@ -11613,6 +11666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: girl (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5559365445516026195, guid: 4ee3bec774981994cacc47ff1fba964f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: adf67685fe4d1584790c5711f040f8e9, type: 2}
     - target: {fileID: 7541953126782427675, guid: 4ee3bec774981994cacc47ff1fba964f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -11686,6 +11743,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: girl (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5559365445516026195, guid: 4ee3bec774981994cacc47ff1fba964f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b0b1f9b33b85cb9438ee9cf75a2dd3b2, type: 2}
     - target: {fileID: 7541953126782427675, guid: 4ee3bec774981994cacc47ff1fba964f, type: 3}
       propertyPath: m_RootOrder
       value: 1

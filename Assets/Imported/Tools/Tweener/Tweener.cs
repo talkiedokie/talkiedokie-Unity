@@ -15,6 +15,9 @@ public class Tweener : MonoBehaviour
 	[SerializeField] float autoSleepDuration = 5f;
 	
 	float autoSleepTimer;
+	Transform _transform;
+	
+	void Awake()=> _transform = transform;
 	
 	void Update(){
 		if(!target) return;
@@ -28,9 +31,9 @@ public class Tweener : MonoBehaviour
 		
 		float deltaSpeed = this.speed * deltaTime;
 		
-		if(position) transform.position = Vector3.Lerp(transform.position, target.position, deltaSpeed);
-		if(rotation) transform.rotation = Quaternion.Lerp(transform.rotation, target.rotation, deltaSpeed);
-		if(scale)	 transform.localScale = Vector3.Lerp(transform.localScale, target.localScale, deltaSpeed);
+		if(position) _transform.position = Vector3.Lerp(_transform.position, target.position, deltaSpeed);
+		if(rotation) _transform.rotation = Quaternion.Lerp(_transform.rotation, target.rotation, deltaSpeed);
+		if(scale)	 _transform.localScale = Vector3.Lerp(_transform.localScale, target.localScale, deltaSpeed);
 		
 		
 	}
@@ -45,9 +48,9 @@ public class Tweener : MonoBehaviour
 	
 	public Transform CreateDefaultPoint(){
 		var newPoint = new GameObject(name).transform;
-			newPoint.position = transform.position;
-			newPoint.rotation = transform.rotation;
-			newPoint.localScale = transform.localScale;
+			newPoint.position = _transform.position;
+			newPoint.rotation = _transform.rotation;
+			newPoint.localScale = _transform.localScale;
 		
 		SetTarget(newPoint);
 		return newPoint;

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public partial class Fairy
 {
+	public float afterSpeakingDelay = 0.1f;
+	
 	public bool isSpeaking{ get; private set; }
 	bool isSpeakStopped;
 	
@@ -26,38 +28,46 @@ public partial class Fairy
 		);
 	}
 	
-	public void Speak(
-		AudioClip clip,
-		float startDelay,
+	public void SpeakRandom(
+		AudioClip[] clips,
+		float delay,
 		Action onFinish
 	){
-		var array = clip?
-			new AudioClip[]{ clip }:
-			new AudioClip[]{ noAudioClip };
-		
-		Speak(array, startDelay, onFinish);
-	}
-	
-	public void Speak(AudioClip clip, float startDelay){ 
-		Speak(clip, startDelay, null);
-	}
-	
-	public void SpeakRandom(AudioClip[] clips, float delay, Action onFinish){
 		var clip = Tools.Random(clips);
 		Speak(clip, delay, onFinish);
 	}
 	
-	#region Encourage
-	
-		public void SayWow(float delay, Action onFinish){
-			SpeakRandom(wowClips, delay, onFinish);
+	#region Speak Overloads
+		
+		public void Speak(
+			AudioClip clip,
+			float startDelay,
+			Action onFinish
+		){
+			var array = clip?
+				new AudioClip[]{ clip }:
+				new AudioClip[]{ noAudioClip };
+			
+			Speak(array, startDelay, onFinish);
 		}
 		
-		public void SayFail(float delay, Action onFinish){
-			SpeakRandom(failClips, delay, onFinish);
-		}
+		public void Speak(
+			AudioClip clip,
+			float startDelay
+		) =>
+			Speak(clip, startDelay, null);
 		
 	#endregion
 	
-	public void StopSpeaking(){ isSpeakStopped = true; }
+	#region Encourage
+	
+		public void SayWow(float delay, Action onFinish) =>
+			SpeakRandom(wowClips, delay, onFinish);
+		
+		public void SayFail(float delay, Action onFinish) =>
+			SpeakRandom(failClips, delay, onFinish);
+		
+	#endregion
+	
+	public void StopSpeaking() => isSpeakStopped = true;
 }

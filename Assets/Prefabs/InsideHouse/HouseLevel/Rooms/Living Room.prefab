@@ -276,14 +276,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dec3f5faf28bf9e44b5912d0489c5bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Feed the fish
   descriptions:
   - text: Feed the fish
     fairyVoiceClip: {fileID: 8300000, guid: 0c05a21134b3e0741a9466668b1bcab3, type: 3}
   rewards: 10
   autoCompleteDebug: 0
   charPoint: {fileID: 0}
-  fairyVoiceClip: {fileID: 8300000, guid: 0c05a21134b3e0741a9466668b1bcab3, type: 3}
   camView: {fileID: 2646534711106836487}
   recapCam: {fileID: 3427993246127928792}
   recapAnim: {fileID: 0}
@@ -306,7 +304,7 @@ MonoBehaviour:
   param: 
   progress: 0
   stinkParticle: {fileID: 0}
-  toolSoundTrigger: 8
+  toolSoundTrigger: 4
   audioGroup:
     value: 0
   feed: {fileID: 574361512803878379}
@@ -354,14 +352,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8fdf019333234783c3ae2b05c2637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Vacuum the carpet
   descriptions:
   - text: Vacuum the carpet
-    fairyVoiceClip: {fileID: 8300000, guid: fc471d915fef73f4480dd11ab027bae4, type: 3}
+    fairyVoiceClip: {fileID: 8300000, guid: 4c822e648816d654391500a698db1c08, type: 3}
+  - text: Clean the carpet
+    fairyVoiceClip: {fileID: 8300000, guid: 22247fdde9da4c5479f0201c83afedee, type: 3}
+  - text: Sweep the carpet
+    fairyVoiceClip: {fileID: 8300000, guid: d02bcf7502e5d9f479773f08079afffa, type: 3}
+  - text: Vacuum the carpet
+    fairyVoiceClip: {fileID: 8300000, guid: 28b5cef7e0f59cf40bb83ab99c57cbb9, type: 3}
   rewards: 10
   autoCompleteDebug: 0
   charPoint: {fileID: 0}
-  fairyVoiceClip: {fileID: 8300000, guid: fc471d915fef73f4480dd11ab027bae4, type: 3}
   camView: {fileID: 3280053887861413986}
   recapCam: {fileID: 2787124933614466493}
   recapAnim: {fileID: 0}
@@ -388,6 +390,7 @@ MonoBehaviour:
   audioGroup:
     value: 0
   _renderer: {fileID: 5028558500189561432}
+  _renderers: []
   progressCurve:
     serializedVersion: 2
     m_Curve:
@@ -1402,7 +1405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2511807759858183475, guid: 8b54e97f299ed9743a07a0309389fa9d, type: 3}
       propertyPath: tasks.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2511807759858183475, guid: 8b54e97f299ed9743a07a0309389fa9d, type: 3}
       propertyPath: tasks.Array.data[0]
@@ -1980,6 +1983,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fish
       objectReference: {fileID: 0}
+    - target: {fileID: 4203764233958166479, guid: 928b35f022ca09c42a30eaf35a2c7dd5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7448731829310149344, guid: 928b35f022ca09c42a30eaf35a2c7dd5, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2317,7 +2324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4203764233958166479, guid: 928b35f022ca09c42a30eaf35a2c7dd5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7448731829310149344, guid: 928b35f022ca09c42a30eaf35a2c7dd5, type: 3}
       propertyPath: m_RootOrder
@@ -2618,16 +2625,32 @@ PrefabInstance:
       objectReference: {fileID: 6191581285380868546}
     - target: {fileID: 5215746974743088612, guid: cb218ca4bc6152f4caf973c4f016fb48, type: 3}
       propertyPath: descriptions.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5215746974743088612, guid: cb218ca4bc6152f4caf973c4f016fb48, type: 3}
       propertyPath: descriptions.Array.data[0].text
       value: Wipe the table
       objectReference: {fileID: 0}
     - target: {fileID: 5215746974743088612, guid: cb218ca4bc6152f4caf973c4f016fb48, type: 3}
+      propertyPath: descriptions.Array.data[1].text
+      value: Clean the table
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215746974743088612, guid: cb218ca4bc6152f4caf973c4f016fb48, type: 3}
+      propertyPath: descriptions.Array.data[2].text
+      value: Wipe the table clean
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215746974743088612, guid: cb218ca4bc6152f4caf973c4f016fb48, type: 3}
       propertyPath: descriptions.Array.data[0].fairyVoiceClip
       value: 
-      objectReference: {fileID: 8300000, guid: 59d4306e16c46a44d83a9464b2ba8044, type: 3}
+      objectReference: {fileID: 8300000, guid: e0bf474eca692064ea8dbd247ae6bc4d, type: 3}
+    - target: {fileID: 5215746974743088612, guid: cb218ca4bc6152f4caf973c4f016fb48, type: 3}
+      propertyPath: descriptions.Array.data[1].fairyVoiceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6770f8757a75cfc4dbe29646c5f1ed97, type: 3}
+    - target: {fileID: 5215746974743088612, guid: cb218ca4bc6152f4caf973c4f016fb48, type: 3}
+      propertyPath: descriptions.Array.data[2].fairyVoiceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 283e6d02775d8e14c8554dde8c309d1d, type: 3}
     - target: {fileID: 7187618298491430728, guid: cb218ca4bc6152f4caf973c4f016fb48, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2889,16 +2912,32 @@ PrefabInstance:
       objectReference: {fileID: 695546356305216222}
     - target: {fileID: 2414198669957921188, guid: 5a57d9930324ace43997616b8977be0d, type: 3}
       propertyPath: descriptions.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2414198669957921188, guid: 5a57d9930324ace43997616b8977be0d, type: 3}
       propertyPath: descriptions.Array.data[0].text
       value: Put the books in the bookshelf
       objectReference: {fileID: 0}
     - target: {fileID: 2414198669957921188, guid: 5a57d9930324ace43997616b8977be0d, type: 3}
+      propertyPath: descriptions.Array.data[1].text
+      value: Place the the books on the shelf
+      objectReference: {fileID: 0}
+    - target: {fileID: 2414198669957921188, guid: 5a57d9930324ace43997616b8977be0d, type: 3}
+      propertyPath: descriptions.Array.data[2].text
+      value: Put the the books on the shelf
+      objectReference: {fileID: 0}
+    - target: {fileID: 2414198669957921188, guid: 5a57d9930324ace43997616b8977be0d, type: 3}
       propertyPath: descriptions.Array.data[0].fairyVoiceClip
       value: 
-      objectReference: {fileID: 8300000, guid: 08f3d8dadc88b764c9cf06534bc83792, type: 3}
+      objectReference: {fileID: 8300000, guid: 5aa81619c1c7e9045a8eca76f0fbdfdf, type: 3}
+    - target: {fileID: 2414198669957921188, guid: 5a57d9930324ace43997616b8977be0d, type: 3}
+      propertyPath: descriptions.Array.data[1].fairyVoiceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e22d18adfb55bfb458fc86bffdfa899a, type: 3}
+    - target: {fileID: 2414198669957921188, guid: 5a57d9930324ace43997616b8977be0d, type: 3}
+      propertyPath: descriptions.Array.data[2].fairyVoiceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 430bdf06c6c1728468fa833a01f1f08f, type: 3}
     - target: {fileID: 4847814216888523459, guid: 5a57d9930324ace43997616b8977be0d, type: 3}
       propertyPath: m_Name
       value: Books

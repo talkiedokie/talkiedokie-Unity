@@ -89,7 +89,7 @@ namespace InsideBuilding.Gameplay
 			while(timer < siphonDuration){
 				float lerp = timer / siphonDuration;
 				
-				aquarium.waterLevel = Mathf.Lerp(1, minWaterLevel, lerp);
+				// aquarium.waterLevel = Mathf.Lerp(1, minWaterLevel, lerp);
 				
 				waterA.localPosition = new Vector3(
 					bucketWaterPos.x,
@@ -144,13 +144,13 @@ namespace InsideBuilding.Gameplay
 			}
 			
 			timer = 0f;
-			float currentWaterLevel = aquarium.waterLevel;
+			// float currentWaterLevel = aquarium.waterLevel;
 			
 			var bucketWaterPos = waterB.localPosition;
 			
 			while(timer < siphonDuration){
 				float lerp = timer / siphonDuration;
-				aquarium.waterLevel = Mathf.Lerp(currentWaterLevel, 1, lerp);
+				// aquarium.waterLevel = Mathf.Lerp(currentWaterLevel, 1, lerp);
 				
 				waterB.localPosition = new Vector3(
 					bucketWaterPos.x,

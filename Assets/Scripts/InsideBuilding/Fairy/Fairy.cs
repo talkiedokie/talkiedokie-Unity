@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using System;
+using Gameplay;
 
 public partial class Fairy : SceneObjectSingleton<Fairy>
 {
@@ -8,27 +9,32 @@ public partial class Fairy : SceneObjectSingleton<Fairy>
 	[SerializeField] AudioClip noAudioClip;
 	
 	[SerializeField] AudioClip[]
-		pleaseSayClips, cantHearClips,
+		pleaseSayClips,
 		wowClips, failClips;
 	
 	[Space()]
 	[SerializeField] Animator anim;
 	[SerializeField] GameObject[] appearParticles;
-	[SerializeField] GeneralAudioSelector appearSound, disappearSound;
 	
-	SpeechRecognizer speechRecognizer;
+	[SerializeField] GeneralAudioSelector
+		appearSound,
+		disappearSound;
+
+	Speech speech; // SpeechRecognizerOwn
 	
-	public Action onInteraction;
+	public event Action onInteraction;
 	
-	void Awake(){
-		speechRecognizer = SpeechRecognizer.Instance;
+	protected override void Awake(){
+		base.Awake();
+		
+		speech = Speech.Instance;
 	}
 	
 	[ContextMenu("Appear")]
 	public void Appear(){
 		if(gameObject.activeSelf) return;
 		
-		OnAppearDisappear(true);
+		SetAppearState(true);
 		appearSound.Play();
 	}
 	
@@ -36,11 +42,11 @@ public partial class Fairy : SceneObjectSingleton<Fairy>
 	public void Disappear(){
 		if(!gameObject.activeSelf) return;
 		
-		OnAppearDisappear(false);
+		SetAppearState(false);
 		disappearSound.Play();
 	}
 	
-	void OnAppearDisappear(bool appear){
+	void SetAppearState(bool appear){
 		var particlePrefab = Tools.Random(appearParticles);
 		
 		var particle = Instantiate(
@@ -53,7 +59,6 @@ public partial class Fairy : SceneObjectSingleton<Fairy>
 		gameObject.SetActive(appear);
 	}
 	
-	public void OnInteraction(){
+	public void OnInteraction() =>
 		onInteraction?.Invoke();
-	}
 }

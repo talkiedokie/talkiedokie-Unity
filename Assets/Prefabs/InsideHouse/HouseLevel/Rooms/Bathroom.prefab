@@ -336,7 +336,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fd174a821c8811a4d96fd6ea2470c6ca, type: 2}
+  - {fileID: 2100000, guid: f7d56c9cd94fb6e49b3e4673a721ff4b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3091,7 +3091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7673130042364942646
 Transform:
   m_ObjectHideFlags: 0
@@ -3265,16 +3265,32 @@ PrefabInstance:
       objectReference: {fileID: 1048348245919228007}
     - target: {fileID: 327122719992143328, guid: fec0fb9a6ee8dbd4a844d69f2a11ea84, type: 3}
       propertyPath: descriptions.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 327122719992143328, guid: fec0fb9a6ee8dbd4a844d69f2a11ea84, type: 3}
       propertyPath: descriptions.Array.data[0].text
       value: Clean bathtub
       objectReference: {fileID: 0}
     - target: {fileID: 327122719992143328, guid: fec0fb9a6ee8dbd4a844d69f2a11ea84, type: 3}
+      propertyPath: descriptions.Array.data[1].text
+      value: Clean the bathtub
+      objectReference: {fileID: 0}
+    - target: {fileID: 327122719992143328, guid: fec0fb9a6ee8dbd4a844d69f2a11ea84, type: 3}
+      propertyPath: descriptions.Array.data[2].text
+      value: Scrub dirt off the bathtub
+      objectReference: {fileID: 0}
+    - target: {fileID: 327122719992143328, guid: fec0fb9a6ee8dbd4a844d69f2a11ea84, type: 3}
       propertyPath: descriptions.Array.data[0].fairyVoiceClip
       value: 
-      objectReference: {fileID: 8300000, guid: be7485e5b0a1cbf43a67f32834b8b23f, type: 3}
+      objectReference: {fileID: 8300000, guid: be2c62dbe3116d74ab2af828787f526d, type: 3}
+    - target: {fileID: 327122719992143328, guid: fec0fb9a6ee8dbd4a844d69f2a11ea84, type: 3}
+      propertyPath: descriptions.Array.data[1].fairyVoiceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1106a63653eb1e54799f828b73ada0d8, type: 3}
+    - target: {fileID: 327122719992143328, guid: fec0fb9a6ee8dbd4a844d69f2a11ea84, type: 3}
+      propertyPath: descriptions.Array.data[2].fairyVoiceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 616872643d6bc9841bb5d49b1416f009, type: 3}
     - target: {fileID: 2945964688535452507, guid: fec0fb9a6ee8dbd4a844d69f2a11ea84, type: 3}
       propertyPath: m_Name
       value: Bathtub
@@ -3514,16 +3530,24 @@ PrefabInstance:
       objectReference: {fileID: 4399818392566172821}
     - target: {fileID: 6741000844673229931, guid: 1ff61859ebd232d4eb51f3bbbd8d5477, type: 3}
       propertyPath: descriptions.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6741000844673229931, guid: 1ff61859ebd232d4eb51f3bbbd8d5477, type: 3}
       propertyPath: descriptions.Array.data[0].text
       value: Clean toilet bowl stains
       objectReference: {fileID: 0}
     - target: {fileID: 6741000844673229931, guid: 1ff61859ebd232d4eb51f3bbbd8d5477, type: 3}
+      propertyPath: descriptions.Array.data[1].text
+      value: Clean the toilet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6741000844673229931, guid: 1ff61859ebd232d4eb51f3bbbd8d5477, type: 3}
       propertyPath: descriptions.Array.data[0].fairyVoiceClip
       value: 
-      objectReference: {fileID: 8300000, guid: 97acff3bf62ea2f40b05208ada79b7cb, type: 3}
+      objectReference: {fileID: 8300000, guid: 858d2f1c842fb8c469c427e18b951633, type: 3}
+    - target: {fileID: 6741000844673229931, guid: 1ff61859ebd232d4eb51f3bbbd8d5477, type: 3}
+      propertyPath: descriptions.Array.data[1].fairyVoiceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a261a8c709156064992336f4adce4003, type: 3}
     - target: {fileID: 7358957309254914870, guid: 1ff61859ebd232d4eb51f3bbbd8d5477, type: 3}
       propertyPath: m_Name
       value: Toilet
@@ -3618,16 +3642,40 @@ PrefabInstance:
       objectReference: {fileID: 7281236743135631936}
     - target: {fileID: 9091612658522045056, guid: 5ebffd82382336e4c904d2453b859983, type: 3}
       propertyPath: descriptions.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9091612658522045056, guid: 5ebffd82382336e4c904d2453b859983, type: 3}
       propertyPath: descriptions.Array.data[0].text
-      value: Clean dirty wash basin
+      value: Clean dirty washbasin
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091612658522045056, guid: 5ebffd82382336e4c904d2453b859983, type: 3}
+      propertyPath: descriptions.Array.data[1].text
+      value: Clean the washbasin
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091612658522045056, guid: 5ebffd82382336e4c904d2453b859983, type: 3}
+      propertyPath: descriptions.Array.data[2].text
+      value: Clean the washbasin
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091612658522045056, guid: 5ebffd82382336e4c904d2453b859983, type: 3}
+      propertyPath: descriptions.Array.data[3].text
+      value: Scrub dirt of the washbasin
       objectReference: {fileID: 0}
     - target: {fileID: 9091612658522045056, guid: 5ebffd82382336e4c904d2453b859983, type: 3}
       propertyPath: descriptions.Array.data[0].fairyVoiceClip
       value: 
+      objectReference: {fileID: 8300000, guid: 73b176ba273ae7e45b1be6ad8df5ac15, type: 3}
+    - target: {fileID: 9091612658522045056, guid: 5ebffd82382336e4c904d2453b859983, type: 3}
+      propertyPath: descriptions.Array.data[1].fairyVoiceClip
+      value: 
       objectReference: {fileID: 8300000, guid: 180f71388663a7844ab8580f1b6b181f, type: 3}
+    - target: {fileID: 9091612658522045056, guid: 5ebffd82382336e4c904d2453b859983, type: 3}
+      propertyPath: descriptions.Array.data[2].fairyVoiceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a8189e400ec745b4a80ed5230ee9c3ba, type: 3}
+    - target: {fileID: 9091612658522045056, guid: 5ebffd82382336e4c904d2453b859983, type: 3}
+      propertyPath: descriptions.Array.data[3].fairyVoiceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: edb0b30ec50989e45a4404aba9f91e9d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ebffd82382336e4c904d2453b859983, type: 3}
 --- !u!114 &6813446803249734144 stripped
@@ -3752,23 +3800,39 @@ PrefabInstance:
       objectReference: {fileID: 4325323640606886450}
     - target: {fileID: 2168155433286605897, guid: f404a5359544804468296354d2c431c9, type: 3}
       propertyPath: descriptions.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2168155433286605897, guid: f404a5359544804468296354d2c431c9, type: 3}
       propertyPath: descriptions.Array.data[0].text
       value: Clean dirty mirror
       objectReference: {fileID: 0}
     - target: {fileID: 2168155433286605897, guid: f404a5359544804468296354d2c431c9, type: 3}
+      propertyPath: descriptions.Array.data[1].text
+      value: Clean the mirror
+      objectReference: {fileID: 0}
+    - target: {fileID: 2168155433286605897, guid: f404a5359544804468296354d2c431c9, type: 3}
+      propertyPath: descriptions.Array.data[2].text
+      value: Wipe the mirror clean
+      objectReference: {fileID: 0}
+    - target: {fileID: 2168155433286605897, guid: f404a5359544804468296354d2c431c9, type: 3}
       propertyPath: descriptions.Array.data[0].fairyVoiceClip
       value: 
-      objectReference: {fileID: 8300000, guid: 7dd4bda2a4a4e264c9d347012c37a8c5, type: 3}
+      objectReference: {fileID: 8300000, guid: 7e41d4fbc65a59e4f87394f4bcdbe46e, type: 3}
+    - target: {fileID: 2168155433286605897, guid: f404a5359544804468296354d2c431c9, type: 3}
+      propertyPath: descriptions.Array.data[1].fairyVoiceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 25a03795e3782cd48a537934f669625c, type: 3}
+    - target: {fileID: 2168155433286605897, guid: f404a5359544804468296354d2c431c9, type: 3}
+      propertyPath: descriptions.Array.data[2].fairyVoiceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b9ae97b19a3f97c40ad826a1c6ddcd98, type: 3}
     - target: {fileID: 3251977813769159932, guid: f404a5359544804468296354d2c431c9, type: 3}
       propertyPath: m_Name
       value: Mirror
       objectReference: {fileID: 0}
     - target: {fileID: 3251977813769159932, guid: f404a5359544804468296354d2c431c9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8081898621053000147, guid: f404a5359544804468296354d2c431c9, type: 3}
       propertyPath: m_RootOrder
@@ -4437,16 +4501,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4198777141315961082, guid: d73005e26c869364fac023fbcd31488b, type: 3}
       propertyPath: descriptions.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4198777141315961082, guid: d73005e26c869364fac023fbcd31488b, type: 3}
       propertyPath: descriptions.Array.data[0].text
       value: Clean the shower
       objectReference: {fileID: 0}
     - target: {fileID: 4198777141315961082, guid: d73005e26c869364fac023fbcd31488b, type: 3}
+      propertyPath: descriptions.Array.data[1].text
+      value: Clean the shower
+      objectReference: {fileID: 0}
+    - target: {fileID: 4198777141315961082, guid: d73005e26c869364fac023fbcd31488b, type: 3}
       propertyPath: descriptions.Array.data[0].fairyVoiceClip
       value: 
       objectReference: {fileID: 8300000, guid: 02892eef4c5deda409de1f4017bd8b36, type: 3}
+    - target: {fileID: 4198777141315961082, guid: d73005e26c869364fac023fbcd31488b, type: 3}
+      propertyPath: descriptions.Array.data[1].fairyVoiceClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b3be7694128e80840a446ea4f9b35e45, type: 3}
     - target: {fileID: 6673622738357582181, guid: d73005e26c869364fac023fbcd31488b, type: 3}
       propertyPath: m_RootOrder
       value: 0

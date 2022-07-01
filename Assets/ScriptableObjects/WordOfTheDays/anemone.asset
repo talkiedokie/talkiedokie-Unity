@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29707849e5e4984b86610687c8ccacc, type: 3}
+  m_Name: anemone
+  m_EditorClassIdentifier: 
+  name: Anemone
+  sprites:
+  - {fileID: 21300000, guid: 45824d9c3bac79e428dd885c26d756f5, type: 3}
+  - {fileID: 21300000, guid: ec0321be20ebbc34594b8aadbc7c96c7, type: 3}
+  fairyVoiceClip: {fileID: 8300000, guid: f407b8fa76930c342a06cde135994fc4, type: 3}
+  isEnabled: 1

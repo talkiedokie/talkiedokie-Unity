@@ -11,37 +11,34 @@ public partial class Fairy
 		float delay,
 		Action onFinish
 	){
-		isSpeaking = true;
-		anim.SetBool("talk", isSpeaking);
+		speech.StopListening();
 		
-		var step = new WaitForSeconds(delay);
+		isSpeaking = true;
+		if(anim) anim.SetBool("talk", isSpeaking);
+		
+		var waitForDelay = new WaitForSeconds(delay);
 		
 		foreach(var clip in clips){
 			source.Stop();
 			source.clip = clip;
 			
-			yield return step;
-			
-			if(!source.clip)
-				source.clip = noAudioClip;
-			
+			yield return waitForDelay;
 			source.Play();
 			
-			yield return WaitForPlayback();
+			yield return WaitForPlayback(clip.length);
 		}
 	
 		isSpeaking = false;
-		anim.SetBool("talk", isSpeaking);
+		if(anim) anim.SetBool("talk", isSpeaking);
 		
+		yield return new WaitForSeconds(afterSpeakingDelay);
 		onFinish?.Invoke();
 	}
 	
-	IEnumerator WaitForPlayback(){
-		bool isPlaying = true;
+	IEnumerator WaitForPlayback(float clipLength){
+		float timer = 0f;
 		
-		while(isPlaying){
-			isPlaying = source.isPlaying;
-			
+		while(source.isPlaying && timer < clipLength){
 			if(isSpeakStopped){
 				source.Stop();
 				isSpeakStopped = false;
@@ -51,6 +48,7 @@ public partial class Fairy
 			}
 			
 			yield return null;
+			timer += Time.deltaTime;
 		}
 	}
 }

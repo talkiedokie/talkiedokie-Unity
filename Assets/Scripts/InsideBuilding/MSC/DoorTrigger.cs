@@ -15,10 +15,14 @@ public class DoorTrigger : MonoBehaviour
 	public string _param = "amount";
 	int param;
 	
+	public GeneralAudioGroupSelect doorSounds;
+	GeneralAudio genAudio;
+	
 	IEnumerator routine;
 	
 	void Awake(){
 		param = Animator.StringToHash(_param);
+		genAudio = GeneralAudio.Instance;
 	}
 	
 	public void Animate(float dir){
@@ -26,6 +30,8 @@ public class DoorTrigger : MonoBehaviour
 		isOpen = !isOpen;
 		
 		Tools.StartCoroutine(ref routine, Routine(), this);
+		
+		genAudio.PlayRandom(doorSounds);
 	}
 	
 	IEnumerator Routine(){

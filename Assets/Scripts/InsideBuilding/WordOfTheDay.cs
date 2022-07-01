@@ -1,9 +1,10 @@
 using UnityEngine;
 
-[System.Serializable]
-public class WordOfTheDay
+[CreateAssetMenu()]
+public class WordOfTheDay : ScriptableObject
 {
-	public string name;
-	public Sprite sprite;
+	new public string name;
+	public Sprite[] sprites;
+	
 	public AudioClip fairyVoiceClip;
 }

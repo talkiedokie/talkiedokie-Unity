@@ -11,13 +11,14 @@ public class SceneObjectSingleton<T> : MonoBehaviour where T : SceneObjectSingle
 				var instances = FindObjectsOfType<T>(includeInactive);
 				int count = instances.Length;
 				
+				var type = typeof(T);
+				string typeName = type.ToString();
+				
 				if(instances == null || count < 1)
-					// Debug.LogWarning("Could not find T instance");
-					throw new System.Exception("Could not find T instance");
+					throw new System.Exception("Could not find '" + typeName + "' instance");
 				
 				else if(count > 1)
-					// Debug.LogWarning("Multiple instances of T are found");
-					throw new System.Exception("Multiple instances of T are found");
+					throw new System.Exception("Multiple instances of '" + typeName + "' are found");
 				
 				instance = instances[0];
 			}
@@ -26,5 +27,9 @@ public class SceneObjectSingleton<T> : MonoBehaviour where T : SceneObjectSingle
 		}
 		
 		protected set{ instance = value; }
+	}
+	
+	protected virtual void Awake(){
+		instance = instance?? (T) this;
 	}
 }

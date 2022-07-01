@@ -117,8 +117,7 @@ public class FpCtrl : MonoBehaviour
 					camMgr?.AddCullingLayer(gpx.layer);
 				}
 				
-				if(input)
-					input.gameObject.SetActive(false);
+				if(input) input.gameObject.SetActive(false);
 			}
 			
 		#endregion
@@ -127,7 +126,7 @@ public class FpCtrl : MonoBehaviour
 			
 			void Update(){
 				HandleMovement();
-				HandleViewRotation();
+				// HandleViewRotation();
 				
 				HandleGroundChecking();
 				
@@ -139,6 +138,8 @@ public class FpCtrl : MonoBehaviour
 			}
 			
 			void FixedUpdate(){
+				HandleViewRotation();
+				
 				// Apply Movement
 					var velocity = new Vector3(
 						movement.x, 0f, movement.y

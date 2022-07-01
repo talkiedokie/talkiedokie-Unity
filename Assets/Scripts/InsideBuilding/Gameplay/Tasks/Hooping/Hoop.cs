@@ -13,10 +13,7 @@ namespace InsideBuilding.Gameplay
 		[Space()]
 		[SerializeField] UnityEvent onTrigger;
 		
-		public delegate void OnTrigger();
-		public OnTrigger _onTrigger;
-		
-		List<GameObject> objects = new List<GameObject>();
+		public List<GameObject> containedObjects{ get; private set; } = new List<GameObject>();
 		
 		void OnTriggerEnter(Collider col){
 			var obj = col.gameObject;
@@ -32,12 +29,10 @@ namespace InsideBuilding.Gameplay
 		public void Interact(GameObject obj){
 			// Debug.Log(obj.name, obj);
 			
-			if(objects.Contains(obj)) return;
-			objects.Add(obj);
+			if(containedObjects.Contains(obj)) return;
+			containedObjects.Add(obj);
 			
 			onTrigger?.Invoke();
-			_onTrigger?.Invoke();
-			
 			SpawnParticle();
 		}
 		

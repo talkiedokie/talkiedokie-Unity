@@ -1,0 +1,292 @@
+fileFormatVersion: 2
+guid: 3364a1574bbc63149a4b167a513526c6
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      74: 1844053587027064052
+    second: body|metarigAction
+  - first:
+      74: 8451674686149789038
+    second: mouth close|Armature.001Action.001
+  - first:
+      74: 8096908861555322741
+    second: mouth close|Armature.002Action.001
+  - first:
+      74: -8378558015350964650
+    second: mouth close|mouth
+  - first:
+      74: 4572326809511700175
+    second: mouth oh|Armature.001Action.001
+  - first:
+      74: 2974239701309791988
+    second: mouth oh|Armature.002Action.001
+  - first:
+      74: -4200703761089244628
+    second: mouth oh|mouth
+  - first:
+      74: 7632428937374424871
+    second: eyes|Armature.001Action.001
+  - first:
+      74: 3407325881721597547
+    second: eyes|Armature.002Action.001
+  - first:
+      74: -6669350076175860622
+    second: eyes|mouth
+  - first:
+      74: 1421010420072582051
+    second: wings|ArmatureAction.001
+  - first:
+      74: -1654739471636250800
+    second: body|body|body|metarigAction
+  - first:
+      74: 2256327666126141899
+    second: mouth close|eyes|eyes|Armature.001Action.001
+  - first:
+      74: 547134801702288777
+    second: mouth close|eyes|eyes|Armature.002Action.001
+  - first:
+      74: 8555390017508948451
+    second: mouth close|eyes|eyes|mouth
+  - first:
+      74: -1074550598443635354
+    second: mouth close|mouth close|mouth close|Armature.001Action.001
+  - first:
+      74: 7705169759652300815
+    second: mouth close|mouth close|mouth close|Armature.002Action.001
+  - first:
+      74: 2277209858374448518
+    second: mouth close|mouth close|mouth close|mouth
+  - first:
+      74: -7042736006079190163
+    second: mouth close|mouth oh|mouth oh|Armature.001Action.001
+  - first:
+      74: 3884846246716305003
+    second: mouth close|mouth oh|mouth oh|Armature.002Action.001
+  - first:
+      74: -6015514736159307906
+    second: mouth close|mouth oh|mouth oh|mouth
+  - first:
+      74: -2620839013103074741
+    second: mouth oh|eyes|eyes|Armature.001Action.001
+  - first:
+      74: -5560911810703488938
+    second: mouth oh|eyes|eyes|Armature.002Action.001
+  - first:
+      74: 92182419742443453
+    second: mouth oh|eyes|eyes|mouth
+  - first:
+      74: 6452437328856924673
+    second: mouth oh|mouth close|mouth close|Armature.001Action.001
+  - first:
+      74: 6264183755131840723
+    second: mouth oh|mouth close|mouth close|Armature.002Action.001
+  - first:
+      74: -591526073008075303
+    second: mouth oh|mouth close|mouth close|mouth
+  - first:
+      74: -2075574768572927459
+    second: mouth oh|mouth oh|mouth oh|Armature.001Action.001
+  - first:
+      74: -7161996007011416210
+    second: mouth oh|mouth oh|mouth oh|Armature.002Action.001
+  - first:
+      74: -6023802885146435359
+    second: mouth oh|mouth oh|mouth oh|mouth
+  - first:
+      74: 8430211961141436384
+    second: eyes|eyes|eyes|Armature.001Action.001
+  - first:
+      74: -8476551389581310981
+    second: eyes|eyes|eyes|Armature.002Action.001
+  - first:
+      74: -7382348726406388117
+    second: eyes|eyes|eyes|mouth
+  - first:
+      74: -6758936922152388699
+    second: eyes|mouth close|mouth close|Armature.001Action.001
+  - first:
+      74: 6633111047455785722
+    second: eyes|mouth close|mouth close|Armature.002Action.001
+  - first:
+      74: -5505907526820293362
+    second: eyes|mouth close|mouth close|mouth
+  - first:
+      74: -4523886099479854458
+    second: eyes|mouth oh|mouth oh|Armature.001Action.001
+  - first:
+      74: -1260332632808621224
+    second: eyes|mouth oh|mouth oh|Armature.002Action.001
+  - first:
+      74: -8389426832654065924
+    second: eyes|mouth oh|mouth oh|mouth
+  - first:
+      74: -1629878935029414512
+    second: wings|wings|wings|ArmatureAction.001
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: d1857c429d39f7a409d1baa101601c9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 17c351c3ca66a0649999b0c99d9c10d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: a8e3954ebe77d744083ce688d00b9959, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.010
+    second: {fileID: 2100000, guid: 0e2da11d75d2c5f46a08ebb644800fb7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.011
+    second: {fileID: 2100000, guid: 18bd9df0b6b9b424a90d01e10b2b377a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.012
+    second: {fileID: 2100000, guid: de7ea7d8415ccba41833e88e60d0901c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.014
+    second: {fileID: 2100000, guid: 2e78851daae2919478542e662d3d1c6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.015
+    second: {fileID: 2100000, guid: 4a9e34971cc26c54bb1896c4aaed6663, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: left
+    second: {fileID: 2100000, guid: 8fe139edffc2efc42ab0c8cec0dc096b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: right.003
+    second: {fileID: 2100000, guid: 9af85b9f9cdf59447aea34cf1016c00d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skin color.002
+    second: {fileID: 2100000, guid: c0eea41803438a7478a781b6d3c9e161, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skin.001
+    second: {fileID: 2100000, guid: 7f108312659cf014a8e6ef10a147fac5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wings.001
+    second: {fileID: 2100000, guid: 23014acfe557cdf4c82608c3c1d0e01e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wingsss
+    second: {fileID: 2100000, guid: 896917de79ba596468bc337d99f4d435, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

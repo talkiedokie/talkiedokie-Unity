@@ -5,7 +5,6 @@ public class DirtyMaterials : Singleton<DirtyMaterials>
 {
 	[SerializeField] Material[] materials;
 	
-	public Material GetRandom(){
-		return Instantiate(Tools.Random(materials));
-	}
+	public Material GetRandom()=>
+		Instantiate(Tools.Random(materials));
 }

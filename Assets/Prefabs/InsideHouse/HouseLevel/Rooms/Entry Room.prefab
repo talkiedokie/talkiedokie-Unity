@@ -1030,12 +1030,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 680040095207004548, guid: f668d1664b3188a46a520f80f410c3f7, type: 3}
+      propertyPath: description
+      value: Go Outside?
+      objectReference: {fileID: 0}
+    - target: {fileID: 680040095207004548, guid: f668d1664b3188a46a520f80f410c3f7, type: 3}
       propertyPath: playerPositionCity.x
-      value: -16.25
+      value: -8.560198
       objectReference: {fileID: 0}
     - target: {fileID: 680040095207004548, guid: f668d1664b3188a46a520f80f410c3f7, type: 3}
       propertyPath: playerPositionCity.z
-      value: -7.25
+      value: 5.260588
+      objectReference: {fileID: 0}
+    - target: {fileID: 680040095207004548, guid: f668d1664b3188a46a520f80f410c3f7, type: 3}
+      propertyPath: levelScene.currentSceneName
+      value: AppEntry
       objectReference: {fileID: 0}
     - target: {fileID: 3661408574384727971, guid: f668d1664b3188a46a520f80f410c3f7, type: 3}
       propertyPath: m_Name

@@ -3,7 +3,82 @@ guid: 4d88bb6f8580a11499e8128e097d7bbc
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hippo
+    second: {fileID: 2100000, guid: 62f1dd779da65424e9d929bad633d493, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leafs2
+    second: {fileID: 2100000, guid: 51ce6730cb867df4caabb1b8f737715e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 220935ff5be8828438c949260545a967, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 0423c197d0cfef24e9b940ce313b0bf1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 305ce4e199c23b349badf9038caa1407, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 5718ce0ed37ccdf4cb2df5400a7bdce0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.005
+    second: {fileID: 2100000, guid: 2b13c6da3a4dcee4bb0d3ab8019a95ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: 958c45f3f7a593747873bcd5b52e68a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.009
+    second: {fileID: 2100000, guid: 4b56c07855247fd4b8138ef1610b10fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.011
+    second: {fileID: 2100000, guid: a9dd508cb69c4fc4cb20326bbc2d845d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.012
+    second: {fileID: 2100000, guid: 90275a56bcdc96d4cb1286a9663d7fdb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.013
+    second: {fileID: 2100000, guid: ba00e19cc17df444e9de8321d6816769, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: fence_
+    second: {fileID: 2100000, guid: 2ad3a8bc156733946bd4b9c49f8621ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pine tree
+    second: {fileID: 2100000, guid: 9e99e5b6a69608546a632a2ec3add938, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pine tree trunk
+    second: {fileID: 2100000, guid: 4cf61d70ec961cc47935986d511312c2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

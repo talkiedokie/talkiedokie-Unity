@@ -11,38 +11,43 @@ namespace InsideBuilding
 			hasStarted = false;
 			Time.timeScale = 0f;
 			
-			var threads = new IEnumerator[]{
-				SetupSingletonReferences(),
-				CheckForSpeechSupport(),
-				LoadLevel(),
-				SetupUsersAccount(),
-				SetupPlayerObject(),
-				SetupRoomUI(),
-				FinalSetup()
-			};
+			// Collect threads
+				var threads = new IEnumerator[]{
+					SetupSingletonReferences(),
+					LoadLevel(),
+					SetupUsersAccount(),
+					SetupPlayerObject(),
+					SetupRoomUI(),
+					FinalizeSetup()
+				};
 			
-			int count = threads.Length;
-			float maxIndex = (float) count - 1;
-			
-			startLoadUI.SetActive(true);
-			
-			for(int i = 0; i < count; i++){
-				yield return threads[i];
+			// Initialize Progress
+				int count = threads.Length;
+				float maxIndex = (float) count - 1;
 				
-				float normalizedValue = (float) i / maxIndex;
-				float percent = Mathf.Round(normalizedValue * 100f);
-				
-				startProgressImg.fillAmount = normalizedValue;
-				startProgressTxt.text = "Loading " + percent + "%";
-			}
+				startLoadUI.SetActive(true);
 			
-			yield return new WaitForSecondsRealtime(1f);
-				
-				startLoadUI.SetActive(false);
-				uiMgr.Transition();
+			// Iterate Threads
+				for(int i = 0; i < count; i++){
+					yield return threads[i]; // Iterate
+					
+					// Update Progress
+						float normalizedValue = (float) i / maxIndex;
+						float percent = Mathf.Round(normalizedValue * 100f);
+						
+						startProgressImg.fillAmount = normalizedValue;
+						startProgressTxt.text = "Loading " + percent + "%";
+				}
 			
-			Time.timeScale = 1f;
-			hasStarted = true;
+			// Post Iteration
+				yield return new WaitForSecondsRealtime(1f);
+					
+					startLoadUI.SetActive(false);
+					uiMgr.Transition();
+			
+			// On Exit
+				Time.timeScale = 1f;
+				hasStarted = true;
 		}
 	}
 }

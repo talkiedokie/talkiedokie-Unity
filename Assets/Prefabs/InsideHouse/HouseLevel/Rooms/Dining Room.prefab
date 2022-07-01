@@ -79,14 +79,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71dc502a3d15b24697b399d30d4894a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Arrange the plates
   descriptions:
   - text: Arrange the plates
     fairyVoiceClip: {fileID: 8300000, guid: d1811e084ff679649ab5a9a75c26b6f0, type: 3}
   rewards: 10
   autoCompleteDebug: 0
   charPoint: {fileID: 0}
-  fairyVoiceClip: {fileID: 8300000, guid: d1811e084ff679649ab5a9a75c26b6f0, type: 3}
   camView: {fileID: 62772005352938148}
   recapCam: {fileID: 862384575228262267}
   recapAnim: {fileID: 0}
@@ -2439,14 +2437,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71dc502a3d15b24697b399d30d4894a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Arrange the chair
   descriptions:
   - text: Arrange the chair
     fairyVoiceClip: {fileID: 8300000, guid: b00358b9dff505241a26fe1bf8bde06f, type: 3}
   rewards: 10
   autoCompleteDebug: 0
   charPoint: {fileID: 0}
-  fairyVoiceClip: {fileID: 8300000, guid: b00358b9dff505241a26fe1bf8bde06f, type: 3}
   camView: {fileID: 5496401324404881658}
   recapCam: {fileID: 5147595819666674981}
   recapAnim: {fileID: 0}
@@ -2653,14 +2649,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8fdf019333234783c3ae2b05c2637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Clean the chair
   descriptions:
   - text: Clean the chair
-    fairyVoiceClip: {fileID: 8300000, guid: 1067ade96d152a54b9a8d24a9eb5a054, type: 3}
+    fairyVoiceClip: {fileID: 8300000, guid: 0a98e6fe5e31b7742ae23e93e14997a9, type: 3}
+  - text: Clean the chair
+    fairyVoiceClip: {fileID: 8300000, guid: 523a4615256e71e408bcdb23205d30fd, type: 3}
+  - text: Wipe the chair clean
+    fairyVoiceClip: {fileID: 8300000, guid: 27cb036136f1b3b48baaede002c6b3e6, type: 3}
   rewards: 10
   autoCompleteDebug: 0
   charPoint: {fileID: 0}
-  fairyVoiceClip: {fileID: 8300000, guid: 1067ade96d152a54b9a8d24a9eb5a054, type: 3}
   camView: {fileID: 6415564621679730403}
   recapCam: {fileID: 5917843115341755196}
   recapAnim: {fileID: 0}
@@ -2687,6 +2685,7 @@ MonoBehaviour:
   audioGroup:
     value: 0
   _renderer: {fileID: 9188635835904843313}
+  _renderers: []
   progressCurve:
     serializedVersion: 2
     m_Curve:
@@ -2818,14 +2817,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f8fdf019333234783c3ae2b05c2637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Clean the table
   descriptions:
   - text: Clean the table
     fairyVoiceClip: {fileID: 8300000, guid: f5bf32300e081894d8781fea238e52d7, type: 3}
+  - text: Clean the table
+    fairyVoiceClip: {fileID: 8300000, guid: 8e9a630f18b540d42af2004bb4ca368a, type: 3}
+  - text: Wipe dirt off the table
+    fairyVoiceClip: {fileID: 8300000, guid: a103222ca61535f4282f22b4f8fad5ac, type: 3}
+  - text: Wipe the table clean
+    fairyVoiceClip: {fileID: 8300000, guid: 39b368c141d67474aa2afe4c50b296d4, type: 3}
   rewards: 10
   autoCompleteDebug: 0
   charPoint: {fileID: 0}
-  fairyVoiceClip: {fileID: 8300000, guid: f5bf32300e081894d8781fea238e52d7, type: 3}
   camView: {fileID: 6749229578348354126}
   recapCam: {fileID: 6233782840780421009}
   recapAnim: {fileID: 0}
@@ -2852,6 +2855,7 @@ MonoBehaviour:
   audioGroup:
     value: 0
   _renderer: {fileID: 1160116320021243921}
+  _renderers: []
   progressCurve:
     serializedVersion: 2
     m_Curve:

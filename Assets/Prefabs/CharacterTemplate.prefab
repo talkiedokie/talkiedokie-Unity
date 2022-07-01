@@ -74,13 +74,14 @@ MonoBehaviour:
   invertX: 0
   invertY: 0
   moveSmoothTime: 0.12
-  viewSmoothTime: 0.12
+  viewSmoothTime: 0.18
   interactionDistance: 5
   clickables:
     serializedVersion: 2
     m_Bits: 705
   enableGpx: 1
   gpx: {fileID: 0}
+  autoResetTransform: 1
 --- !u!136 &7851308424227046750
 CapsuleCollider:
   m_ObjectHideFlags: 0

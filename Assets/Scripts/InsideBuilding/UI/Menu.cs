@@ -15,7 +15,9 @@ namespace InsideBuilding
 		void OnEnable(){
 			bool hasTask = gameMgr.CurrentTask != null;
 			
-			taskTxt.text = hasTask? "Cancel Task": "Select Task";
+			taskTxt.text = hasTask?
+				"Cancel Task":
+				"Select Task";
 			
 			locationBtn.interactable = !hasTask;
 			wordBtn.interactable = !hasTask;

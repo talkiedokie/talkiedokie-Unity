@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29707849e5e4984b86610687c8ccacc, type: 3}
+  m_Name: crocodile
+  m_EditorClassIdentifier: 
+  name: Crocodile
+  sprites:
+  - {fileID: 21300000, guid: d075050107c0cc54d9ebbc7215a0921d, type: 3}
+  - {fileID: 21300000, guid: c3697aa5974d57e4f955cb29e16a802f, type: 3}
+  - {fileID: 21300000, guid: b6d962639fd84894cb095656c290d277, type: 3}
+  fairyVoiceClip: {fileID: 8300000, guid: eba27cc6dffde564889f30597cdedff7, type: 3}
+  isEnabled: 1

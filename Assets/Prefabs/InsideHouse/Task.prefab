@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7568073116955943990}
   - component: {fileID: 734959397975383846}
+  - component: {fileID: 4837041713302737914}
   m_Layer: 0
   m_Name: CM taskRecap
   m_TagString: Untagged
@@ -67,6 +68,25 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 5026347416520100521}
+--- !u!95 &4837041713302737914
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27039781511769659}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ee9649f8a4f10f0478abb8d8275c9191, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2410742516475560026
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,15 +296,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e46ae10bdca9b042b170e765c8ba7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 
+  descriptions: []
   rewards: 10
+  autoCompleteDebug: 0
   charPoint: {fileID: 0}
-  fairyVoiceClip: {fileID: 0}
   camView: {fileID: 79891959628395257}
   recapCam: {fileID: 734959397975383846}
   recapAnim: {fileID: 0}
   recapAnimParam: recap
-  isFinished: 0
 --- !u!1 &5027543789363425166
 GameObject:
   m_ObjectHideFlags: 0

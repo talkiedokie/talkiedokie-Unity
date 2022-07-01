@@ -13,7 +13,9 @@ public class UIManager : SceneObjectSingleton<UIManager>
 	
 	Camera cam;
 	
-	void Awake(){
+	protected override void Awake(){
+		base.Awake();
+		
 		for(int i = 0; i < transform.childCount; i++){
 			var child = transform.GetChild(i).gameObject;
 				Hide(child);

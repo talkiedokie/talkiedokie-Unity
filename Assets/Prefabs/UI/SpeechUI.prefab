@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6542851119153470496
 RectTransform:
   m_ObjectHideFlags: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Result
+  m_Text: Bed
 --- !u!1 &5233943005212944980
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +227,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 175, y: 140}
+  m_SizeDelta: {x: 175, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1151094353652524609
 MonoBehaviour:
@@ -241,9 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123ca46b69ec9d74a97065104be2f8cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerImg: {fileID: 7291402128715156160}
   hypothesisObj: {fileID: 5233943005369388628}
   resultTxt: {fileID: 5233943004467259707}
+  popAnim: {fileID: 5233943005361017348}
 --- !u!1 &5233943005361017344
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +281,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 60, y: 60}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5233943005361017347
 CanvasRenderer:
@@ -368,7 +368,7 @@ RectTransform:
   m_GameObject: {fileID: 5233943005369388628}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.35, y: 1.35, z: 1}
+  m_LocalScale: {x: 2.35, y: 2.35, z: 1}
   m_Children: []
   m_Father: {fileID: 2091112346132052851}
   m_RootOrder: 0

@@ -12,13 +12,8 @@ public class Clickable : MonoBehaviour
 	
 	public bool clicked{ get; private set; }
 	
-	void Awake(){
-		param = Animator.StringToHash(_param);
-	}
-	
-	void OnMouseDown(){
-		Interact();
-	}
+	void Awake() => param = Animator.StringToHash(_param);
+	void OnMouseDown() => Interact();
 	
 	public void ShowHighlight(bool b){
 		foreach(var highlight in highlights)

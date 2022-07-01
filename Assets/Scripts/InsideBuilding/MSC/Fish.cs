@@ -20,7 +20,7 @@ public class Fish : MonoBehaviour
 	
 	void Awake(){
 		aquarium = GetComponentInParent<Aquarium>();
-		aquarium.AddSwimmers(this);
+		// aquarium.AddSwimmers(this);
 	}
 	
 	void OnBecameVisible(){
@@ -46,8 +46,8 @@ public class Fish : MonoBehaviour
 			}
 			
 			else{
-				var min = aquarium.waterBounds.min;
-				var max = aquarium.waterBounds.max;
+				var min = aquarium.waterBounds.min + aquarium.position;
+				var max = aquarium.waterBounds.max + aquarium.position;
 				
 				targetPosition = new Vector3(
 					Random.Range(min.x, max.x),
@@ -66,7 +66,7 @@ public class Fish : MonoBehaviour
 		var velocity = dir * speed * Time.deltaTime;
 		var displacement = transform.position + velocity;
 			
-			transform.position = aquarium.Clamp(displacement);
+			// transform.position = aquarium.Clamp(displacement);
 		
 		transform.forward = Vector3.SmoothDamp(
 			transform.forward,

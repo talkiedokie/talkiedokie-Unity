@@ -75,7 +75,7 @@ namespace InsideBuilding.Gameplay
 				selected = null;
 			}
 			
-			score ++;
+			int score = hoop.containedObjects.Count;
 			if(score >= maxScore) CompleteTask();
 		}
 	}

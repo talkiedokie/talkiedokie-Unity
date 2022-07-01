@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GeneralAudio
   m_EditorClassIdentifier: 
   bgm: {fileID: 8300000, guid: f4766fe53d1b7be40a51e2e7169c41b8, type: 3}
-  bgmVolume: 0.1
+  bgmVolume: 0
   clips:
   - {fileID: 8300000, guid: 57127e79e94260647b869e47e0f89e1e, type: 3}
   - {fileID: 8300000, guid: 5d7d6dd565fca274698853fff0bc5eee, type: 3}
@@ -45,3 +45,11 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 5d6253373b79ddb41a162970ad2ce473, type: 3}
     - {fileID: 8300000, guid: d52c1e2e4189e2d4b9b3d9bf256f644e, type: 3}
     - {fileID: 8300000, guid: 96f2122d612cd08438f20e0fb0a8a6c0, type: 3}
+  - name: Door
+    clips:
+    - {fileID: 8300000, guid: 412e338040629094bb1e489bf81433ee, type: 3}
+    - {fileID: 8300000, guid: 07c9bc5e6c9ab0744921fc569cae3d75, type: 3}
+    - {fileID: 8300000, guid: 92357e25c251b934c963838cbd23db55, type: 3}
+    - {fileID: 8300000, guid: 0685866e91c8307408fad9896c8baade, type: 3}
+    - {fileID: 8300000, guid: 467542fa2f317494691f12cc18634a97, type: 3}
+    - {fileID: 8300000, guid: 7c2bb37cfab6f5943b82ebbb2c1f79f4, type: 3}

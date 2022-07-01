@@ -128,13 +128,13 @@ public static class Tools
 	public static void StartCoroutine( // This will run a coroutine and making sure that the old routine is already stop (avoiding lags from duplicate routines)
 		ref IEnumerator current,
 		IEnumerator target,
-		MonoBehaviour monoBehaviour
+		MonoBehaviour iterator
 	){
 		if(current != null)
-			monoBehaviour.StopCoroutine(current);
+			iterator.StopCoroutine(current);
 		
 		current = target;
-		monoBehaviour.StartCoroutine(current);
+		iterator.StartCoroutine(current);
 	}
 	
 	public static bool CompareLayer(int layer, LayerMask mask){

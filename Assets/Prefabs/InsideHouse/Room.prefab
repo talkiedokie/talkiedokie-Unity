@@ -1036,6 +1036,10 @@ PrefabInstance:
       value: gpx
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5a7fe96e33a144a479d1d7c461add846, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5a7fe96e33a144a479d1d7c461add846, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}

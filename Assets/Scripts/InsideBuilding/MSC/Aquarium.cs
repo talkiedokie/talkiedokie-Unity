@@ -4,7 +4,36 @@ using System.Collections.Generic;
 [RequireComponent(typeof(Renderer))]
 public class Aquarium : MonoBehaviour
 {
-	public Bounds waterBounds{ get; private set; }
+	public Bounds waterBounds;
+	
+	#region Properties
+		
+		Transform t;
+		public Transform _transform
+		{
+			get
+			{
+				if(!t)
+					t = transform;
+				
+				return t;
+			}
+		}
+		
+		public Vector3 position => _transform.position;
+		
+	#endregion
+	
+	void OnDrawGizmos()
+	{
+		var center = waterBounds.center + position;
+		var size = waterBounds.size;
+		
+		Gizmos.color = Color.blue;
+		Gizmos.DrawWireCube(center, size);
+	}
+	
+/* 	public Bounds waterBounds{ get; private set; }
 	
 	public Transform waterReference;
 	
@@ -76,5 +105,5 @@ public class Aquarium : MonoBehaviour
 	public void SetFishTarget(Transform target){
 		var fish = Tools.Random(swimmers);
 			fish.SetTargetPosition(target);
-	}
+	} */
 }

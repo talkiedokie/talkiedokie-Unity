@@ -73,6 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3236881544068490363}
+  - component: {fileID: 5961330127283996099}
   m_Layer: 5
   m_Name: EntryPointUI
   m_TagString: Untagged
@@ -101,6 +102,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5961330127283996099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6246347298409898777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23846595da6aa1f4ba5ba19fdffec908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  descriptionTxt: {fileID: 800630956403311469}
 --- !u!1 &7087378913242492820
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +216,7 @@ PrefabInstance:
     - target: {fileID: 4421217872289148494, guid: 8128e17985673f146b0b256f46da8a1a, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5961330127283996099}
     - target: {fileID: 4421217872289148494, guid: 8128e17985673f146b0b256f46da8a1a, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -213,7 +227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4421217872289148494, guid: 8128e17985673f146b0b256f46da8a1a, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Trigger, Assembly-CSharp
+      value: InsideBuilding.EntryPointUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4421217872289148494, guid: 8128e17985673f146b0b256f46da8a1a, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -380,7 +394,7 @@ PrefabInstance:
     - target: {fileID: 4421217872289148494, guid: 8128e17985673f146b0b256f46da8a1a, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5961330127283996099}
     - target: {fileID: 4421217872289148494, guid: 8128e17985673f146b0b256f46da8a1a, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -391,7 +405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4421217872289148494, guid: 8128e17985673f146b0b256f46da8a1a, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Trigger, Assembly-CSharp
+      value: InsideBuilding.EntryPointUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4421217872289148494, guid: 8128e17985673f146b0b256f46da8a1a, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
