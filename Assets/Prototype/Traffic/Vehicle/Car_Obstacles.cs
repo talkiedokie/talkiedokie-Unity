@@ -13,11 +13,13 @@ namespace Prototype.TrafficSystems
 		bool ignoreObstacles; // anti traffic jam system
 		IEnumerator ignoreObstacles_Routine = null;
 		
+		// on awake
 		void InitializeSpeedModifier_ObstacleCheck(){
 			speedModifier_ObstacleCheck = new SpeedModifier("Obstacle Check");
 			speedModifiers.Add(speedModifier_ObstacleCheck);
 		}
 		
+		// on custom update
 		public void CheckForObstacles(
 			LayerMask layers,
 			float sphereCastRadius,

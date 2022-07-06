@@ -14,11 +14,13 @@ namespace Prototype.TrafficSystems
 		
 		SpeedModifier speedModifier_Junction;
 		
+		// on awake
 		void InitializeSpeedModifier_Junction(){
 			speedModifier_Junction = new SpeedModifier("Junction");
 			speedModifiers.Add(speedModifier_Junction);
 		}
 		
+		// on custom update
 		public void CheckForJunctions(float minSpeedPercent){
 			if(!targetWaypoint) return;
 			
@@ -33,6 +35,7 @@ namespace Prototype.TrafficSystems
 				speedModifier_Junction.value = 1f;
 		}
 		
+		// on custom update
 		public void CheckForDirectionChange(float signalCheckAmount){
 			if(!isHeadingTowardsJunction){
 				if(lSignalLight) lSignalLight.SetActive(false);

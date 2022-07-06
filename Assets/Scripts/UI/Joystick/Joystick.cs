@@ -23,22 +23,19 @@ public class Joystick : MonoBehaviour,
 		[SerializeField] bool showHideHandle;
 		
 		[Foldout("References")]
-		[SerializeField] RectTransform rectTransform;
-		[SerializeField] Transform handle, direction;
+		[SerializeField] RectTransform pad, handle, direction;
 		
 		[Foldout("Events")]
 		public UnityEvent<Vector2> onAxisUpdate;
 		public UnityEvent<float> onXUpdate, onYUpdate;
 		
+		Vector3 padDefaultPos;
+		
 	#endregion
 	
 	#region Unity Ticks
 		
-		void OnValidate(){
-			if(!rectTransform)
-				rectTransform = transform as RectTransform;
-		}
-		
+		void Awake() => padDefaultPos = pad.position;
 		void OnEnable() => ResetPosition();
 		
 	#endregion
@@ -46,6 +43,8 @@ public class Joystick : MonoBehaviour,
 	#region Event Systems
 		
 		public void OnPointerDown(PointerEventData data){
+			pad.position = data.position;
+			
 			if(showHideHandle){
 				handle.gameObject.SetActive(true);
 				
@@ -81,9 +80,9 @@ public class Joystick : MonoBehaviour,
 	#region Logic
 		
 		void UpdatePosition(Vector2 dataPosition){
-			var position = (Vector2) transform.position;
+			var position = (Vector2) pad.position;
 				var difference = dataPosition - position;
-				float size = rectTransform.sizeDelta.x / 2f * handleMinPosition;
+				float size = pad.sizeDelta.x / 2f * handleMinPosition;
 				
 					difference = Vector2.ClampMagnitude(difference, size);
 					axis = difference / size;
@@ -101,6 +100,8 @@ public class Joystick : MonoBehaviour,
 			axis = Vector2.zero;
 			handle.localPosition = Vector3.zero;
 			direction.rotation = Quaternion.identity;
+			
+			pad.position = padDefaultPos;
 		}
 		
 	#endregion

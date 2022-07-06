@@ -37,7 +37,7 @@ namespace Minigame.Conveyor
 			public int score{ get; private set; }
 			
 			public int coinRewards = 20;
-			public Action onScoreUpdate, onWinning;
+			public Action onScoreUpdate, onItemBroken, onWinning;
 		
 		[Foldout("Effects")]
 		[SerializeField] GameObject[] particles;
@@ -50,12 +50,21 @@ namespace Minigame.Conveyor
 		[Space()]
 		[SerializeField] GameObject[] winParticles;
 		[SerializeField] GeneralAudioSelector winSound;
-	
+
+		public bool donePlaying;
 		[ContextMenu("New Item")]
-		public void NewItem(){
-			if(itemSpawnRoutine != null) return;
+		public Item NewItem(){
+
+			Item newItem = null;
+			
+			if(itemSpawnRoutine != null || donePlaying)
+				return newItem;
 			
 			roboticArmAnim.SetTrigger("move");
+			
+			newItem = Tools.Random(items).Instantiate();
+				spawnedItems.Add(newItem);
+				newItem.gameObject.SetActive(false);
 			
 			itemSpawnRoutine = routine();
 			StartCoroutine(itemSpawnRoutine);
@@ -63,14 +72,15 @@ namespace Minigame.Conveyor
 			IEnumerator routine(){
 				yield return new WaitForSeconds(itemSpawnDelay);
 				
-				var newItem = Tools.Random(items).Instantiate();
-					spawnedItems.Add(newItem);
+				newItem.gameObject.SetActive(true);
 				
 				spawnSound.PlayAdditive();
 				SpawnRandomParticle(newItem.transform.position);
 				
 				itemSpawnRoutine = null;
 			}
+			
+			return newItem;
 		}
 		
 		public Basket FindBasket(string speechResult){
@@ -78,7 +88,7 @@ namespace Minigame.Conveyor
 			
 			foreach(var basket in baskets){
 				string basketName = basket.name.ToLower();
-				Debug.Log(basketName + " " + speechResult);
+				// Debug.Log(basketName + " " + speechResult);
 				
 				if(speechResult.Contains(basketName)){
 					output = basket;
@@ -125,6 +135,7 @@ namespace Minigame.Conveyor
 				
 				foreach(var item in spawnedItems)
 					item.enabled = false;
+
 				
 				onWinning?.Invoke();
 			}
@@ -132,18 +143,19 @@ namespace Minigame.Conveyor
 			else if(amount > 0){
 				correctSound.PlayAdditive();
 				SpawnRandomParticle(selectedBasket.transform.position);
-				
-				onScoreUpdate?.Invoke();
 			}
 			
 			else wrongSound.PlayAdditive();
 			
 			scoreTxt.text = score.ToString();
+			onScoreUpdate?.Invoke();
 		}
 		
 		public void OnItemBroken(Item item){
 			if(spawnedItems.Contains(item))
 				spawnedItems.Remove(item);
+			
+			onItemBroken?.Invoke();
 		}
 		
 		void SpawnRandomParticle(Vector3 position){

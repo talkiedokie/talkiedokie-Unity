@@ -12,7 +12,7 @@ namespace Gameplay
 		const FontStyle
 			ITAL = FontStyle.Italic,
 			BOLD = FontStyle.Bold;
-
+		
 		public void SetActive(bool b) => gameObject.SetActive(b);
 
 		public void OnListen(){

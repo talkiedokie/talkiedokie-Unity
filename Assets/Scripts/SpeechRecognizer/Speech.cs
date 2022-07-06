@@ -13,6 +13,8 @@ namespace Gameplay
 			appearSound,
 			skipSound;
 		
+		public AudioRecorder audioRecorder;
+		
 		public bool isListening{ get; private set; }
 		public bool isSkipped{ get; private set; }
 		
@@ -20,15 +22,10 @@ namespace Gameplay
 		public string hypothesis, result;
 		Action<string> onFinish;
 		
-		int partialResultCount;
-		
 		GameObject pluginInstance;
 		SpeechRecognizer speechRecognizer;
 		
 		GeneralAudio genAudio;
-		
-		public void Initialize() =>
-			SpeechRecognizer.onInitResult();
 		
 		#region Calls
 		
@@ -43,7 +40,7 @@ namespace Gameplay
 			isListening = true;
 			isSkipped = false;
 			
-			EnablePlugin();
+			// StartMic();
 			
 			ui.OnListen();
 			appearSound.Play();
@@ -53,7 +50,7 @@ namespace Gameplay
 		
 		public void StopListening(){
 			isListening = false;
-			DisablePlugin();
+			// EndMic();
 			
 			onFinish = null;
 		}
@@ -63,7 +60,8 @@ namespace Gameplay
 			skipSound.Play();
 			
 			result = " ";
-			ui.OnResult(result);
+			
+			ui.OnResult("skipped");
 			SetBgmVolume(1f);
 			
 			onFinish?.Invoke(result);
@@ -82,9 +80,6 @@ namespace Gameplay
 		public void OnPluginPartialResultCallback(string message){
 			if(!isListening) return;
 			
-			partialResultCount ++;
-			if(partialResultCount < 20) return;
-			
 			hypothesis = message;
 			ui.OnHypothesis(message);
 		}
@@ -96,7 +91,6 @@ namespace Gameplay
 			ui.OnResult(result);
 			
 			onFinish?.Invoke(result);
-			partialResultCount = 0;
 		}
 		
 		#endregion
@@ -107,29 +101,8 @@ namespace Gameplay
 			
 			genAudio.SetBGMVolume(percent);
 		}
-		
-		public void EnablePlugin()
-		{
-			pluginInstance = Instantiate(plugin);
-			speechRecognizer = pluginInstance.GetComponentInChildren<SpeechRecognizer>();
-			
-			speechRecognizer.PartialResultReceived += OnPluginPartialResultCallback;
-			speechRecognizer.ResultReceived += OnPluginResultCallback;
-		}
-		
-		public void DisablePlugin()
-		{
-			if(!pluginInstance)
-				return;
-			
-			speechRecognizer.PartialResultReceived -= OnPluginPartialResultCallback;
-			speechRecognizer.ResultReceived -= OnPluginResultCallback;
-			
-			speechRecognizer = null;
-			DestroyImmediate(pluginInstance);
-		}
-		
-		void OnDestroy() =>
-			SpeechRecognizer.Dispose();
+	
+		public void StartMic() => audioRecorder.StartMic();
+		public void EndMic() => audioRecorder.EndMic();
 	}
 }

@@ -30,6 +30,33 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.95, z: 0}
+--- !u!114 &4752049152338332150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3585853415698541603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e280a4feae336346935570aadedb780, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCarHonk:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4206873458018272104}
+        m_TargetAssemblyTypeName: NPC, Assembly-CSharp
+        m_MethodName: OnCarHonk
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &4396335117888917874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,7 +308,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 532333366467207588, guid: bbf5b7ba2302b104e9bf6c8bc02c54f8, type: 3}
       propertyPath: m_Name
-      value: npc
+      value: npc Variant
       objectReference: {fileID: 0}
     - target: {fileID: 532333366467207589, guid: bbf5b7ba2302b104e9bf6c8bc02c54f8, type: 3}
       propertyPath: m_RootOrder
@@ -350,3 +377,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 532333366467207589, guid: bbf5b7ba2302b104e9bf6c8bc02c54f8, type: 3}
   m_PrefabInstance: {fileID: 4396335118477648594}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4206873458018272104 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 532333366467207610, guid: bbf5b7ba2302b104e9bf6c8bc02c54f8, type: 3}
+  m_PrefabInstance: {fileID: 4396335118477648594}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 361c373c5d857c54dbc813c4c6b83c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

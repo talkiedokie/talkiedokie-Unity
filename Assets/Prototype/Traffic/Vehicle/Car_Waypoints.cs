@@ -21,6 +21,7 @@ namespace Prototype.TrafficSystems
 		
 		Vector3 previousPosition;
 		
+		// on awake
 		void SetupWaypoints(){ // start
 			GetRandomPoint(currentWaypoint, ref targetWaypoint, ref targetWaypoint_Index);
 			GetRandomPoint(targetWaypoint, ref nextWaypoint, ref nextWaypoint_Index);
@@ -28,8 +29,9 @@ namespace Prototype.TrafficSystems
 			currentPathLength = currentWaypoint.connectedPoints[targetWaypoint_Index].length;
 		}
 		
+		// on update
 		void UpdateSplinePosition(){ // called every frame
-			float linearVelocity = speed * speedPercent_Smooth * Time.deltaTime; // see "speedPercent_Smooth" from "Car_SpeedHandler" partial script
+			float linearVelocity = speed * speedPercent_Smooth * Time.fixedDeltaTime; // see "speedPercent_Smooth" from "Car_SpeedHandler" partial script
 			currentPathDistance += linearVelocity;
 			
 			if(currentPathDistance > currentPathLength){

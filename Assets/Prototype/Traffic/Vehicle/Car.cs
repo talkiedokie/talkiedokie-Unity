@@ -33,24 +33,18 @@ namespace Prototype.TrafficSystems
 		
 		#region Updates
 			
-			void Update(){
+			public void OnUpdate(){
 				SmoothenSpeedPercent();
-				UpdateSplinePosition();
 			}
 			
-			void FixedUpdate(){
+			public void OnFixedUpdate(){
+				UpdateSplinePosition();
 				UpdatePosition();
 				UpdateRotation();
 			}
 			
-			void LateUpdate(){
-				if(engineAudioSource)
-					engineAudioSource.pitch = Mathf.Lerp(
-						enginePitchMinMax.x,
-						enginePitchMinMax.y,
-						speedPercent_Smooth
-					);
-				
+			public void OnLateUpdate(){
+				UpdateEngineSound();
 				OnCarStoppedUpdate();
 			}
 			
@@ -62,8 +56,8 @@ namespace Prototype.TrafficSystems
 				}
 			
 				void OnDrawGizmos(){
-					DrawTrafficLightIndicatorGizmo();
 					DrawObstacleCheckGizmo();
+					DrawTrafficLightIndicatorGizmo();
 				}
 				
 			#endif
@@ -71,24 +65,7 @@ namespace Prototype.TrafficSystems
 		#endregion
 		
 		#region Motor
-			
-			/*
-			
-			// TRANSFORM
-			void UpdatePosition() =>
-				_transform.position = currentWaypoint.GetPositionTo(targetWaypoint_Index, pathDstPercent);
-			
-			void UpdateRotation(){
-				var currentPosition = _transform.position;
-				var direction = currentPosition - previousPosition;
-				
-				if(direction != Vector3.zero) _transform.forward = direction;
-				
-				previousPosition = currentPosition;
-			} 
-			
-			*/
-			
+		
 			// RIGIDBODY (kinematic)
 			void UpdatePosition(){
 				var targetPosition = currentWaypoint.GetPositionTo(targetWaypoint_Index, pathDstPercent);
@@ -108,6 +85,15 @@ namespace Prototype.TrafficSystems
 			}
 			
 		#endregion
+		
+		void UpdateEngineSound(){
+			if(engineAudioSource)
+				engineAudioSource.pitch = Mathf.Lerp(
+					enginePitchMinMax.x,
+					enginePitchMinMax.y,
+					speedPercent_Smooth
+				);
+		}
 		
 		void RandomizeColor(){
 			var rend = GetComponentInChildren<Renderer>();

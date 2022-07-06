@@ -13,9 +13,8 @@ namespace InsideBuilding
 			camMgr = CameraManager.Instance;
 			
 			speech = Speech.Instance;
-			speech.Initialize();
 			
-			yield break;
+			yield return null;
 		}
 		
 		IEnumerator LoadLevel(){
@@ -46,7 +45,7 @@ namespace InsideBuilding
 			
 			usernameTxt.text = UserData.name;
 			
-			yield break;
+			yield return null;
 		}
 		
 		IEnumerator SetupPlayerObject(){
@@ -65,7 +64,7 @@ namespace InsideBuilding
 			
 			Destroy(playerPlaceHolder.gameObject);
 			
-			yield break;
+			yield return null;
 		}
 		
 		IEnumerator SetupRoomUI(){
@@ -87,7 +86,7 @@ namespace InsideBuilding
 			Destroy(roomButtonTemplate.gameObject);
 			Destroy(roomTasksUITemplate.gameObject);
 			
-			yield break;
+			yield return null;
 		}
 		
 		IEnumerator FinalizeSetup(){
@@ -95,7 +94,6 @@ namespace InsideBuilding
 			GeneralAudio.Instance.PlayMusic();
 			
 			yield return null;
-			// speech.DisablePlugin();
 		}
 	}
 }

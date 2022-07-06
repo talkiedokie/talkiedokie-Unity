@@ -14,6 +14,7 @@ namespace Prototype.TrafficSystems
 		public float speedPercent_Smooth{ get; private set; }
 		float speedPercent_SmoothVel;
 		
+		// on custom update
 		public void CalculateSpeedPercent(){
 			speedPercent = 1f;
 			
@@ -25,6 +26,7 @@ namespace Prototype.TrafficSystems
 			speedPercent = Mathf.Clamp01(speedPercent);
 		}
 		
+		// on update
 		void SmoothenSpeedPercent(){
 			float smoothTime = accelerationTime * speedPercent;
 			

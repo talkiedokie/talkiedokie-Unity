@@ -20,8 +20,10 @@ namespace Minigame.Conveyor
 			public float MaxTimer => maxTimer;
 		
 		[Foldout("Item Spawn")]
-		[SerializeField, LabelOverride("Duration")] float itemSpawnDuration;
-		[SerializeField, LabelOverride("Decrement Amount")] float itemSpawnDurationDecrement;
+		[SerializeField] float itemSpeedIncrement = 0.5f;
+		
+		// [SerializeField, LabelOverride("Duration")] float itemSpawnDuration;
+		// [SerializeField, LabelOverride("Decrement Amount")] float itemSpawnDurationDecrement;
 		
 		[Foldout("Post Gameplay")]
 		[SerializeField, LabelOverride("UI")] GameObject postGameplayUI;
@@ -36,18 +38,20 @@ namespace Minigame.Conveyor
 		[SerializeField] GeneralAudioSelector rewardSound;
 		[SerializeField] SceneLoader cityScene;
 		
-		bool isPlaying, isWin;
+		float currentItemSpeed = 1f;
+		IEnumerator spawnItemRoutine;
+		
+		public bool isPlaying, isWin;
 
 		Speech speech;
 		GameManager gameMgr;
 		
 		void Awake(){
 			speech = Speech.Instance;
-			speech.Initialize();
-			
 			gameMgr = GameManager.Instance;
 			
-			gameMgr.onScoreUpdate += OnScoreUpdate;
+			gameMgr.onScoreUpdate += SpawnNewItem;
+			gameMgr.onItemBroken += SpawnNewItem;
 			gameMgr.onWinning += OnWinning;
 		}
 		
@@ -67,8 +71,6 @@ namespace Minigame.Conveyor
 		IEnumerator SelectBasketWithSpeech_Loop(){
 			while(useSpeech && isPlaying){
 				yield return GetTargetBasket();
-				
-				Debug.Log("Yeah");
 				yield return WaitForSpeechListen();
 				
 				// Get the Destination Basket via Speech result
@@ -99,17 +101,17 @@ namespace Minigame.Conveyor
 				yield return null;
 		}
 		
-		void OnScoreUpdate(){
-			itemSpawnDuration -= itemSpawnDurationDecrement;
+		void SpawnNewItem(){
+			var item = gameMgr.NewItem();
 			
-			itemSpawnDuration = Mathf.Clamp(
-				itemSpawnDuration,
-				gameMgr.itemSpawnDelay,
-				float.MaxValue
-			);
+			if(item){			
+				item.speed = currentItemSpeed;
+				currentItemSpeed += itemSpeedIncrement;
+			}
 		}
 		
 		void OnWinning(){
+			gameMgr.donePlaying = true;
 			isPlaying = false;
 			isWin = true;
 		}

@@ -134,6 +134,13 @@ public class GeneralAudio : Singleton<GeneralAudio>
 		bgmPlayer.volume = bgmVolume * percent;
 	}
 	
+	#if UNITY_EDITOR
+	
+		public void SetBGMVolumeOnBuild(float amount) =>
+			bgmVolume = amount;
+		
+	#endif
+	
 	[System.Serializable]
 	public class Group{
 		public string name;

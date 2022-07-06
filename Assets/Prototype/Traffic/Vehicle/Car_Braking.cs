@@ -2,8 +2,6 @@ using UnityEngine;
 
 namespace Prototype.TrafficSystems
 {
-	using Cars;
-	
 	public partial class Car
 	{
 		[SerializeField] GameObject brakeLight;
@@ -16,6 +14,7 @@ namespace Prototype.TrafficSystems
 		bool isStopped;
 		public float stopDuration{ get; private set; } // for traffic jam handling
 		
+		// on custom update
 		public void HandleBraking(){
 			if(brakeLight){
 				bool isBreaking = speedPercent < brakeTrigger;

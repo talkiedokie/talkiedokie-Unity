@@ -80,6 +80,21 @@ namespace Prototype.TrafficSystems
 			}
 		}
 		
+		void Update(){
+			foreach(var car in cars)
+				car.OnUpdate();
+		}
+		
+		void FixedUpdate(){
+			foreach(var car in cars)
+				car.OnFixedUpdate();
+		}
+		
+		void LateUpdate(){
+			foreach(var car in cars)
+				car.OnLateUpdate();
+		}
+		
 		void OnDrawGizmos(){
 			foreach(var car in cars){
 				var position = car.obstacleCheckPoint.position;
@@ -92,5 +107,14 @@ namespace Prototype.TrafficSystems
 					Gizmos.DrawLine(position, position + (direction * obstacleCheckStoppingDistancePercent));
 			}
 		}
+		
+		#region Debug Tools
+		
+			public void Reiterate(bool toggleUIValue){
+				if(toggleUIValue)
+					StartCoroutine(Start());
+			}
+			
+		#endregion
 	}
 }

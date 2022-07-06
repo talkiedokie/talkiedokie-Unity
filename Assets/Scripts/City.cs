@@ -34,4 +34,7 @@ public class City : MonoBehaviour
 		}
 		
 	#endif
+	
+	public void Restart()=> SceneLoader.Current();
+	public void Quit()=> Application.Quit();
 }

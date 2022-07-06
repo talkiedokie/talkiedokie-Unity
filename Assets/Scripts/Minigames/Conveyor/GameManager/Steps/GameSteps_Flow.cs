@@ -6,6 +6,7 @@ namespace Minigame{
 	{
 		public partial class GameSteps : MonoBehaviour
 		{
+			protected IEnumerator itemCheck;
 			IEnumerator Start(){
 				var threads = new IEnumerator[]{
 					Instruction(),
@@ -35,27 +36,54 @@ namespace Minigame{
 				yield return new WaitForSeconds(0.5f);
 					isPlaying = true;
 					
-					gameMgr.NewItem();
+					SpawnNewItem();
 					StartCoroutine(SelectBasketWithSpeech_Loop());
 			}
 			
 			IEnumerator Timer(){
 				float timer = maxTimer;
-				float itemSpawnTimer = 0f;
+				// float itemSpawnTimer = 0f;
+				
+				itemCheck = NoItemCheck();
+				StartCoroutine(itemCheck);
 				
 				while(timer > 0f && isPlaying){
 					timerImg.fillAmount = timer / maxTimer;
 					
 					float deltaTime = Time.deltaTime;
 					timer -= deltaTime;
-					itemSpawnTimer += deltaTime;
+					
+					/* itemSpawnTimer += deltaTime;
 					
 					if(itemSpawnTimer >= itemSpawnDuration){
 						gameMgr.NewItem();
 						itemSpawnTimer = 0f;
-					}
+					} */
 					
 					yield return null;
+				}
+				
+				StopCoroutine(itemCheck);
+			}
+			
+			IEnumerator NoItemCheck(){
+				var timer = new WaitForSeconds(1f);
+				
+				while(true){
+
+					if (!isPlaying)
+						yield break;
+
+					var item = FindObjectOfType<Item>();
+					
+					if(!item){
+						
+
+						SpawnNewItem();
+						Debug.LogWarning("Item Spawned Manually");
+					}
+					
+					yield return timer;
 				}
 			}
 			

@@ -6,11 +6,13 @@ namespace Prototype.TrafficSystems
 	{
 		SpeedModifier speedModifier_TrafficLight;
 		
+		// on awake
 		void InitializeSpeedModifier_TrafficLight(){
 			speedModifier_TrafficLight = new SpeedModifier("Traffic Light");
 			speedModifiers.Add(speedModifier_TrafficLight);
 		}
 		
+		// on custom update
 		public void CheckForTrafficLight(float stopDstPercent){
 			if(!nextWaypoint) return;
 			

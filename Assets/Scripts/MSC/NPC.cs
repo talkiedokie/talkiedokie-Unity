@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
-using Prototype.Cars;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class NPC : MonoBehaviour
 {
+	[SerializeField] bool generalWalkables = true;
 	[SerializeField] Collider[] floors;
 	
 	[SerializeField] float
@@ -28,14 +28,17 @@ public class NPC : MonoBehaviour
 	int blend = Animator.StringToHash("blend");
 	
 	IEnumerator onHonkRoutine;
+	static NPCManager mgr;
 	
 	void Awake(){
+		mgr = NPCManager.Instance;
+		
 		agent = GetComponent<NavMeshAgent>();
 		anim = GetComponentInChildren<Animator>();
 		_transform = transform;
 	}
 	
-	IEnumerator Start(){
+	public IEnumerator Start(){
 		defaultSpeedValue = agent.speed;
 		Walk();
 		
@@ -55,6 +58,7 @@ public class NPC : MonoBehaviour
 	
 	[ContextMenu("Get Target Position")]
 	public void GetTargetPosition(){
+		var floors = generalWalkables? mgr.walkables: this.floors;
 		var floor = Tools.Random(floors);
 		var bounds = floor.bounds;
 		

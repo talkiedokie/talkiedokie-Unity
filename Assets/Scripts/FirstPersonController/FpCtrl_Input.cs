@@ -23,11 +23,9 @@ public class FpCtrl_Input : SceneObjectSingleton<FpCtrl_Input>,
 		
 		// Slider UI
 		[SerializeField] Slider speedSlider, panSpeedSlider;
-			
+		
 		public float speed{ get; set; } = 1f;
 		public float panSpeed{ get; set; }  = 1f;
-
-        
 			
 		const string
 			SPD_KEY = "playerSpeed",

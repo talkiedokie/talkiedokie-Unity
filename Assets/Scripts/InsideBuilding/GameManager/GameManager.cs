@@ -75,6 +75,11 @@ namespace InsideBuilding
 				else uiMgr.Show(menu, single);
 			}
 			
+			void OnDestroy(){
+				// SpeechRecognizer.OnDestroyCall();
+				// AudioRecorder.OnDestroyCall();
+			}
+			
 		#endregion
 		
 		#region Utilities

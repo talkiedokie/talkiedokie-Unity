@@ -28,10 +28,11 @@ public partial class Fairy
 			yield return WaitForPlayback(clip.length);
 		}
 	
+		yield return new WaitForSeconds(afterSpeakingDelay);
+		
 		isSpeaking = false;
 		if(anim) anim.SetBool("talk", isSpeaking);
 		
-		yield return new WaitForSeconds(afterSpeakingDelay);
 		onFinish?.Invoke();
 	}
 	

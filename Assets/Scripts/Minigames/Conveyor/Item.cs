@@ -8,25 +8,18 @@ namespace Minigame{
 		public class Item : MonoBehaviour
 		{
 			public Basket basket;
+			public float speed = 1f;
+			
 			[SerializeField] Transform broken;
 			
-			Rigidbody rb;
-			Tweener tweener;
+			[SerializeField] Rigidbody rb;
+			[SerializeField] Tweener tweener;
 			
-			static GameManager gameMgr;
-			static ConveyorBelt belt;
-			
-			void Start(){
-				rb = GetComponent<Rigidbody>();
-				tweener = GetComponent<Tweener>();
-				
-				if(!gameMgr) gameMgr = GameManager.Instance;
-				if(!belt) belt = ConveyorBelt.Instance;
-			}
+			static GameManager gameMgr => GameManager.Instance;
 			
 			void FixedUpdate(){
 				if(!rb.isKinematic)
-					rb.velocity = belt.ItemVelocity + (Vector3.up * rb.velocity.y);
+					rb.velocity = speed * new Vector3(1f, rb.velocity.y, 0f);
 			}
 			
 			public Item Instantiate(){
@@ -43,7 +36,7 @@ namespace Minigame{
 			
 			public void OnBasketEnter(Basket basket){
 				if(basket == this.basket) gameMgr.Score(1);
-				else gameMgr.Score(-1);
+				else gameMgr.Score(0);
 				
 				Destroy(gameObject);
 			}
@@ -51,7 +44,7 @@ namespace Minigame{
 			public void Break(){
 				if(rb.isKinematic) return; // not breakable if kinmeatic (it means the tweener is traveling towards the basket)
 				
-				gameMgr.Score(-1);
+				gameMgr.Score(0);
 				
 				if(broken){
 					broken.SetParent(null);

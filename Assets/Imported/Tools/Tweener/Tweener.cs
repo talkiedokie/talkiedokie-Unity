@@ -34,8 +34,6 @@ public class Tweener : MonoBehaviour
 		if(position) _transform.position = Vector3.Lerp(_transform.position, target.position, deltaSpeed);
 		if(rotation) _transform.rotation = Quaternion.Lerp(_transform.rotation, target.rotation, deltaSpeed);
 		if(scale)	 _transform.localScale = Vector3.Lerp(_transform.localScale, target.localScale, deltaSpeed);
-		
-		
 	}
 	
 	public void SetTarget(Transform target){

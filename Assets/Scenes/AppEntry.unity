@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.25
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.021244787, g: 0.17627794, b: 0.21137959, a: 0.25}
+  m_IndirectSpecularColor: {r: 0.088263944, g: 0.20377834, b: 0.22663096, a: 0.25}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9865,6 +9865,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817211009}
   m_CullTransparentMesh: 1
+--- !u!82 &1817808301 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 918489943, guid: 4685ca116fa0e074a9c799775c494edc, type: 3}
+  m_PrefabInstance: {fileID: 1931008046}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1829337757
 GameObject:
   m_ObjectHideFlags: 0
@@ -13278,6 +13283,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerController
       objectReference: {fileID: 0}
+    - target: {fileID: 2975608934961179112, guid: 48128268845854d4083b9e4c472cc457, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2975608934961179113, guid: 48128268845854d4083b9e4c472cc457, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -13387,6 +13396,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2049643530}
     m_Modifications:
+    - target: {fileID: 2086508936918350189, guid: 84f903bb5aad7df40af4fac1b4e994b8, type: 3}
+      propertyPath: fairy
+      value: 
+      objectReference: {fileID: 2055620049}
+    - target: {fileID: 2086508936918350189, guid: 84f903bb5aad7df40af4fac1b4e994b8, type: 3}
+      propertyPath: fairyAudioSource
+      value: 
+      objectReference: {fileID: 1817808301}
+    - target: {fileID: 2086508937826016410, guid: 84f903bb5aad7df40af4fac1b4e994b8, type: 3}
+      propertyPath: fairy
+      value: 
+      objectReference: {fileID: 2055620049}
+    - target: {fileID: 2086508937826016410, guid: 84f903bb5aad7df40af4fac1b4e994b8, type: 3}
+      propertyPath: fairyAudioSource
+      value: 
+      objectReference: {fileID: 1817808301}
+    - target: {fileID: 2086508937826016410, guid: 84f903bb5aad7df40af4fac1b4e994b8, type: 3}
+      propertyPath: LogMessageReceived.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3092911659663607590, guid: 84f903bb5aad7df40af4fac1b4e994b8, type: 3}
       propertyPath: m_Name
       value: SpeechManager
@@ -13456,6 +13485,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 777640965}
     - target: {fileID: 4449278417075198775, guid: 84f903bb5aad7df40af4fac1b4e994b8, type: 3}
+      propertyPath: fairy
+      value: 
+      objectReference: {fileID: 2055620049}
+    - target: {fileID: 8600426295315168906, guid: 84f903bb5aad7df40af4fac1b4e994b8, type: 3}
       propertyPath: fairy
       value: 
       objectReference: {fileID: 2055620049}

@@ -32,14 +32,8 @@ namespace InsideBuilding
 		}
 		
 		void ListenFairy_WordOfTheDay(){
-			StartCoroutine(delay());
-			
-			IEnumerator delay(){
-				yield return new WaitForSeconds(0.5f);
-				
-				fairy.ListenToSpeech(wordOfTheDay.name, WordPopup_Correct, OnListenFinish);
-				void OnListenFinish() => fairy.Speak(ycneyft_Clip, 1f, OnLevelFinished);
-			}
+			fairy.ListenToSpeech(wordOfTheDay.name, WordPopup_Correct, OnListenFinish);
+			void OnListenFinish() => fairy.Speak(ycneyft_Clip, 1f, OnLevelFinished);
 		}
 		
 		void ShowWordOfTheDayUI(){

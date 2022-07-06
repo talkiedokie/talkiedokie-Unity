@@ -55,5 +55,10 @@ namespace Prototype.TrafficSystems
 			}
 			
 		#endif
+		
+		public void Reiterate(bool toggleUIValue){
+			if(toggleUIValue)
+				StartCoroutine(Start());
+		}
 	}
 }
