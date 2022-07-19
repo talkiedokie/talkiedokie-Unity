@@ -14,14 +14,14 @@ public partial struct SceneLoader
 	#if UNITY_EDITOR
 	
 		[CustomPropertyDrawer(typeof(SceneLoader))]
-		class SceneLoaderPropertyDrawer : PropertyDrawer
+		private class SceneLoaderPropertyDrawer : PropertyDrawer
 		{
 			private SerializedProperty
 				serializedIndex,
 				serializeLabel,
 				serializeCurrentSceneName;
 			
-			private string[] names;
+			private static string[] names;
 			
 			public override void OnGUI(
 				Rect position,
@@ -66,7 +66,13 @@ public partial struct SceneLoader
 			
 			private void GetSceneNames(){
 				int count = SceneManager.sceneCountInBuildSettings;
-					names = new string[count];
+				
+				if(names != null){
+					if(names.Length == count)
+						return;
+				}
+				
+				names = new string[count];
 				
 				for(int i = 0; i < count; i++){
 					string path = SceneUtility.GetScenePathByBuildIndex(i);

@@ -15,6 +15,13 @@ namespace Gameplay
 		
 		public AudioRecorder audioRecorder;
 		
+		[Foldout("Other Settings")]
+		[SerializeField] bool setMusicVolume = true;
+		[SerializeField, Range(0,1)] float musicVolume = 0.1f;
+		
+		[Space()]
+		[SerializeField] bool enableDisableMic = false;
+		
 		public bool isListening{ get; private set; }
 		public bool isSkipped{ get; private set; }
 		
@@ -40,17 +47,21 @@ namespace Gameplay
 			isListening = true;
 			isSkipped = false;
 			
-			// StartMic();
-			
 			ui.OnListen();
 			appearSound.Play();
 			
-			SetBgmVolume(0.1f);
+			if(setMusicVolume)
+				SetBgmVolume(musicVolume);
+			
+			if(enableDisableMic){}
+				// enable plugin
 		}
 		
 		public void StopListening(){
 			isListening = false;
-			// EndMic();
+			
+			if(enableDisableMic){}
+				// disable Plugin
 			
 			onFinish = null;
 		}
@@ -64,14 +75,18 @@ namespace Gameplay
 			ui.OnResult("skipped");
 			SetBgmVolume(1f);
 			
-			onFinish?.Invoke(result);
-			StopListening();
+			OnFinish();
 		}
 		
 		public void FinishUsing(){
 			ui.SetActive(false);
 			SetBgmVolume(1f);
 		}
+
+       /*  public void ToggleSpeechUI(bool isOn)
+        {
+            ui.SetActive(isOn);
+        } */
 		
 		#endregion
 		
@@ -90,10 +105,15 @@ namespace Gameplay
 			result = message;
 			ui.OnResult(result);
 			
-			onFinish?.Invoke(result);
+			OnFinish();
 		}
 		
 		#endregion
+		
+		void OnFinish(){
+			onFinish?.Invoke(result);
+			StopListening();
+		}
 		
 		void SetBgmVolume(float percent){
 			if(!genAudio)
@@ -101,8 +121,5 @@ namespace Gameplay
 			
 			genAudio.SetBGMVolume(percent);
 		}
-	
-		public void StartMic() => audioRecorder.StartMic();
-		public void EndMic() => audioRecorder.EndMic();
 	}
 }

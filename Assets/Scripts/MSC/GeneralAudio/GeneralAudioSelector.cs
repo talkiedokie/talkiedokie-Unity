@@ -7,13 +7,11 @@ public partial struct GeneralAudioSelector
 	
 	public GeneralAudioSelector(int v){ value = v; }
 	
-	public static implicit operator int(GeneralAudioSelector gas){
-		return gas.value;
-	}
+	public static implicit operator int(GeneralAudioSelector gas) =>
+		gas.value;
 	
-	public static implicit operator GeneralAudioSelector(int value){
-		return new GeneralAudioSelector(value);
-	}
+	public static implicit operator GeneralAudioSelector(int value) =>
+		new GeneralAudioSelector(value);
 	
 	static GeneralAudio mgr;
 	static GeneralAudio Mgr{
@@ -23,6 +21,6 @@ public partial struct GeneralAudioSelector
 		}
 	}
 	
-	public void Play(){ Mgr.Play(value); }
-	public void PlayAdditive(){ Mgr.PlayAdditive(value); }
+	public void Play() => Mgr.Play(value);
+	public void PlayAdditive() => Mgr.PlayAdditive(value);
 }

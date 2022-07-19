@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Zoo
+namespace Minigame.Zoo
 {
     [RequireComponent(typeof(Tweener))]
     public class Animal : MonoBehaviour
     {
         [Header("Data")]
-        [SerializeField] private string _animalName;
+        public string _animalName;
+
         private Tweener _tweener;
+        private Animator _anim;
 
         public void SetupAnimal(Transform initialPos)
         {
             _tweener = GetComponent<Tweener>();
+            _anim = GetComponent<Animator>();
 
-            if (initialPos != null)
-            {
-                transform.position = initialPos.position;
-                transform.rotation = initialPos.transform.rotation;
-            }
+            transform.parent.position = initialPos.position;
+            transform.parent.rotation = initialPos.transform.rotation;
         }
 
         public void WalkToDestination(Transform destination)
@@ -27,9 +27,9 @@ namespace Zoo
             _tweener.SetTarget(destination);
         }
 
-        public void PlayPositiveAnimation()
+        public void PlayAnimation(string name)
         {
-            // todo : trigger positive animation in animator
+            _anim.SetTrigger(name);
         }
     }
 }

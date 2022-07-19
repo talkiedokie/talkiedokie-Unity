@@ -49,5 +49,8 @@ namespace Prototype.TrafficSystems
 			
 			if(honkTrigger) Debug.Log(honkTrigger, honkTrigger);
 		}
+		
+		void RandomizeHonkPitch() =>
+			honkAudioSource.pitch = Random.Range(0.5f, 1.5f);
 	}
 }

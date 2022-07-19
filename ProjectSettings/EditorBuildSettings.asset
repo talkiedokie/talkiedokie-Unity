@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Levels/HospitalLevel.unity
     guid: 7a29696d84881dc44b85bfcde99616b0
+  - enabled: 1
+    path: Assets/Resources/Levels/MinigameLevels/Zoo-WhatAnimaIsIt.unity
+    guid: 05837682d9c90d34d901264e4c1000c0
   m_configObjects: {}

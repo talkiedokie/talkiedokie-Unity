@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 532333366467207589}
   - component: {fileID: 532333366467207611}
   - component: {fileID: 532333366467207610}
+  - component: {fileID: -4158788156033270422}
+  - component: {fileID: 2506110080061772367}
   m_Layer: 11
   m_Name: npc
   m_TagString: Untagged
@@ -66,8 +68,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 361c373c5d857c54dbc813c4c6b83c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  generalWalkables: 1
   floors:
   - {fileID: 0}
   idleDuration: 10
   animSmooth: 0.1
   targetPositionGizmoSize: 1
+--- !u!114 &-4158788156033270422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532333366467207588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a668d29353a999a4db0bad06d0696e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiPrefab: {fileID: 2985376262962180576, guid: 99dd894cb23596b4a92bab043ef01942, type: 3}
+  messages:
+  - Hi! How are you?
+  - "Hey! How\u2019ve you been?"
+  - Howdy! You alright, friend?
+  - "Yo! What\u2019s going on, man?"
+  - "What\u2019s up! Buddy?"
+  - Sup?
+  - "How\u2019s life, mate?"
+  - Hiya! Is everything fine?
+  - "How\u2019s it going? Long time, no see dear!"
+  - Wazzup! Dude?
+  - Hello there! How are you today?
+  - Hi! How may I help you?
+  - Good morning! Is there anything I can help you find?
+  - Hello! It is a pleasure to meet you
+  - Good morning! How are you today?
+  - Hello
+  - Good Morning
+  updateRig: 0
+  rig: {fileID: 0}
+  rigTarget: {fileID: 0}
+--- !u!135 &2506110080061772367
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532333366467207588}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 1, z: 2}

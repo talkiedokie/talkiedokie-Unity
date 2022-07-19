@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5921760724524319107}
-  - component: {fileID: 6333827343750793198}
   - component: {fileID: 2967176009820559999}
   m_Layer: 0
   m_Name: stopLight
@@ -33,25 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6333827343750793198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2422366537656383614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84ad6dce185255647b62bbeba13d059b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  red: {fileID: 3733229631540458998}
-  yellow: {fileID: 8807076161627235026}
-  green: {fileID: 7029272771157978289}
-  affectedPoint: {fileID: 0}
-  gizmoOffset: 5
-  gizmoRadius: 2
-  color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &2967176009820559999
 MonoBehaviour:
   m_ObjectHideFlags: 0

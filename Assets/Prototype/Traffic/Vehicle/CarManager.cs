@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using Random = UnityEngine.Random;
 
 namespace Prototype.TrafficSystems
 {
@@ -41,6 +42,11 @@ namespace Prototype.TrafficSystems
 		WaitForSeconds step;
 		
 		void OnValidate() => step = new WaitForSeconds(1f / refreshRate);
+		
+		void Awake(){
+			foreach(var car in cars)
+				car.speed += Random.Range(-1f, 1f);
+		}
 		
 		IEnumerator Start(){
 			step = new WaitForSeconds(1f / refreshRate);

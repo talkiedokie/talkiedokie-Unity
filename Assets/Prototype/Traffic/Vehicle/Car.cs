@@ -4,7 +4,8 @@ namespace Prototype.TrafficSystems
 {
 	public partial class Car : MonoBehaviour
 	{
-		[SerializeField] float speed = 0.25f;
+		// [SerializeField] float speed = 0.25f;
+		public float speed = 0.25f;
 		
 		[Space()]
 		[SerializeField] AudioSource engineAudioSource;
@@ -26,6 +27,8 @@ namespace Prototype.TrafficSystems
 			
 			void Start(){
 				SetupWaypoints();
+				
+				RandomizeHonkPitch();
 				RandomizeColor();
 			}
 			

@@ -19,8 +19,14 @@ public class SpawnInsideSphere : MonoBehaviour
 			var randomPosition = Random.insideUnitSphere * radius;
 			child.position = position + randomPosition;
 			
-			if(randomRotation)
-				child.rotation = Random.rotation;
+			if(randomRotation){
+				// child.rotation = Random.rotation;
+				
+				var eulerAngles = child.eulerAngles;
+					eulerAngles.y = Random.Range(0, 360);
+				
+				child.eulerAngles = eulerAngles;
+			}
 			
 			if(randomScale){
 				float scaleValue = Random.Range(randomScaleMinMax.x, randomScaleMinMax.y);
