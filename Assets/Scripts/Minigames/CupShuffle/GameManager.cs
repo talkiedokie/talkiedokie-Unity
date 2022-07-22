@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using Gameplay;
+using System.Text.RegularExpressions;
 
 namespace Minigame.Cups{
     /// <summary>
@@ -13,29 +15,31 @@ namespace Minigame.Cups{
     public class GameManager : MonoBehaviour
     {
         [Header("Configuration")]
-        [SerializeField, InspectorName("Cup GameObject")] 
+        [SerializeField, LabelOverride("Cup GameObject")] 
         private GameObject _cupObj;
 
-        [SerializeField, InspectorName("Ball GameObject")] 
+        [SerializeField, LabelOverride("Ball GameObject")] 
         private GameObject _ballObj;
 
         //location of the cups
-        [SerializeField, InspectorName("Cup Locations")]
-        private List<Transform> _cupPos;
+        [SerializeField]
+        private List<CupLocationPair> _cupPosList;
 
         [SerializeField] private TMP_Text _progressText, _livesText, _gameResultText;
 
         [Foldout("Events")]
         [SerializeField] private UnityEvent onGameStarted, onGameEnded;
-        [SerializeField] private UnityEvent<string> onCupGuessed;
+        [SerializeField] private UnityEvent onAnswered;
 
-        private int _progress, _lives, _totalGuesses, _ballIndex;
+        private int _progress, _lives, _totalGuesses, _cupAmount;
         private int _shuffleAmount = 3;
-        private int[] _cupSequence, _lastSwap;
+        private int[] _lastSwap, _cupSequence;
         private bool _waitingForPlayerInput, _isShuffling;
+        private int _ballCupNum;
 
         private void Awake(){
 			// GeneralAudio.Instance.PlayMusic();
+            UpdateUIProgress();
         }
 
         /// <summary>
@@ -46,10 +50,10 @@ namespace Minigame.Cups{
             _lives = 3;
             _totalGuesses = 3;
             _lastSwap = new int[2];
+            _cupAmount = _cupPosList.Count;
 
-            //creates an array that counts through _totalGuesses.
-            //e.g. [0,1,2] if _totalGuesses is 3.
-            _cupSequence = Enumerable.Range(0, _totalGuesses).ToArray();
+            //this where the cup numbers and their positions will be placed.
+            _cupSequence = Enumerable.Range(0, _cupAmount).ToArray();
 
             onGameStarted.Invoke();
             SpawnObjects();
@@ -57,20 +61,27 @@ namespace Minigame.Cups{
         }
 
         /// <summary>
-        /// Spawns the cups and the ball.
+        /// Spawns the cups.
         /// </summary>
         private void SpawnObjects(){
             //get the parent layer to place it inside
             var parentLayer = _cupObj.transform.parent;
 
             //spawn the cups
-            for (int i = 0; i < _cupPos.Count; i++)
+            for (int i = 0; i < _cupAmount; i++)
             {   
-                Instantiate(_cupObj, _cupPos[i].position, Quaternion.identity, parentLayer);
+                var clone = Instantiate(_cupObj, _cupPosList[i].position, Quaternion.identity, parentLayer);
+                LabelCup(clone, i);
             }
+        }
 
-            //spawn the ball
-
+        /// <summary>
+        /// Labels the clone for organization
+        /// </summary>
+        /// <param name="clone">Instantiated Cup Object</param>
+        /// <param name="num">Cup Number</param>
+        private void LabelCup(GameObject clone, int num){
+            clone.name = $"Cup {num}";
         }
 
         /// <summary>
@@ -100,26 +111,135 @@ namespace Minigame.Cups{
         /// Shuffles the cups by random pairs.
         /// </summary>
         private IEnumerator ShuffleCups(){
-            _isShuffling = true;
+            _ballObj.SetActive(true);
+
+            //randomly select cup number and set location
+            SetInitialBallLocation();
+
+            //lift the cup
+
+            //delay to see the ball
+            yield return new WaitForSeconds(2);
+
+            //hide ball and put down cup
+            _ballObj.SetActive(false);
+
             for (int i = 0; i < _shuffleAmount; i++)
             {
-                //move the cups
-                //lastSwap will record which indices are swapped
+                //shuffle the cups
+                //lastSwap will record which indexes are swapped
                 _lastSwap = _cupSequence.ShufflePair(_lastSwap);
 
                 yield return new WaitForSeconds(2);
 
                 //animate the cups
             }
-            _isShuffling = false;
+
+            //move ball to updated location
+            UpdateBallLocation();
+
+            //player input
+            Invoke(nameof(EnablePlayerInput), 2);
         }
 
-        private void ShufflePair(){
+        /// <summary>
+        /// Randomly choose which cup should the ball go under.
+        /// Gets called before shuffling.
+        /// </summary>
+        private void SetInitialBallLocation(){
+            //randomly select cup number
+            _ballCupNum = Random.Range(0, _cupAmount);
+            UpdateBallLocation();
+        }
 
+
+        /// <summary>
+        /// Updates the location of the ball by finding its designated cup number.
+        /// </summary>
+        private void UpdateBallLocation(){
+            //use _ballCupNum to find the index from the list of cup positions
+            var index = GetBallLocation();
+            Debug.Log($"location: {(CupLocation) index}");
+
+            //use the index to get position
+            _ballObj.transform.position = _cupPosList[index].position;
+        }
+
+        /// <summary>
+        /// Gets the current location of the ball.<br/>
+        /// Throws exception if the ball does not have a cup number or out of bounds.
+        /// </summary>
+        private int GetBallLocation(){
+            //find the index of the cup w/ ball
+            for (int i = 0; i < _cupAmount; i++)
+            {
+                //use _ballCupNum to find the index
+                if(_cupSequence[i] == _ballCupNum)
+                    return i;                
+            }
+            return -1;
+        }
+
+        private void EnablePlayerInput(){
+            Debug.Log("Listening to player");
+            Speech.Instance.StartListening(CheckInput);
+        }
+
+        private void CheckInput(string speech){
+            Speech.Instance.StopListening();
+            speech = speech.ToLower();
+            string answer = ((CupLocation)GetBallLocation()).ToString().ToLower();
+            Regex pattern = new Regex(@$"\b({answer})\b", RegexOptions.IgnoreCase);
+
+            Debug.Log($"Speech: {speech}");
+
+            if(pattern.IsMatch(speech)){
+                //correct answer
+                Debug.Log("correct");
+                CorrectGuess();
+            }
+            else{
+                Debug.Log("wrong");
+                WrongGuess();
+            }
+
+            onAnswered.Invoke();
+            CheckProgress();
+        }
+
+        private void CorrectGuess(){
+            _progress++;
+        }
+
+        private void WrongGuess(){
+            _lives--;
         }
 
         private void EndGame(){
 
         }
+    }
+
+    /// <summary>
+    /// Labels the direction of the cup should be placed.
+    /// </summary>
+    [System.Serializable]
+    public struct CupLocationPair{
+        public CupLocation direction;
+        public Transform transform;
+
+        public Vector3 position{
+            get {return transform.position;}
+        }
+    }
+
+    /// <summary>
+    /// General Direction of the cups/ball.
+    /// </summary>
+    public enum CupLocation{
+        None = -1,
+        Left,
+        Center,
+        Right
     }
 }

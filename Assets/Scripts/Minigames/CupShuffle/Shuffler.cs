@@ -9,7 +9,7 @@ namespace Minigame.Cups{
         /// <summary>
         /// Shuffles a pair from an array sequence.
         /// Throws exception if array size is less than 2. <br/>
-        /// Usage: fruits.SwapPair([2,3])
+        /// Usage: <c>fruits.SwapPair([2,3])</c>
         /// </summary>
         /// <typeparam name="T">Data Type of the array</typeparam>
         /// <param name="arr">Array to shuffle</param>
@@ -26,10 +26,10 @@ namespace Minigame.Cups{
             //re-select the pairs if it's similar with the last pair
             while (!(arr.Length <= 2 || lastPair == null || CheckPairs(randPair, lastPair)));
 
-            foreach(var i in randPair){
-                Debug.Log(i);
-            }
-            Debug.Log("----");
+            // foreach(var i in randPair){
+            //     Debug.Log(i);
+            // }
+            // Debug.Log("----");
 
             //swap the elements
             var temp = arr[randPair[0]];
